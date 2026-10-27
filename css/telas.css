@@ -487,3 +487,19 @@ body.com-janela { overflow: hidden; }
   padding: 10px 0; min-height: 44px; background: none; border: none; color: var(--texto); font-size: 14px; cursor: pointer;
 }
 .lista-entradas button > span { display: flex; flex-direction: column; gap: 2px; }
+
+/* filtro por bateria no Painel */
+.filtro-bateria { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.btn-filtro { min-height: 44px; font-weight: 500; color: var(--texto-medio); }
+.chip-filtro {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 4px 0 14px;
+  border-radius: 999px; background: var(--escuro); color: #fff;
+}
+.chip-filtro .texto-aux { color: var(--escuro-sub); }
+.chip-filtro .btn-icone { color: #fff; width: 36px; height: 36px; }
+@media (prefers-color-scheme: dark) { .chip-filtro { background: var(--primaria); color: #12161C; } .chip-filtro .texto-aux, .chip-filtro .btn-icone { color: #12161C; } }
+[data-produto] { cursor: pointer; }
+.lista-top li[data-produto]:active, .tabela tr[data-produto]:hover td { background: var(--linha-sel); }
+.dica-top { margin: 6px 0 0; }
+@media (min-width: 900px) { .dica-top { display: none; } }
+.linha-venda-bateria { display: flex; justify-content: space-between; width: 100%; gap: 12px; color: var(--texto); text-decoration: none; }

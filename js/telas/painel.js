@@ -2,6 +2,7 @@
 // Números prontos do banco (só vendas concluídas). Chart.js é carregado só aqui.
 import { supabase, ok, mensagemDeErro } from '../supabase.js';
 import { icone } from '../icones.js';
+import { escolherBateria } from '../componentes/escolher-bateria.js';
 import {
   $, esc, dinheiro, percentual, saldo, hojeISO, linhaCurta, baixarCSV, ehNotebook, aviso, FUSO,
 } from '../util.js';
@@ -93,6 +94,85 @@ function barras(lista, cor) {
     </div>`).join('');
 }
 
+// ---------- filtro por bateria ----------
+// As funções do painel no banco agregam todas as baterias. Com uma bateria escolhida,
+// os números saem dos itens vendidos dela (vw_venda_itens_detalhe), poucos por período.
+// Taxas, formas de pagamento e atendimento de cada venda entram na proporção do valor
+// que essa bateria teve na venda.
+
+function indicadoresItens(itens, taxas = 0) {
+  const fat = itens.reduce((s, i) => s + Number(i.total_item), 0);
+  const cmv = itens.reduce((s, i) => s + Number(i.custo_total), 0);
+  const desc = itens.reduce((s, i) => s + Number(i.desconto_rateado), 0);
+  const qtd = itens.reduce((s, i) => s + Number(i.quantidade), 0);
+  const n = new Set(itens.map((i) => i.venda_id)).size;
+  const r1 = (v) => Math.round(v * 10) / 10;
+  return {
+    faturamento: fat, cmv, lucro_bruto: fat - cmv, taxas, lucro_liquido: fat - cmv - taxas,
+    margem_pct: fat > 0 ? r1(((fat - cmv) / fat) * 100) : null,
+    markup_pct: cmv > 0 ? r1((fat / cmv - 1) * 100) : null,
+    qtd_vendas: n, qtd_baterias: qtd, ticket_medio: n ? fat / n : 0,
+    descontos: desc, desconto_pct: fat + desc > 0 ? r1((desc / (fat + desc)) * 100) : 0,
+  };
+}
+
+async function dadosDaBateria(produto, per, inicio12) {
+  const colunas = 'venda_id, venda_numero, data_hora, data_local, quantidade, total_item, desconto_rateado, custo_total, lucro_bruto';
+  const itensDe = (ini, fim) => supabase.from('vw_venda_itens_detalhe').select(colunas)
+    .eq('produto_id', produto.id).eq('status', 'concluida').gte('data_local', ini).lte('data_local', fim)
+    .order('data_hora', { ascending: false }).then(ok);
+  const [itens, itensAnt, itens12, prod] = await Promise.all([
+    itensDe(...per.atual), itensDe(...per.anterior), itensDe(inicio12, hojeISO()),
+    supabase.from('vw_produtos_estoque').select('*').eq('id', produto.id).single().then(ok),
+  ]);
+
+  const ids = [...new Set(itens.map((i) => i.venda_id))];
+  let vendas = [];
+  let pagamentos = [];
+  if (ids.length) {
+    [vendas, pagamentos] = await Promise.all([
+      supabase.from('vw_vendas_lista').select('id, total, taxas, tipo_atendimento').in('id', ids).then(ok),
+      supabase.from('venda_pagamentos').select('venda_id, valor, formas_pagamento(nome)').in('venda_id', ids).then(ok),
+    ]);
+  }
+  const valorNaVenda = new Map();
+  for (const i of itens) valorNaVenda.set(i.venda_id, (valorNaVenda.get(i.venda_id) ?? 0) + Number(i.total_item));
+  const parte = new Map(vendas.map((v) => [v.id, Number(v.total) > 0 ? (valorNaVenda.get(v.id) ?? 0) / Number(v.total) : 0]));
+
+  const taxas = vendas.reduce((s, v) => s + Number(v.taxas) * (parte.get(v.id) ?? 0), 0);
+  const participacao = (mapa) => {
+    const total = [...mapa.values()].reduce((s, v) => s + v, 0);
+    return [...mapa.entries()].sort((a, b) => b[1] - a[1]).map(([nome, v]) => [nome, total ? (v / total) * 100 : 0]);
+  };
+  const porForma = new Map();
+  for (const p of pagamentos) {
+    const nome = p.formas_pagamento?.nome ?? '?';
+    porForma.set(nome, (porForma.get(nome) ?? 0) + Number(p.valor) * (parte.get(p.venda_id) ?? 0));
+  }
+  const porAtend = new Map();
+  for (const v of vendas) porAtend.set(v.tipo_atendimento, (porAtend.get(v.tipo_atendimento) ?? 0) + (valorNaVenda.get(v.id) ?? 0));
+
+  const porMes = new Map();
+  for (const i of itens12) {
+    const mes = `${i.data_local.slice(0, 7)}-01`;
+    const m = porMes.get(mes) ?? { mes, faturamento: 0, lucro_bruto: 0 };
+    m.faturamento += Number(i.total_item);
+    m.lucro_bruto += Number(i.lucro_bruto);
+    porMes.set(mes, m);
+  }
+
+  const k = indicadoresItens(itens, taxas);
+  const unidades = Math.max(Number(prod.estoque_atual), 0);
+  return {
+    k, kA: indicadoresItens(itensAnt), itens, prod,
+    meses: [...porMes.values()],
+    formas: participacao(porForma),
+    atend: participacao(porAtend).map(([t, pct]) => [ATENDIMENTO[t] ?? t, pct]),
+    linhas: k.faturamento ? [{ linha: prod.linha, margem_pct: k.margem_pct }] : [],
+    valor: { unidades, valor_custo: unidades * Number(prod.custo_medio), valor_venda_potencial: unidades * Number(prod.preco_venda ?? 0) },
+  };
+}
+
 function segPeriodo(tipo, comPersonalizado) {
   const opcoes = [['hoje', 'Hoje'], ['7dias', '7 dias'], ['mes', 'Mês'], ['ano', 'Ano'], ...(comPersonalizado ? [['personalizado', 'Personalizado']] : [])];
   return `<div class="seg-periodo" role="radiogroup" aria-label="Período">
@@ -104,6 +184,7 @@ export async function render(raiz) {
   let tipo = 'mes';
   let ordenarTop = 'quantidade';
   let custom = [hojeISO().slice(0, 8) + '01', hojeISO()];
+  let produto = null; // { id, modelo, linha } quando filtrado por uma bateria
   let grafico = null;
 
   raiz.innerHTML = `
@@ -123,6 +204,7 @@ export async function render(raiz) {
       </div>
     </header>
     <div class="so-celular">${segPeriodo(tipo, false)}</div>
+    <div class="filtro-bateria" id="filtro-bateria"></div>
     <section class="kpis" id="kpis" aria-label="Indicadores"></section>
     <div class="grade-painel">
       <section class="cartao grafico-cartao">
@@ -142,18 +224,36 @@ export async function render(raiz) {
     </div>
     <p class="texto-aux legenda-margem"><strong>Markup</strong>: quanto se acrescentou sobre o custo. <strong>Margem</strong>: quanto do preço de venda virou lucro.</p>`;
 
+  function desenharFiltro() {
+    $('#filtro-bateria', raiz).innerHTML = produto
+      ? `<span class="chip-filtro">${icone('produtos', 18)}<strong>${esc(produto.modelo)}</strong><span class="texto-aux">${esc(linhaCurta(produto.linha))}</span>
+          <button type="button" class="btn-icone" data-limpar-bateria aria-label="Ver todas as baterias">${icone('fechar', 18)}</button></span>
+         <button type="button" class="link-btn" data-escolher-bateria>Trocar</button>`
+      : `<button type="button" class="btn btn-secundario btn-filtro" data-escolher-bateria>${icone('busca', 18)}Todas as baterias</button>`;
+  }
+
   async function carregar() {
     const per = periodos(tipo, ...custom);
     const [ini, fim] = per.atual;
     const [iniA, fimA] = per.anterior;
-    $('#subtitulo', raiz).textContent = `${per.titulo} · comparado a ${per.vs}`;
+    const inicio12 = iso(new Date(Date.UTC(Number(hojeISO().slice(0, 4)), Number(hojeISO().slice(5, 7)) - 12, 1)));
+    $('#subtitulo', raiz).textContent = `${per.titulo} · comparado a ${per.vs}${produto ? ` · só ${produto.modelo}` : ''}`;
     $('#kpis', raiz).innerHTML = '<p class="texto-aux">Carregando…</p>';
+    desenharFiltro();
     try {
+      if (produto) {
+        const d = await dadosDaBateria(produto, per, inicio12);
+        desenharKpis(d.k, d.kA, per);
+        desenharGrafico(d.meses);
+        desenharVendasDaBateria(d.itens, d.prod, per);
+        desenharDistribuicao(d.formas, d.atend, d.linhas);
+        desenharEstoque(d.valor, null, d.prod);
+        return;
+      }
       const [k, kA, meses, formas, top, linhas, atend, valor, baixo] = await Promise.all([
         supabase.rpc('painel_indicadores', { p_inicio: ini, p_fim: fim }).single().then(ok),
         supabase.rpc('painel_indicadores', { p_inicio: iniA, p_fim: fimA }).single().then(ok),
-        supabase.from('vw_resumo_mensal').select('mes, faturamento, lucro_bruto')
-          .gte('mes', iso(new Date(Date.UTC(Number(hojeISO().slice(0, 4)), Number(hojeISO().slice(5, 7)) - 12, 1)))).order('mes').then(ok),
+        supabase.from('vw_resumo_mensal').select('mes, faturamento, lucro_bruto').gte('mes', inicio12).order('mes').then(ok),
         supabase.rpc('painel_por_forma_pagamento', { p_inicio: ini, p_fim: fim }).then(ok),
         supabase.rpc('painel_top_produtos', { p_inicio: ini, p_fim: fim, p_ordenar: ordenarTop, p_limite: 10 }).then(ok),
         supabase.rpc('painel_por_linha', { p_inicio: ini, p_fim: fim }).then(ok),
@@ -164,11 +264,26 @@ export async function render(raiz) {
       desenharKpis(k, kA, per);
       desenharGrafico(meses);
       desenharTop(top, per);
-      desenharDistribuicao(formas, atend, linhas);
+      desenharDistribuicao(
+        formas.map((f) => [f.forma_pagamento, f.participacao_pct]),
+        atend.map((a) => [ATENDIMENTO[a.tipo_atendimento] ?? a.tipo_atendimento, a.participacao_pct]),
+        linhas,
+      );
       desenharEstoque(valor, baixo);
     } catch (e) {
       $('#kpis', raiz).innerHTML = `<p class="msg-erro">${esc(mensagemDeErro(e))}</p>`;
     }
+  }
+
+  function desenharVendasDaBateria(itens, prod, per) {
+    $('#top', raiz).innerHTML = `
+      <div class="rotulo-linha topo-top"><h2 class="cartao-h">Vendas da ${esc(prod.modelo)} ${per.titulo === 'Hoje' ? 'hoje' : 'no período'}</h2></div>
+      ${!itens.length ? '<p class="texto-aux">Nenhuma venda desta bateria no período.</p>' : `
+      <ul class="lista-simples">
+        ${itens.slice(0, 15).map((i) => `<li><a class="linha-venda-bateria" href="#vendas/${i.venda_numero}">
+          <span><strong>Nº ${i.venda_numero}</strong> <span class="texto-aux">${fmtData(i.data_local)} · ${i.quantidade} un</span></span>
+          <span>${dinheiro(i.total_item)} <span class="verde forte">+${dinheiroInteiro(i.lucro_bruto)}</span></span></a></li>`).join('')}
+      </ul>${itens.length > 15 ? `<p class="texto-aux texto-p">E mais ${itens.length - 15} vendas no período.</p>` : ''}`}`;
   }
 
   function desenharKpis(k, kA, per) {
@@ -277,13 +392,14 @@ export async function render(raiz) {
       </div>
       ${!top.length ? `<p class="texto-aux">Sem vendas ${per.titulo === 'Hoje' ? 'hoje' : 'no período'}.</p>` : `
       <ol class="lista-top so-celular">
-        ${top.slice(0, 5).map((p, i) => `<li><span class="texto-aux">${i + 1}</span><strong class="modelo-p">${esc(p.modelo)}</strong>
+        ${top.slice(0, 5).map((p, i) => `<li data-produto='${esc(JSON.stringify({ id: p.produto_id, modelo: p.modelo, linha: p.linha }))}'><span class="texto-aux">${i + 1}</span><strong class="modelo-p">${esc(p.modelo)}</strong>
           <span class="texto-aux">${p.quantidade} un</span><strong class="verde">${dinheiroInteiro(ordenarTop === 'faturamento' ? p.faturamento : p.lucro_bruto)}</strong></li>`).join('')}
       </ol>
+      <p class="texto-aux texto-p dica-top">Toque numa bateria para ver só ela.</p>
       <div class="tabela-rolagem so-notebook">
         <table class="tabela tabela-leve">
           <thead><tr><th>Modelo</th><th>Linha</th><th class="num">Qtd</th><th class="num">Faturamento</th><th class="num">Lucro</th><th class="num">Margem</th></tr></thead>
-          <tbody>${top.map((p) => `<tr><td><strong class="modelo-p">${esc(p.modelo)}</strong></td><td class="texto-medio">${esc(linhaCurta(p.linha))}</td>
+          <tbody>${top.map((p) => `<tr data-produto='${esc(JSON.stringify({ id: p.produto_id, modelo: p.modelo, linha: p.linha }))}' title="Ver só esta bateria"><td><strong class="modelo-p">${esc(p.modelo)}</strong></td><td class="texto-medio">${esc(linhaCurta(p.linha))}</td>
             <td class="num">${p.quantidade}</td><td class="num">${dinheiroInteiro(p.faturamento)}</td>
             <td class="num verde forte">${dinheiroInteiro(p.lucro_bruto)}</td><td class="num">${percentual(p.margem_pct)}</td></tr>`).join('')}</tbody>
         </table>
@@ -293,19 +409,31 @@ export async function render(raiz) {
   function desenharDistribuicao(formas, atend, linhas) {
     $('#distribuicao', raiz).innerHTML = `
       <h2 class="cartao-h">Como pagaram</h2>
-      ${barras(formas.map((f) => [f.forma_pagamento, f.participacao_pct]), 'barra-escura')}
+      ${barras(formas, 'barra-escura')}
       <h2 class="cartao-h sub-dist">Atendimento</h2>
-      ${barras(atend.map((a) => [ATENDIMENTO[a.tipo_atendimento] ?? a.tipo_atendimento, a.participacao_pct]), 'barra-amarela')}
-      <h2 class="cartao-h sub-dist">Margem por linha</h2>
+      ${barras(atend, 'barra-amarela')}
+      <h2 class="cartao-h sub-dist">${produto ? 'Margem da bateria' : 'Margem por linha'}</h2>
       ${linhas.length ? `<ul class="lista-simples">${linhas.map((l) => `<li><span>${esc(l.linha)}</span><strong>${percentual(l.margem_pct)}</strong></li>`).join('')}</ul>`
         : '<p class="texto-aux">Sem vendas no período.</p>'}`;
   }
 
-  function desenharEstoque(valor, baixo) {
+  function desenharEstoque(valor, baixo, prod = null) {
     $('#parado', raiz).innerHTML = `
-      <div class="texto-sub">Dinheiro parado em bateria</div>
+      <div class="texto-sub">${prod ? `Dinheiro parado em ${esc(prod.modelo)}` : 'Dinheiro parado em bateria'}</div>
       <div class="kpi-valor">${dinheiroInteiro(valor.valor_custo)}</div>
       <div class="texto-sub">${valor.unidades} ${Number(valor.unidades) === 1 ? 'unidade' : 'unidades'} · ${dinheiroInteiro(valor.valor_venda_potencial)} a preço de venda</div>`;
+    if (prod) {
+      $('#repor', raiz).innerHTML = `
+        <h2 class="cartao-h">Estoque da ${esc(prod.modelo)}</h2>
+        <ul class="lista-simples">
+          <li><span>Em estoque</span><strong class="${prod.estoque_atual <= 0 ? 'vermelho' : prod.abaixo_minimo ? 'amarelo' : 'verde'}">${saldo(prod.estoque_atual)} (mín. ${prod.estoque_minimo})</strong></li>
+          <li><span>Custo médio</span><strong>${Number(prod.custo_medio) > 0 ? dinheiro(prod.custo_medio) : '-'}</strong></li>
+          <li><span>Preço de venda</span><strong>${prod.preco_venda ? dinheiro(prod.preco_venda) : '-'}</strong></li>
+          <li><span>Margem no preço atual</span><strong>${percentual(prod.margem_pct)}</strong></li>
+        </ul>
+        <a class="link" href="#estoque/${encodeURIComponent(prod.modelo)}">Abrir no estoque</a>`;
+      return;
+    }
     $('#repor', raiz).innerHTML = `
       <h2 class="cartao-h">Repor estoque</h2>
       ${baixo.length ? `<ul class="lista-simples lista-repor-painel">${baixo.slice(0, 5).map((p) => `
@@ -320,8 +448,8 @@ export async function render(raiz) {
     try {
       const itens = ok(await supabase.from('vw_venda_itens_detalhe')
         .select('venda_numero, data_hora, status, cliente_nome, marca, modelo, linha, quantidade, preco_unitario, desconto_rateado, total_item, custo_unitario, custo_total, lucro_bruto, garantia_ate')
-        .gte('data_local', ini).lte('data_local', fim).order('data_hora'));
-      baixarCSV(`vendas-${ini}-a-${fim}.csv`, [
+        .gte('data_local', ini).lte('data_local', fim).match(produto ? { produto_id: produto.id } : {}).order('data_hora'));
+      baixarCSV(`vendas-${produto ? `${produto.modelo}-` : ''}${ini}-a-${fim}.csv`, [
         ['Venda', 'Data', 'Hora', 'Situação', 'Cliente', 'Marca', 'Modelo', 'Linha', 'Qtd', 'Preço unitário', 'Desconto rateado', 'Total do item', 'Custo unitário', 'Custo total', 'Lucro bruto', 'Garantia até'],
         ...itens.map((i) => [i.venda_numero, new Date(i.data_hora).toLocaleDateString('pt-BR', { timeZone: FUSO }),
           new Date(i.data_hora).toLocaleTimeString('pt-BR', { timeZone: FUSO, hour: '2-digit', minute: '2-digit' }),
@@ -335,9 +463,17 @@ export async function render(raiz) {
   }
 
   raiz.addEventListener('click', (e) => {
-    const b = e.target.closest('[data-periodo], [data-ordenar], #exportar');
+    const b = e.target.closest('[data-periodo], [data-ordenar], #exportar, [data-escolher-bateria], [data-limpar-bateria], [data-produto]');
     if (!b) return;
     if (b.id === 'exportar') return exportar();
+    if (b.dataset.limparBateria !== undefined) { produto = null; carregar(); return; }
+    if (b.dataset.produto) { produto = JSON.parse(b.dataset.produto); carregar(); window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    if (b.dataset.escolherBateria !== undefined) {
+      escolherBateria({ titulo: 'Ver painel de uma bateria', permitirNova: false, somenteAtivos: false }).then((p) => {
+        if (p) { produto = { id: p.id, modelo: p.modelo, linha: p.linha }; carregar(); }
+      });
+      return;
+    }
     if (b.dataset.ordenar) {
       ordenarTop = b.dataset.ordenar;
       const [ini, fim] = periodos(tipo, ...custom).atual;

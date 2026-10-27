@@ -6,7 +6,7 @@ import { abrirJanelaBateria } from './janela-nova-bateria.js';
 import { icone } from '../icones.js';
 import { $, esc, dinheiro, saldo, corSaldo, linhaCurta, aplicacoesCurtas, debounce } from '../util.js';
 
-export async function escolherBateria({ titulo = 'Adicionar bateria' } = {}) {
+export async function escolherBateria({ titulo = 'Adicionar bateria', permitirNova = true, somenteAtivos = true } = {}) {
   const escolha = await abrirJanela({
     titulo,
     html: `
@@ -14,14 +14,14 @@ export async function escolherBateria({ titulo = 'Adicionar bateria' } = {}) {
         <input type="search" placeholder="Modelo ou carro" aria-label="Buscar bateria" autocomplete="off" autofocus>
       </label>
       <ul class="linhas resultados-janela"></ul>
-      <button type="button" class="link-btn link-forte" data-nova>Não achou? Cadastrar bateria nova</button>`,
+      ${permitirNova ? '<button type="button" class="link-btn link-forte" data-nova>Não achou? Cadastrar bateria nova</button>' : ''}`,
     montar(corpo, fechar) {
       const input = $('input', corpo);
       const ul = $('ul', corpo);
       let resultados = [];
       async function buscar() {
         try {
-          resultados = ok(await supabase.rpc('buscar_produtos', { p_termo: input.value.trim() || null, p_limite: 30 }));
+          resultados = ok(await supabase.rpc('buscar_produtos', { p_termo: input.value.trim() || null, p_somente_ativos: somenteAtivos, p_limite: 30 }));
           ul.innerHTML = resultados.length ? resultados.map((p) => `
             <li><button type="button" class="linha-botao" data-id="${p.id}">
               <span class="min0">
@@ -40,7 +40,7 @@ export async function escolherBateria({ titulo = 'Adicionar bateria' } = {}) {
         const b = e.target.closest('[data-id]');
         if (b) fechar(resultados.find((p) => p.id === b.dataset.id));
       });
-      $('[data-nova]', corpo).addEventListener('click', () => fechar({ nova: true, modelo: input.value.trim().toUpperCase() }));
+      $('[data-nova]', corpo)?.addEventListener('click', () => fechar({ nova: true, modelo: input.value.trim().toUpperCase() }));
       buscar();
     },
   });
