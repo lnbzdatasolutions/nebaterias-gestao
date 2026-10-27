@@ -3,7 +3,8 @@ import { supabase, ok, mensagemDeErro } from '../supabase.js';
 import { icone } from '../icones.js';
 import { abrirJanela } from '../componentes/janela.js';
 import { abrirJanelaCliente } from '../componentes/janela-novo-cliente.js';
-import { $, esc, dinheiro, data, telefone, iniciais, hojeISO, debounce, aviso, ehNotebook, baixarCSV, FUSO } from '../util.js';
+import { $, esc, dinheiro, data, telefone, iniciais, hojeISO, debounce, aviso, ehNotebook, FUSO } from '../util.js';
+import { exportarClientes } from '../exportar.js';
 
 const linkWhats = (tel) => `https://wa.me/55${String(tel).replace(/\D/g, '')}`;
 const mesAno = (d) => new Date(d).toLocaleDateString('pt-BR', { timeZone: FUSO, month: '2-digit', year: 'numeric' });
@@ -199,11 +200,7 @@ export async function render(raiz, { params }) {
           if (ehNotebook()) ver(novo.id);
         }
       } else if (alvo.id === 'exportar') {
-        const todos = ok(await supabase.from('clientes').select('nome, telefone, cpf_cnpj, veiculo, placa, obs, created_at').order('nome'));
-        baixarCSV(`clientes-${hojeISO()}.csv`, [
-          ['Nome', 'Telefone', 'CPF/CNPJ', 'Veículo', 'Placa', 'Observações', 'Cadastro'],
-          ...todos.map((c) => [c.nome, telefone(c.telefone), c.cpf_cnpj, c.veiculo, c.placa, c.obs, data(c.created_at)]),
-        ]);
+        await exportarClientes();
       } else if (alvo.dataset.editar) editar(alvo.dataset.editar);
       else ver(alvo.dataset.ver);
     } catch (err) {

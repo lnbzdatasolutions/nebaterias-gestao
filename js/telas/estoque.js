@@ -4,9 +4,10 @@ import { supabase, ok, mensagemDeErro } from '../supabase.js';
 import { icone } from '../icones.js';
 import { abrirJanela } from '../componentes/janela.js';
 import { abrirJanelaBateria } from '../componentes/janela-nova-bateria.js';
+import { exportarEstoque } from '../exportar.js';
 import {
   $, esc, dinheiro, percentual, saldo, corSaldo, categoria, CATEGORIAS, linhaCurta, aplicacoesCurtas,
-  debounce, aviso, ocupado, ehNotebook, baixarCSV, hojeISO, FUSO,
+  debounce, aviso, ocupado, ehNotebook, FUSO,
 } from '../util.js';
 
 const MOTIVOS = ['Contagem', 'Garantia / troca', 'Avaria', 'Outro'];
@@ -223,14 +224,7 @@ export async function render(raiz, { params }) {
         const nova = await abrirJanelaBateria({ textoBotao: 'Salvar bateria', modeloInicial: termo.toUpperCase() });
         if (nova) { aviso(`${nova.modelo} cadastrada.`, 'ok'); await carregar(); desenharResumo(); }
       } else if (alvo.id === 'exportar') {
-        const todos = ok(await supabase.rpc('buscar_produtos', { p_somente_ativos: false, p_limite: 1000 }));
-        baixarCSV(`estoque-${hojeISO()}.csv`, [
-          ['Marca', 'Modelo', 'Linha', 'Aplicações', 'Saldo', 'Mínimo', 'Custo médio', 'Preço de venda', 'Preço sem usada', 'Margem %', 'Valor em estoque (custo)', 'Ativo'],
-          ...todos.map((p) => [p.marca, p.modelo, p.linha, p.aplicacoes, p.estoque_atual, p.estoque_minimo,
-            Number(p.custo_medio), p.preco_venda === null ? '' : Number(p.preco_venda),
-            p.preco_venda_sem_sucata === null ? '' : Number(p.preco_venda_sem_sucata),
-            p.margem_pct === null ? '' : Number(p.margem_pct), Number(p.valor_estoque_custo), p.ativo ? 'sim' : 'não']),
-        ]);
+        await exportarEstoque();
       } else if (alvo.dataset.filtro !== undefined) {
         filtro = alvo.dataset.filtro;
         raiz.querySelectorAll('[data-filtro]').forEach((b) => b.setAttribute('aria-pressed', b === alvo));
