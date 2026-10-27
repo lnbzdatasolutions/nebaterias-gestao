@@ -1,6 +1,7 @@
 // Venda registrada (#vender/ok): confirmação e comprovante para o WhatsApp do cliente.
 import { supabase, ok, mensagemDeErro } from '../supabase.js';
 import { icone } from '../icones.js';
+import { abrirEditarVenda } from '../componentes/janela-editar-venda.js';
 import { $, esc, dinheiro, data, hora } from '../util.js';
 
 const ATENDIMENTO = { balcao: 'Balcão', entrega: 'Entrega', socorro: 'Socorro' };
@@ -67,6 +68,7 @@ export async function renderVendaRegistrada(raiz, registrada, aoSair) {
         <a class="btn btn-escuro btn-grande" href="${linkWhats}" target="_blank" rel="noopener">${icone('whatsapp', 22)}${tel ? 'Enviar no WhatsApp do cliente' : 'Enviar comprovante no WhatsApp'}</a>
         <button type="button" class="btn btn-secundario" id="copiar">Copiar texto</button>
         <a class="btn btn-primario btn-grande" href="#vender">${icone('mais', 22, 2.4)}Nova venda</a>
+        <button type="button" class="btn btn-secundario btn-grande" id="informar-nota">Informar nota fiscal</button>
         <a class="link-btn" href="#inicio">Voltar ao início</a>
       </div>
     </div>`;
@@ -77,6 +79,13 @@ export async function renderVendaRegistrada(raiz, registrada, aoSair) {
       e.target.textContent = 'Texto copiado';
     } catch {
       e.target.textContent = 'Não foi possível copiar';
+    }
+  });
+
+  $('#informar-nota', raiz).addEventListener('click', async (e) => {
+    if (await abrirEditarVenda(venda.id)) {
+      e.target.textContent = 'Nota informada · ver venda';
+      e.target.onclick = () => { location.hash = `vendas/${venda.numero}`; };
     }
   });
 
