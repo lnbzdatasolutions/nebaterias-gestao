@@ -317,11 +317,12 @@ body.com-janela { overflow: hidden; }
 .botoes-ok .link-btn { align-self: center; }
 
 /* ---------- Nota fiscal e edição da venda ---------- */
-.selo { display: inline-flex; align-items: center; height: 26px; padding: 0 10px; border-radius: 999px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.selo { display: inline-block; line-height: 26px; height: 26px; padding: 0 10px; border-radius: 999px; font-size: 13px; font-weight: 600; white-space: nowrap; max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
 .selo-alerta { background: var(--alerta-fundo); color: var(--alerta-texto); }
 .selo-ok { background: var(--ok-fundo); color: var(--ok); }
 .selo-perigo { background: var(--perigo-fundo); color: var(--perigo); }
 .rotulo-campo { font-size: 14px; font-weight: 600; }
+.rotulo-linha .selo { flex-shrink: 0; max-width: none; }
 .pilha-p { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .grade-editar { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
 @media (min-width: 900px) { .grade-editar { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
@@ -387,6 +388,7 @@ body.com-janela { overflow: hidden; }
 .chave-txt { font-family: ui-monospace, Consolas, monospace; font-size: 12px; overflow-wrap: anywhere; color: var(--texto-medio); }
 .contas { display: flex; flex-direction: column; gap: 6px; }
 .linha-conta { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
+.linha-conta > :last-child { white-space: nowrap; text-align: right; }
 .detalhe-cheio .linha-conta { font-size: 16px; }
 .linha-conta-total { border-top: 1px solid var(--divisoria); padding-top: 10px; margin-top: 4px; align-items: baseline; }
 .linha-conta-total strong:last-child { font-family: var(--fonte-titulo); font-size: 22px; }

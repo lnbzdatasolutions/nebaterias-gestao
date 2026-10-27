@@ -147,7 +147,9 @@ async function mostrarAvisoNotas(raiz) {
   cel.innerHTML = `${icone('documento', 28)}
     <span class="min0">
       <strong class="d-bloco">${semNota ? `${plural(semNota, 'venda', 'vendas')} sem nota fiscal` : `${plural(cancelar, 'nota', 'notas')} para cancelar`}</strong>
-      <span class="texto-aux">${semNota ? `${dinheiro(r.valor_sem_nota)} · toque para informar` : 'cancele no Tiranota e marque no sistema'}</span>
+      <span class="texto-aux">${semNota
+        ? `${dinheiro(r.valor_sem_nota)} · ${cancelar ? `${plural(cancelar, 'nota', 'notas')} para cancelar` : 'toque para informar'}`
+        : 'cancele no Tiranota e marque no sistema'}</span>
     </span>${icone('seta', 22)}`;
   if (!semNota) cel.href = '#vendas';
   const nb = $('#aviso-notas-nb', raiz);
