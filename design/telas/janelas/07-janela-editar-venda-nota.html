@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editar venda · nota fiscal</title>
+<!-- Referência visual estática gerada do protótipo. Dados são de exemplo. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4ED8}a:hover{color:#1E40AF}
+</style>
+</head>
+<body>
+<div style="width: 100%; box-sizing: border-box; background: #FFFFFF; font-family: Inter, system-ui, sans-serif; color: #12161C; border-radius: 20px; display: flex; flex-direction: column">
+
+  <header style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 20px 20px 12px; border-bottom: 1px solid #EEF0F3">
+    <div>
+      <h2 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 24px">Editar venda nº 130</h2>
+      <div style="font-size: 13px; color: #5B6472; margin-top: 2px">27/10/2026 14:50 · 1× M60GD · R$ 450,00 · Pix</div>
+    </div>
+    <button aria-label="Fechar" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; border: 1px solid #E1E4E9; background: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#12161C" style="stroke-width: 2.2; stroke-linecap: round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+    </button>
+  </header>
+
+  <div style="padding: 16px 20px; display: flex; flex-wrap: wrap; gap: 20px">
+
+    <section aria-label="Nota fiscal" style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+        <h3 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 19px">Nota fiscal</h3>
+        <span style="font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 999px; background: #FFF4D6; color: #7A4E00">Sem nota</span>
+      </div>
+      <p style="margin: 0; font-size: 13px; color: #5B6472">Emita no Tiranota e cole aqui a chave de acesso. Número, série e tipo são preenchidos sozinhos.</p>
+
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <label for="ev-chave" style="font-size: 14px; font-weight: 600">Chave de acesso (44 números)</label>
+        <div style="display: flex; gap: 8px">
+          <input id="ev-chave" inputmode="numeric" value="" placeholder="0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000" style="flex: 1; min-width: 0; height: 50px; box-sizing: border-box; border-radius: 12px; border: 2px solid #12161C; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; letter-spacing: 0.02em">
+          <button style="height: 50px; padding: 0 14px; flex-shrink: 0; border-radius: 12px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; color: #12161C; cursor: pointer">Colar</button>
+        </div>
+        
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+        <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 6px">
+          <span style="font-size: 14px; font-weight: 600">Tipo</span>
+          <div role="group" aria-label="Tipo de nota" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+            
+              <button aria-pressed="true" style="height: 46px; border-radius: 12px; border: 2px solid #12161C; background: #12161C; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; cursor: pointer">NFC-e</button>
+            
+              <button aria-pressed="false" style="height: 46px; border-radius: 12px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; cursor: pointer">NF-e</button>
+            
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="ev-num" style="font-size: 14px; font-weight: 600">Número *</label>
+          <input id="ev-num" inputmode="numeric" value="" style="height: 48px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; width: 100%; background: #FFFFFF">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="ev-serie" style="font-size: 14px; font-weight: 600">Série</label>
+          <input id="ev-serie" inputmode="numeric" value="" style="height: 48px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; width: 100%; background: #FFFFFF">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="ev-data" style="font-size: 14px; font-weight: 600">Data de emissão</label>
+          <input id="ev-data" type="text" inputmode="numeric" value="27/10/2026" style="height: 48px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; width: 100%">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 6px">
+          <label for="ev-valor" style="font-size: 14px; font-weight: 600">Valor da nota</label>
+          <input id="ev-valor" inputmode="decimal" value="R$ 450,00" style="height: 48px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; width: 100%">
+        </div>
+        <div style="grid-column: span 2; display: flex; flex-direction: column; gap: 6px">
+          <label for="ev-doc" style="font-size: 14px; font-weight: 600">CPF/CNPJ na nota <span style="font-weight: 400; color: #5B6472">(se o cliente pediu)</span></label>
+          <input id="ev-doc" inputmode="text" placeholder="Só números ou letras do CNPJ" style="height: 48px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; width: 100%">
+        </div>
+      </div>
+
+      <button style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 12px; border: 1px dashed #9AA2AE; background: #FAFBFC; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; color: #12161C; cursor: pointer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M21 12.5 12.6 21a5 5 0 0 1-7.1-7.1L14 5.4a3.3 3.3 0 0 1 4.7 4.7l-8.4 8.4a1.7 1.7 0 0 1-2.4-2.4l7.7-7.7"></path></svg>
+        Anexar PDF da nota (opcional)
+      </button>
+      <button style="align-self: flex-start; min-height: 40px; padding: 0; border: none; background: none; color: #B42318; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">A nota foi cancelada no Tiranota? Marcar como cancelada</button>
+    </section>
+
+    <section aria-label="Dados da venda" style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+      <h3 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 19px">Dados da venda</h3>
+
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <span style="font-size: 14px; font-weight: 600">Cliente</span>
+          <button style="min-height: 40px; padding: 0 4px; border: none; background: none; color: #1D4ED8; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Trocar</button>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; background: #F5F6F8">
+          <div style="width: 38px; height: 38px; flex-shrink: 0; border-radius: 19px; background: #12161C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">MS</div>
+          <div style="min-width: 0; font-size: 14px"><strong>Maria Souza</strong><br><span style="color: #5B6472">(85) 98888-0000 · HB20</span></div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <span style="font-size: 14px; font-weight: 600">Atendimento</span>
+        <div role="group" aria-label="Atendimento" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+          
+            <button aria-pressed="false" style="height: 44px; border-radius: 10px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Balcão</button>
+          
+            <button aria-pressed="true" style="height: 44px; border-radius: 10px; border: 2px solid #12161C; background: #12161C; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Entrega</button>
+          
+            <button aria-pressed="false" style="height: 44px; border-radius: 10px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Socorro</button>
+          
+        </div>
+        <label for="ev-bairro" style="position: absolute; left: -9999px">Bairro ou endereço</label>
+        <input id="ev-bairro" placeholder="Bairro ou endereço" value="Messejana" style="height: 46px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C">
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 6px">
+        <label for="ev-obs" style="font-size: 14px; font-weight: 600">Observação</label>
+        <textarea id="ev-obs" rows="3" style="box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 10px 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; resize: vertical">Cliente pediu CPF na nota</textarea>
+      </div>
+
+      <div style="display: flex; gap: 8px; padding: 10px 12px; border-radius: 12px; background: #F5F6F8; font-size: 13px; color: #3D4652">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; flex-shrink: 0; margin-top: 1px" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+        Itens, valores e pagamento não se editam, para não bagunçar estoque e lucro. Para corrigir, cancele a venda e registre de novo.
+      </div>
+    </section>
+  </div>
+
+  <footer style="display: flex; flex-wrap: wrap; gap: 10px; padding: 14px 20px 20px; border-top: 1px solid #EEF0F3">
+    <button style="flex: 1 1 120px; min-height: 52px; border-radius: 14px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 16px; font-weight: 600; color: #12161C; cursor: pointer">Cancelar</button>
+    <button style="flex: 2 1 200px; min-height: 52px; border-radius: 14px; border: none; background: #FFC21A; color: #12161C; font-family: Inter, sans-serif; font-size: 17px; font-weight: 700; cursor: pointer">Salvar alterações</button>
+  </footer>
+</div>
+</body>
+</html>

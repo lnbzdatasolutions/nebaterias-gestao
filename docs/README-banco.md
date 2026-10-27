@@ -17,6 +17,7 @@ A especificação completa está no documento "Sistema de Gestão — N E Bateri
 1. Criar o projeto no Supabase com o e-mail da loja.
 2. SQL Editor → colar e rodar `supabase/schema.sql`.
 3. SQL Editor → colar e rodar `supabase/seed.sql`.
+3b. SQL Editor → rodar cada arquivo de `supabase/migracoes/` em ordem (`002_notas_fiscais.sql`: nota fiscal na venda).
 4. Authentication → Sign In / Providers → desligar **Allow new users to sign up**.
 5. Authentication → Users → **Add user** para o dono e para a esposa.
 6. Copiar `Project URL` e a chave `anon` para as variáveis de ambiente do Netlify.
@@ -30,7 +31,7 @@ A especificação completa está no documento "Sistema de Gestão — N E Bateri
 | `supabase/schema.sql` | Tabelas, índices, triggers, funções RPC, views, RLS e permissões |
 | `supabase/seed.sql` | Dados da loja, formas de pagamento e catálogo inicial Moura |
 | `supabase/consultas.sql` | Consulta pronta de cada tela, em SQL e em supabase-js |
-| `testes/` | Testes locais (Postgres 16): `./testes/rodar.sh` — 20 cenários |
+| `testes/` | Testes locais (Postgres 16): `./testes/rodar.sh` — 32 cenários |
 | `.github/workflows/manutencao-supabase.yml` | Ping a cada 3 dias + `pg_dump` aos domingos |
 
 ## Regras que o app precisa respeitar

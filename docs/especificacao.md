@@ -79,7 +79,7 @@ O MVP tem 7 módulos; tudo que envolve nota fiscal, integrações externas e fin
 
 **Fora do escopo do MVP:**
 
-- Emissão de NF-e ou NFC-e.
+- Emissão de NF-e ou NFC-e (a loja emite no Tiranota; o sistema só registra a nota — seção 11).
 - Integração com maquininha, banco ou Pix automático.
 - Contas a pagar e a receber, fluxo de caixa completo.
 - Venda a prazo (fiado) com controle de parcelas a receber — ver pontos em aberto.
@@ -214,7 +214,7 @@ O estoque é sempre a soma dos movimentos, o custo de cada bateria é o custo m�
 
 ## 6. Modelo de dados (Supabase / PostgreSQL)
 
-São 11 tabelas, 9 views e 13 funções chamadas pelo app, já escritas e testadas. Nomes, diagrama de relacionamentos, dicionário de dados, funções, permissões e a consulta pronta de cada tela estão em `docs/banco-de-dados.md`.
+São 12 tabelas, 11 views e 15 funções chamadas pelo app, já escritas e testadas. Nomes, diagrama de relacionamentos, dicionário de dados, funções, permissões e a consulta pronta de cada tela estão em `docs/banco-de-dados.md`.
 
 ## 7. Carga inicial do catálogo
 
@@ -351,10 +351,51 @@ A entrega é feita em 4 etapas, cada uma testada pelo dono no próprio celular a
 - [ ] A loja cobra instalação ou outros serviços (teste de bateria, carga)? Se sim, incluir “serviço” como tipo de produto sem estoque.
 - [ ] Conferir a lista de modelos e códigos com o revendedor Moura (seção 7).
 - [ ] Quem será o dono das contas do GitHub, Supabase e Netlify (recomendado: e-mail da loja)?
+- [ ] Pedir ao contador para confirmar se a emissão de NF-e (Tiranota) para consumidor pessoa física está correta, já que o Ceará passou a exigir NFC-e nessas vendas desde 01/01/2026.
 - [ ] Entrega e socorro têm cobrança em algum caso (distância, horário)? Hoje o banco registra só o tipo de atendimento e o bairro, sem taxa.
+
+## 11. Nota fiscal e edição da venda
+
+O sistema **não emite nota fiscal**. A loja continua emitindo no Tiranota; o sistema só registra a referência da nota em cada venda e avisa quais vendas ainda estão sem nota.
+
+**Fluxo**
+
+1. A venda é registrada normalmente.
+2. O dono emite a nota no Tiranota.
+3. No sistema, abre a venda (Histórico → venda, ou "Informar nota fiscal" na tela de venda registrada) e cola a **chave de acesso**. Tipo, série e número são preenchidos a partir da chave.
+4. Salva. A venda passa a mostrar "NFC-e nº 130" (ou NF-e) no histórico.
+
+**Campos da nota**
+
+| Campo | Regra |
+| --- | --- |
+| Chave de acesso | 44 números; aceita colada com espaços; o banco confere o dígito verificador |
+| Tipo | NFC-e (65) ou NF-e (55); vem da chave |
+| Número e série | Vêm da chave; sem chave, número obrigatório e série padrão 1 |
+| Data de emissão | Padrão: hoje |
+| Valor da nota | Padrão: total da venda; o sistema marca quando for diferente |
+| CPF/CNPJ na nota | Opcional (aceita CNPJ com letras) |
+| PDF da nota | Opcional, guardado no Supabase Storage |
+| Observação | Livre |
+
+**O que se edita numa venda já registrada:** nota fiscal, cliente, atendimento (balcão/entrega/socorro e bairro) e observação. **Itens, valores e pagamento não se editam**, para não bagunçar estoque, custo e lucro: para corrigir, cancelar a venda e registrar de novo.
+
+**Situações da nota na lista de vendas**
+
+| Situação | Quando | O que o app mostra |
+| --- | --- | --- |
+| Sem nota | Venda concluída sem nota registrada | Selo amarelo; contador no Início e filtro "Sem nota" |
+| Emitida | Nota registrada | Selo verde com tipo e número |
+| Cancelar nota | Venda cancelada que ainda tem nota emitida | Selo vermelho: cancelar no Tiranota e marcar no sistema |
+
+**Regras:** uma única nota "emitida" por venda; nota não se apaga (corrige-se ou marca-se como cancelada, com motivo); venda cancelada não recebe nota nova.
+
+Telas: `design/imagens/celular/12` a `14`, `design/imagens/notebook/08` e `12`, `design/imagens/janelas/07`. Banco: `supabase/migracoes/002_notas_fiscais.sql` (ver `docs/banco-de-dados.md`, seção 9).
 
 **Fontes** (consultadas em 27/10/2026)
 
 - [Supabase — preços e limites do plano Free](https://supabase.com/pricing)
 - [Netlify — limites do plano Free em 2026 (créditos)](https://kuberns.com/blogs/netlify-pricing/)
 - [Netlify — modelo de créditos (custo por deploy e por GB)](https://agentdeals.dev/vendor/netlify)
+- [Ceará: fim do MFE e NFC-e obrigatória a partir de 2026 (Contábeis)](https://www.contabeis.com.br/noticias/73536/ceara-encerra-mfe-e-cf-e-migracao-para-nfc-e-comeca-em-2026/)
+- [Tiranota — planos](https://www.tiranota.com.br/planos-e-precos)

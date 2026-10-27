@@ -2,7 +2,7 @@
 
 Atualizado em 27/10/2026
 
-O banco tem 11 tabelas, 9 views e 13 funções chamadas pelo app; o esquema completo está em `supabase/schema.sql` e foi testado em PostgreSQL 16, com 20 cenários aprovados (seção 8).
+O banco tem 12 tabelas, 11 views e 15 funções chamadas pelo app; o esquema está em `supabase/schema.sql` mais `supabase/migracoes/`, testado em PostgreSQL 16 com 32 cenários aprovados (seções 8 e 9).
 
 ## 1. Nomes e convenções
 
@@ -458,3 +458,58 @@ O desenvolvedor cria o banco em cerca de 10 minutos rodando dois arquivos no SQL
 | `testes/` | Simulador do Supabase e os 20 cenários (só para teste local) |
 | `.github/workflows/manutencao-supabase.yml` | Anti-pausa e backup semanal |
 | `README.md` | Resumo de nomes e passo a passo |
+
+
+## 9. Migração 002 — nota fiscal na venda
+
+Arquivo `supabase/migracoes/002_notas_fiscais.sql`. Rodar depois do `schema.sql` e do `seed.sql`; não altera nem apaga dados existentes. Testes: `testes/02_notas_fiscais.sql` (12 cenários, aprovados), executados pelo `testes/rodar.sh`.
+
+**Tabela `notas_fiscais`**
+
+| Campo | Tipo | Regra |
+| --- | --- | --- |
+| venda_id | uuid → vendas | Obrigatório |
+| modelo | smallint | 55 = NF-e, 65 = NFC-e (vem da chave) |
+| serie, numero | smallint, integer | Vêm da chave; sem chave, série padrão 1; único por modelo + série + número |
+| chave | text, única | 44 números; limpa espaços e pontos; dígito verificador conferido; precisa bater com modelo/série/número |
+| data_emissao | date | Padrão hoje (Fortaleza) |
+| valor | numeric(12,2) | Padrão: total da venda |
+| cpf_cnpj_destinatario | text | Maiúsculas, só letras e números |
+| situacao | text | `emitida` ou `cancelada` (cancelada exige motivo e não volta) |
+| arquivo_path | text | Caminho do PDF no Storage (bucket `notas-fiscais`, opcional) |
+| obs, motivo_cancelamento, cancelada_em, usuario_id | | |
+
+Só pode haver **uma nota emitida por venda** (índice único parcial). Não há DELETE para o app.
+
+**Funções novas**
+
+| Função | Uso |
+| --- | --- |
+| `atualizar_venda(p_venda_id, p)` | Edita `cliente_id`, `tipo_atendimento`, `local_atendimento` e `obs`; recusa itens, valores e pagamentos |
+| `fn_chave_nfe_valida(p_chave)` | Confere a chave enquanto o usuário digita (opcional) |
+
+**Views**
+
+- `vw_vendas_lista` ganha as colunas `nota_id`, `nota_modelo`, `nota_serie`, `nota_numero`, `nota_chave` e `situacao_nota` (`pendente`, `emitida`, `cancelar_nota`, `nao_se_aplica`).
+- `vw_notas_fiscais`: histórico de notas com número da venda, cliente e o alerta `valor_diferente_da_venda`.
+- `vw_resumo_notas`: `vendas_sem_nota`, `valor_sem_nota`, `notas_para_cancelar` (alerta do Início).
+
+**Consultas no app**
+
+```javascript
+// alerta do Início
+const { data: resumo } = await supabase.from('vw_resumo_notas').select('*').single();
+// filtro "Sem nota"
+const { data } = await supabase.from('vw_vendas_lista').select('*').eq('situacao_nota', 'pendente');
+// registrar nota colando só a chave
+const { data: nota, error } = await supabase.from('notas_fiscais')
+  .insert({ venda_id, chave, data_emissao, cpf_cnpj_destinatario, obs }).select().single();
+// marcar nota como cancelada
+await supabase.from('notas_fiscais').update({ situacao: 'cancelada', motivo_cancelamento }).eq('id', notaId);
+// editar cliente / atendimento / observação
+await supabase.rpc('atualizar_venda', { p_venda_id: vendaId, p: { cliente_id, tipo_atendimento, local_atendimento, obs } });
+```
+
+As mensagens de erro do banco já vêm em português, prontas para mostrar. Segunda nota na mesma venda volta com o código `23505`: mostrar "Esta venda já tem nota; cancele a anterior antes".
+
+**Também nesta migração:** `clientes.cpf_cnpj` passa a guardar letras (CNPJ alfanumérico da Receita Federal para inscrições novas).
