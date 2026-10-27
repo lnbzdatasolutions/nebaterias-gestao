@@ -2,7 +2,7 @@
 // Dados do Supabase nunca são guardados em cache (sempre vão à rede).
 // Arquivos do app: usa o cache na hora e atualiza em segundo plano.
 
-const CACHE = 'nebaterias-v3';
+const CACHE = 'nebaterias-v4';
 const CASCA = [
   '/', '/index.html', '/manifest.json', '/css/app.css', '/css/telas.css',
   '/js/app.js', '/js/supabase.js', '/js/config.js', '/js/util.js', '/js/icones.js',
@@ -12,7 +12,7 @@ const CASCA = [
   '/js/telas/entrada.js', '/js/telas/clientes.js', '/js/telas/produtos.js',
   '/js/componentes/janela.js', '/js/componentes/janela-novo-cliente.js',
   '/js/componentes/janela-nova-bateria.js', '/js/componentes/escolher-bateria.js',
-  '/js/componentes/nota-fiscal.js', '/js/componentes/janela-editar-venda.js', '/js/telas/vendas.js',
+  '/js/componentes/nota-fiscal.js', '/js/componentes/janela-editar-venda.js', '/js/telas/vendas.js', '/js/telas/painel.js',
   '/icones/icone-192.png', '/icones/icone.svg',
 ];
 const EXTERNOS = ['fonts.googleapis.com', 'fonts.gstatic.com', 'cdn.jsdelivr.net'];
