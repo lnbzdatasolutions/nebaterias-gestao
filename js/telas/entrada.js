@@ -2,7 +2,7 @@
 // (tudo dentro da RPC registrar_compra). A tela só mostra a prévia dos números.
 import { supabase, ok, mensagemDeErro } from '../supabase.js';
 import { icone } from '../icones.js';
-import { abrirJanela } from '../componentes/janela.js';
+import { abrirJanela, pedirTexto } from '../componentes/janela.js';
 import { escolherBateria } from '../componentes/escolher-bateria.js';
 import { $, esc, dinheiro, numero, valorCampo, centavos, hojeISO, saldo, aviso, ocupado, FUSO } from '../util.js';
 
@@ -97,7 +97,7 @@ export async function render(raiz, { irPara }) {
 
       <div class="pilha coluna-resumo">
         <section class="cartao cartao-escuro" id="resumo"></section>
-        <section class="cartao so-notebook" id="ultimas"><h2 class="cartao-h">Últimas entradas</h2><p class="texto-aux">Carregando…</p></section>
+        <section class="cartao" id="ultimas"><h2 class="cartao-h">Últimas entradas</h2><p class="texto-aux">Carregando…</p></section>
       </div>
     </div>
 
@@ -196,16 +196,65 @@ export async function render(raiz, { irPara }) {
     ultimo?.select();
   }
 
+  let limiteUltimas = 5;
+
+  /** Detalhe de uma entrada já registrada, com o botão de cancelar. */
+  async function verCompra(id) {
+    let c;
+    try {
+      c = ok(await supabase.from('compras')
+        .select('id, numero, data_compra, numero_nota, frete, outros_custos, qtd_sucata_entregue, abatimento_sucata, total, status, motivo_cancelamento, fornecedores(nome), compra_itens(quantidade, preco_tabela, desconto_unitario, custo_unitario_final, subtotal, produtos(modelo))')
+        .eq('id', id).single());
+    } catch (e) {
+      return aviso(mensagemDeErro(e), 'erro');
+    }
+    const cancelada = c.status === 'cancelada';
+    const acao = await abrirJanela({
+      titulo: `Entrada nº ${c.numero}`,
+      subtitulo: `${new Date(`${c.data_compra}T12:00`).toLocaleDateString('pt-BR')} · ${c.fornecedores?.nome ?? 'Sem fornecedor'}${c.numero_nota ? ` · nota ${c.numero_nota}` : ''}`,
+      html: `
+        <div class="detalhe-venda">
+          ${cancelada ? `<p class="nota nota-alerta">${icone('alerta', 18)}<span>Cancelada${c.motivo_cancelamento ? `: ${esc(c.motivo_cancelamento)}` : ''}</span></p>` : ''}
+          <div class="contas">
+            ${c.compra_itens.map((i) => `
+              <div class="linha-conta"><span>${i.quantidade}× ${esc(i.produtos?.modelo)} <span class="texto-aux">tabela ${dinheiro(i.preco_tabela)}${Number(i.desconto_unitario) ? ` - ${dinheiro(i.desconto_unitario)}` : ''}</span></span><span>${dinheiro(i.subtotal)}</span></div>
+              <div class="linha-conta texto-aux texto-p"><span>custo final por bateria</span><span>${dinheiro(i.custo_unitario_final)}</span></div>`).join('')}
+            ${Number(c.frete) + Number(c.outros_custos) ? `<div class="linha-conta texto-aux"><span>Frete e outros</span><span>+ ${dinheiro(Number(c.frete) + Number(c.outros_custos))}</span></div>` : ''}
+            ${Number(c.abatimento_sucata) ? `<div class="linha-conta texto-aux"><span>Sucata (${c.qtd_sucata_entregue})</span><span>- ${dinheiro(c.abatimento_sucata)}</span></div>` : ''}
+            <div class="linha-conta linha-conta-total"><strong>Total pago</strong><strong class="riscavel ${cancelada ? 'cancelada' : ''}">${dinheiro(c.total)}</strong></div>
+          </div>
+          ${cancelada ? '' : `
+            <p class="nota">${icone('alerta', 18)}<span>Cancelar retira as baterias do estoque. O custo médio não volta ao valor anterior.</span></p>
+            <button type="button" class="btn btn-perigo btn-grande" data-cancelar-compra>Cancelar entrada</button>`}
+        </div>`,
+      montar(corpo, fechar) {
+        corpo.querySelector('[data-cancelar-compra]')?.addEventListener('click', () => fechar('cancelar'));
+      },
+    });
+    if (acao !== 'cancelar') return;
+    const motivo = await pedirTexto({ titulo: `Cancelar entrada nº ${c.numero}`, rotulo: 'Motivo do cancelamento', sim: 'Cancelar e retirar do estoque', perigo: true });
+    if (!motivo) return;
+    try {
+      ok(await supabase.rpc('cancelar_compra', { p_compra_id: c.id, p_motivo: motivo }));
+      aviso(`Entrada nº ${c.numero} cancelada e estoque retirado.`, 'ok');
+      carregarUltimas();
+    } catch (e) {
+      aviso(mensagemDeErro(e), 'erro');
+    }
+  }
+
   async function carregarUltimas() {
     const el = $('#ultimas', raiz);
     try {
       const compras = ok(await supabase.from('vw_compras_lista')
-        .select('numero, data_compra, itens_resumo, total, status').order('numero', { ascending: false }).limit(5));
-      el.innerHTML = `<h2 class="cartao-h">Últimas entradas</h2>` + (compras.length ? `<ul class="lista-simples">
-        ${compras.map((c) => `<li class="${c.status === 'cancelada' ? 'cancelada' : ''}">
-          <span><strong>Nº ${c.numero}</strong> <span class="texto-aux">${diaMes(c.data_compra)} · ${esc(String(c.itens_resumo).replace(/(\d+)x /g, '$1× '))}</span></span>
-          <strong class="riscavel">${dinheiro(c.total)}</strong></li>`).join('')}
-      </ul>` : '<p class="texto-aux">Nenhuma entrada registrada ainda.</p>');
+        .select('id, numero, data_compra, itens_resumo, total, status').order('numero', { ascending: false }).limit(limiteUltimas));
+      el.innerHTML = `<h2 class="cartao-h">Últimas entradas</h2>` + (compras.length ? `<ul class="lista-simples lista-entradas">
+        ${compras.map((c) => `<li class="${c.status === 'cancelada' ? 'cancelada' : ''}"><button type="button" data-compra="${c.id}">
+          <span><strong class="riscavel">Nº ${c.numero}</strong> <span class="texto-aux">${diaMes(c.data_compra)} · ${esc(String(c.itens_resumo).replace(/(\d+)x /g, '$1× '))}</span>
+            ${c.status === 'cancelada' ? '<span class="vermelho texto-p forte">cancelada</span>' : ''}</span>
+          <strong class="riscavel">${dinheiro(c.total)}</strong></button></li>`).join('')}
+      </ul>${compras.length === limiteUltimas ? '<button type="button" class="link-btn" data-mais-entradas>Ver mais entradas</button>' : ''}`
+        : '<p class="texto-aux">Nenhuma entrada registrada ainda.</p>');
     } catch (e) {
       el.innerHTML = `<p class="msg-erro">${esc(mensagemDeErro(e))}</p>`;
     }
@@ -260,9 +309,11 @@ export async function render(raiz, { irPara }) {
     }
   });
   raiz.addEventListener('click', (e) => {
-    const alvo = e.target.closest('[data-remover], #adicionar, [data-registrar]');
+    const alvo = e.target.closest('[data-remover], #adicionar, [data-registrar], [data-compra], [data-mais-entradas]');
     if (!alvo) return;
-    if (alvo.id === 'adicionar') adicionar();
+    if (alvo.dataset.compra) verCompra(alvo.dataset.compra);
+    else if (alvo.dataset.maisEntradas !== undefined) { limiteUltimas += 20; carregarUltimas(); }
+    else if (alvo.id === 'adicionar') adicionar();
     else if (alvo.dataset.remover !== undefined) { r.itens.splice(Number(alvo.dataset.remover), 1); desenharItens(); }
     else registrar(alvo);
   });
