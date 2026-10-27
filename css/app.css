@@ -363,3 +363,13 @@ svg { flex-shrink: 0; }
 .recolhivel-corpo { padding: 4px 16px 16px; }
 .kpi-var .neutro { color: var(--escuro-sub); }
 .kpi-var:has(.neutro) .kpi-rotulo { color: var(--escuro-sub) !important; }
+
+/* Selo "Powered by Netlify" (plano gratuito): é um iframe fixo no canto inferior
+   direito que o Netlify insere na página. No celular ele cobria as abas Estoque,
+   Entrada e Painel; aqui só o mudamos de lugar (continua visível e clicável). */
+@media (max-width: 899.98px) {
+  #nl-badge-frame { bottom: calc(var(--altura-rodape) + env(safe-area-inset-bottom)) !important; }
+  body:has(.tela .barra-acao) #nl-badge-frame { bottom: calc(var(--altura-rodape) + 82px + env(safe-area-inset-bottom)) !important; }
+  body:has(.venda[data-passo="2"]) #nl-badge-frame { bottom: calc(var(--altura-rodape) + 134px + env(safe-area-inset-bottom)) !important; }
+  .tela { padding-bottom: calc(var(--altura-rodape) + 80px + env(safe-area-inset-bottom)); }
+}
