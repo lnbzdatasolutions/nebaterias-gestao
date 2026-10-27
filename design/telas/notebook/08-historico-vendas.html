@@ -12,7 +12,7 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
 </style>
 </head>
 <body>
-<div style="min-height: 100vh; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-wrap: wrap; align-items: stretch">
+<div style="min-height: 100vh; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-wrap: wrap; align-items: stretch; position: relative">
 
   <aside style="flex: 1 1 232px; max-width: 100%; box-sizing: border-box; background: #12161C; color: #FFFFFF; padding: 20px 14px; display: flex; flex-direction: column; gap: 20px">
     <div style="display: flex; align-items: center; gap: 10px; padding: 0 6px">
@@ -49,7 +49,7 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
     <header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px">
       <div>
         <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 32px">Vendas</h1>
-        <div style="font-size: 14px; color: #5B6472">Outubro de 2026 · 42 vendas · R$ 18.420,00 · 1 cancelada</div>
+        <div style="font-size: 14px; color: #5B6472">Outubro de 2026 · 43 vendas · R$ 18.870,00 · 1 cancelada</div>
       </div>
       <a href="03-vender.html" style="display: flex; align-items: center; min-height: 46px; padding: 0 18px; border-radius: 12px; background: #FFC21A; color: #12161C; text-decoration: none; font-weight: 700; font-size: 15px">+ Nova venda</a>
     </header>
@@ -71,11 +71,23 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
         <label for="st" style="font-size: 13px; font-weight: 600">Situação</label>
         <select id="st" style="height: 44px; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif; background: #FFFFFF"><option>Todas</option></select>
       </div>
+      <div style="display: flex; flex-direction: column; gap: 4px; flex: 1 1 260px">
+        <span style="font-size: 13px; font-weight: 600">Nota fiscal</span>
+        <div role="group" aria-label="Filtrar por nota fiscal" style="display: flex; gap: 4px; background: #E9EBEF; padding: 4px; border-radius: 10px">
+          
+            <button aria-pressed="true" style="flex: 1; height: 36px; padding: 0 10px; border-radius: 8px; border: none; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap">Todas</button>
+          
+            <button aria-pressed="false" style="flex: 1; height: 36px; padding: 0 10px; border-radius: 8px; border: none; background: transparent; color: #12161C; font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap">Sem nota (2)</button>
+          
+            <button aria-pressed="false" style="flex: 1; height: 36px; padding: 0 10px; border-radius: 8px; border: none; background: transparent; color: #12161C; font-family: Inter, sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap">Cancelar (1)</button>
+          
+        </div>
+      </div>
     </section>
 
     <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
       <section aria-label="Lista de vendas" style="flex: 2 1 560px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; overflow-x: auto">
-        <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 740px">
           <thead>
             <tr style="text-align: left; color: #5B6472; font-size: 12px; background: #FAFBFC">
               <th style="padding: 12px 10px; font-weight: 600">Nº</th>
@@ -83,6 +95,7 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
               <th style="padding: 12px 10px; font-weight: 600">Cliente</th>
               <th style="padding: 12px 10px; font-weight: 600">Baterias</th>
               <th style="padding: 12px 10px; font-weight: 600">Pagamento</th>
+              <th style="padding: 12px 10px; font-weight: 600">Nota</th>
               <th style="padding: 12px 10px; font-weight: 600; text-align: right">Total</th>
               <th style="padding: 12px 10px; font-weight: 600; text-align: right">Lucro</th>
               <th style="padding: 12px 10px"><span style="position: absolute; left: -9999px">Ações</span></th>
@@ -91,11 +104,26 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
           <tbody>
             
               <tr style="border-top: 1px solid #EEF0F3; background: #FFF8E1">
+                <td style="padding: 12px 10px; font-weight: 600">#130</td>
+                <td style="padding: 12px 10px; color: #5B6472; white-space: nowrap">27/10 14:50</td>
+                <td style="padding: 12px 10px">Maria Souza</td>
+                <td style="padding: 12px 10px">1× M60GD</td>
+                <td style="padding: 12px 10px; color: #5B6472">Pix</td>
+                <td style="padding: 12px 10px"><span style="font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 999px; white-space: nowrap; background: #FFF4D6; color: #7A4E00">Sem nota</span></td>
+                <td style="padding: 12px 10px; text-align: right; font-weight: 600; text-decoration: none">R$ 450,00</td>
+                <td style="padding: 12px 10px; text-align: right; color: #1F7A4D">R$ 160,00</td>
+                <td style="padding: 8px 10px; text-align: right">
+                  <button aria-label="Ver venda 130" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Ver</button>
+                </td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
                 <td style="padding: 12px 10px; font-weight: 600">#129</td>
                 <td style="padding: 12px 10px; color: #5B6472; white-space: nowrap">27/10 14:32</td>
                 <td style="padding: 12px 10px">João da Silva</td>
                 <td style="padding: 12px 10px">1× M60GD</td>
                 <td style="padding: 12px 10px; color: #5B6472">Pix + Dinheiro</td>
+                <td style="padding: 12px 10px"><span style="font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 999px; white-space: nowrap; background: #E3F4EA; color: #1F7A4D">NFC-e 129</span></td>
                 <td style="padding: 12px 10px; text-align: right; font-weight: 600; text-decoration: none">R$ 405,00</td>
                 <td style="padding: 12px 10px; text-align: right; color: #1F7A4D">R$ 115,00</td>
                 <td style="padding: 8px 10px; text-align: right">
@@ -109,6 +137,7 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
                 <td style="padding: 12px 10px">Sem cadastro</td>
                 <td style="padding: 12px 10px">1× M150BD</td>
                 <td style="padding: 12px 10px; color: #5B6472">Crédito 3x</td>
+                <td style="padding: 12px 10px"><span style="font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 999px; white-space: nowrap; background: #E3F4EA; color: #1F7A4D">NF-e 43</span></td>
                 <td style="padding: 12px 10px; text-align: right; font-weight: 600; text-decoration: none">R$ 1.100,00</td>
                 <td style="padding: 12px 10px; text-align: right; color: #1F7A4D">R$ 439,25</td>
                 <td style="padding: 8px 10px; text-align: right">
@@ -122,6 +151,7 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
                 <td style="padding: 12px 10px">Sem cadastro</td>
                 <td style="padding: 12px 10px">2× M40SD</td>
                 <td style="padding: 12px 10px; color: #5B6472">Pix</td>
+                <td style="padding: 12px 10px"><span style="font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 999px; white-space: nowrap; background: #FFF4D6; color: #7A4E00">Sem nota</span></td>
                 <td style="padding: 12px 10px; text-align: right; font-weight: 600; text-decoration: none">R$ 760,00</td>
                 <td style="padding: 12px 10px; text-align: right; color: #1F7A4D">R$ 264,46</td>
                 <td style="padding: 8px 10px; text-align: right">
@@ -135,6 +165,7 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
                 <td style="padding: 12px 10px">Maria Souza</td>
                 <td style="padding: 12px 10px">1× M60GD</td>
                 <td style="padding: 12px 10px; color: #5B6472">Débito</td>
+                <td style="padding: 12px 10px"><span style="font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 999px; white-space: nowrap; background: #FDE7E5; color: #B42318">Cancelar nota</span></td>
                 <td style="padding: 12px 10px; text-align: right; font-weight: 600; text-decoration: line-through">R$ 450,00</td>
                 <td style="padding: 12px 10px; text-align: right; color: #9AA2AE">—</td>
                 <td style="padding: 8px 10px; text-align: right">
@@ -148,6 +179,7 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
                 <td style="padding: 12px 10px">Carlos Lima</td>
                 <td style="padding: 12px 10px">1× M70LD</td>
                 <td style="padding: 12px 10px; color: #5B6472">Crédito 2x</td>
+                <td style="padding: 12px 10px"><span style="font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 999px; white-space: nowrap; background: #E3F4EA; color: #1F7A4D">NFC-e 126</span></td>
                 <td style="padding: 12px 10px; text-align: right; font-weight: 600; text-decoration: none">R$ 600,00</td>
                 <td style="padding: 12px 10px; text-align: right; color: #1F7A4D">R$ 178,00</td>
                 <td style="padding: 8px 10px; text-align: right">
@@ -161,6 +193,7 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
                 <td style="padding: 12px 10px">Sem cadastro</td>
                 <td style="padding: 12px 10px">1× MA5-D</td>
                 <td style="padding: 12px 10px; color: #5B6472">Dinheiro</td>
+                <td style="padding: 12px 10px"><span style="font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 999px; white-space: nowrap; background: #E3F4EA; color: #1F7A4D">NFC-e 125</span></td>
                 <td style="padding: 12px 10px; text-align: right; font-weight: 600; text-decoration: none">R$ 190,00</td>
                 <td style="padding: 12px 10px; text-align: right; color: #1F7A4D">R$ 65,00</td>
                 <td style="padding: 8px 10px; text-align: right">
@@ -174,6 +207,7 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
                 <td style="padding: 12px 10px">Ana Rocha</td>
                 <td style="padding: 12px 10px">1× M60AX</td>
                 <td style="padding: 12px 10px; color: #5B6472">Pix</td>
+                <td style="padding: 12px 10px"><span style="font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 999px; white-space: nowrap; background: #E3F4EA; color: #1F7A4D">NFC-e 124</span></td>
                 <td style="padding: 12px 10px; text-align: right; font-weight: 600; text-decoration: none">R$ 690,00</td>
                 <td style="padding: 12px 10px; text-align: right; color: #1F7A4D">R$ 190,00</td>
                 <td style="padding: 8px 10px; text-align: right">
@@ -187,6 +221,7 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
                 <td style="padding: 12px 10px">Sem cadastro</td>
                 <td style="padding: 12px 10px">2× M60GD</td>
                 <td style="padding: 12px 10px; color: #5B6472">Pix</td>
+                <td style="padding: 12px 10px"><span style="font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 999px; white-space: nowrap; background: #E3F4EA; color: #1F7A4D">NFC-e 123</span></td>
                 <td style="padding: 12px 10px; text-align: right; font-weight: 600; text-decoration: none">R$ 850,00</td>
                 <td style="padding: 12px 10px; text-align: right; color: #1F7A4D">R$ 270,00</td>
                 <td style="padding: 8px 10px; text-align: right">
@@ -197,36 +232,47 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
           </tbody>
         </table>
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-top: 1px solid #EEF0F3; font-size: 13px; color: #5B6472">
-          <span>Mostrando 8 de 42</span>
+          <span>Mostrando 9 de 43</span>
           <button style="height: 36px; padding: 0 14px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Carregar mais</button>
         </div>
       </section>
 
       <section aria-label="Detalhe da venda" style="flex: 1 1 300px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 14px">
         <div style="display: flex; align-items: baseline; justify-content: space-between">
-          <h2 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 22px">Venda nº 129</h2>
+          <h2 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 22px">Venda nº 130</h2>
           <span style="font-size: 13px; font-weight: 600; color: #1F7A4D">Concluída</span>
         </div>
-        <div style="font-size: 14px; color: #5B6472">27/10 14:32 · Entrega · Aldeota</div>
+        <div style="font-size: 14px; color: #5B6472">27/10 14:50 · Entrega · Messejana</div>
+        <div style="padding: 12px 14px; border-radius: 12px; background: #FFF4D6; border: 1px solid #F2D27A; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+            <span style="font-size: 14px; font-weight: 600">Nota fiscal</span>
+            <span style="font-size: 12px; font-weight: 600; color: #7A4E00">Pendente</span>
+          </div>
+          <div style="font-size: 13px; color: #3D4652">Emita no Tiranota e cole a chave aqui.</div>
+          <button style="height: 40px; border-radius: 10px; border: none; background: #FFC21A; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 700; cursor: pointer">Informar nota fiscal</button>
+        </div>
         <div style="padding: 12px; border-radius: 12px; background: #F5F6F8; font-size: 14px">
-          <div style="font-weight: 600">João da Silva</div>
-          <div style="color: #5B6472">(85) 99999-1234 · Onix · ABC1D23</div>
+          <div style="font-weight: 600">Maria Souza</div>
+          <div style="color: #5B6472">(85) 98888-0000 · HB20 · POX4G21</div>
         </div>
         <div style="font-size: 14px; display: flex; flex-direction: column; gap: 6px">
           <div style="display: flex; justify-content: space-between"><span>1× M60GD</span><span>R$ 450,00</span></div>
-          <div style="display: flex; justify-content: space-between; color: #5B6472"><span>Desconto</span><span>− R$ 45,00 (10%)</span></div>
-          <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 16px; padding-top: 6px; border-top: 1px solid #EEF0F3"><span>Total</span><span>R$ 405,00</span></div>
-          <div style="display: flex; justify-content: space-between; color: #5B6472"><span>Pagamento</span><span>Pix + Dinheiro</span></div>
-          <div style="display: flex; justify-content: space-between; color: #1F7A4D; font-weight: 600"><span>Lucro bruto</span><span>R$ 115,00</span></div>
+          <div style="display: flex; justify-content: space-between; color: #5B6472"><span>Desconto</span><span>R$ 0,00</span></div>
+          <div style="display: flex; justify-content: space-between; font-weight: 700; font-size: 16px; padding-top: 6px; border-top: 1px solid #EEF0F3"><span>Total</span><span>R$ 450,00</span></div>
+          <div style="display: flex; justify-content: space-between; color: #5B6472"><span>Pagamento</span><span>Pix</span></div>
+          <div style="display: flex; justify-content: space-between; color: #1F7A4D; font-weight: 600"><span>Lucro bruto</span><span>R$ 160,00</span></div>
           <div style="display: flex; justify-content: space-between; color: #5B6472"><span>Garantia até</span><span>27/10/2027</span></div>
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <button style="flex: 1 1 100%; height: 44px; border-radius: 10px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Editar venda</button>
           <button style="flex: 1 1 140px; height: 44px; border-radius: 10px; border: none; background: #12161C; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Reenviar comprovante</button>
           <button style="flex: 1 1 120px; height: 44px; border-radius: 10px; border: 1px solid #F1B5AF; background: #FFFFFF; color: #B42318; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Cancelar venda</button>
         </div>
       </section>
     </div>
   </main>
+
+  
 </div>
 </body>
 </html>

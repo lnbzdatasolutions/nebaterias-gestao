@@ -48,6 +48,8 @@ export async function render(raiz) {
       </div>
     </header>
 
+    <a href="#vendas/sem-nota" id="aviso-notas-nb" class="aviso-notas so-notebook" hidden></a>
+
     <section class="cartoes-resumo" aria-label="Resumo">
       <div class="cartao kpi"><div class="kpi-rotulo">Vendas hoje</div><div class="kpi-valor" id="k-vendas">-</div><div class="kpi-sub" id="k-vendas-sub">&nbsp;</div></div>
       <div class="cartao kpi"><div class="kpi-rotulo">Lucro hoje</div><div class="kpi-valor verde" id="k-lucro">-</div><div class="kpi-sub" id="k-lucro-sub">&nbsp;</div></div>
@@ -63,6 +65,7 @@ export async function render(raiz) {
       <a href="#estoque" class="cartao atalho">${icone('busca', 24)}<span>Consultar estoque</span></a>
       <a href="#entrada" class="cartao atalho">${icone('entrada', 24)}<span>Nova entrada</span></a>
     </div>
+    <a href="#vendas/sem-nota" id="aviso-notas-cel" class="aviso-notas so-celular" hidden></a>
 
     <div class="grade-inicio">
       <section class="cartao ultimas" aria-labelledby="t-ultimas">
@@ -85,6 +88,8 @@ export async function render(raiz) {
         <section id="estoque-baixo" class="alerta" hidden aria-label="Estoque baixo"></section>
       </div>
     </div>`;
+
+  mostrarAvisoNotas(raiz);
 
   $('#busca-rapida', raiz).addEventListener('submit', (e) => {
     e.preventDefault();
@@ -127,6 +132,34 @@ export async function render(raiz) {
     console.error(erro);
     $('#lista-vendas', raiz).innerHTML = `<p class="msg-erro">Não foi possível carregar os dados: ${esc(mensagemDeErro(erro))}</p>`;
   }
+}
+
+/** Aviso de vendas sem nota fiscal e de notas para cancelar no Tiranota (migração 002). */
+async function mostrarAvisoNotas(raiz) {
+  const { data: r, error } = await supabase.from('vw_resumo_notas').select('*').maybeSingle();
+  if (error || !r) return; // sem a migração 002 o Início continua funcionando
+  const semNota = Number(r.vendas_sem_nota);
+  const cancelar = Number(r.notas_para_cancelar);
+  if (!semNota && !cancelar) return;
+  const plural = (n, s, p) => `${n} ${n === 1 ? s : p}`;
+  const cel = $('#aviso-notas-cel', raiz);
+  cel.hidden = false;
+  cel.innerHTML = `${icone('documento', 28)}
+    <span class="min0">
+      <strong class="d-bloco">${semNota ? `${plural(semNota, 'venda', 'vendas')} sem nota fiscal` : `${plural(cancelar, 'nota', 'notas')} para cancelar`}</strong>
+      <span class="texto-aux">${semNota
+        ? `${dinheiro(r.valor_sem_nota)} · ${cancelar ? `${plural(cancelar, 'nota', 'notas')} para cancelar` : 'toque para informar'}`
+        : 'cancele no Tiranota e marque no sistema'}</span>
+    </span>${icone('seta', 22)}`;
+  if (!semNota) cel.href = '#vendas';
+  const nb = $('#aviso-notas-nb', raiz);
+  nb.hidden = false;
+  if (!semNota) nb.href = '#vendas';
+  const partes = [
+    semNota ? `<strong>${plural(semNota, 'venda', 'vendas')} sem nota fiscal</strong> (${dinheiro(r.valor_sem_nota)})` : '',
+    cancelar ? `<strong>${plural(cancelar, 'nota', 'notas')} para cancelar</strong> no Tiranota` : '',
+  ].filter(Boolean).join(' e ');
+  nb.innerHTML = `${icone('documento', 22)}<span class="min0">${partes}</span><span class="link-alerta">Resolver no histórico →</span>`;
 }
 
 function corSaldo(p) {

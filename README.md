@@ -12,7 +12,7 @@ Sistema web interno (celular e notebook) para vendas, estoque, entradas, cliente
 | `design/imagens/` | Imagem de cada tela (celular, notebook, janelas rápidas) |
 | `design/telas/` | HTML estático de cada tela; abra `design/telas/celular/02-inicio.html` no navegador |
 | `design/fonte-canvas/` | Arquivos originais do protótipo |
-| `supabase/` | `schema.sql`, `seed.sql`, `consultas.sql` |
+| `supabase/` | `schema.sql`, `seed.sql`, `consultas.sql` e `migracoes/` (002: nota fiscal na venda) |
 | `testes/` | Testes locais do banco |
 | `.github/workflows/` | Anti-pausa e backup semanal do Supabase |
 | `scripts/build.mjs` | Gera `js/config.js` com as chaves públicas do Supabase e monta `dist/` para o Netlify |

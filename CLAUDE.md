@@ -23,12 +23,15 @@ Sistema web interno da loja N E Baterias (Fortaleza-CE): vendas, estoque, entrad
 - O front usa só a chave `anon` do Supabase, lida de variável de ambiente. Nunca a `service_role`.
 - Dinheiro sempre formatado `R$ 1.234,56`; datas `dd/mm/aaaa`; fuso `America/Fortaleza`.
 - Campos de formulário com fonte de no mínimo 16 px; alvos de toque de no mínimo 44 px.
+- O sistema **não emite nota fiscal** (a loja emite no Tiranota). Só registra a nota na venda: tabela `notas_fiscais` e `docs/especificacao.md` seção 11.
+- Venda registrada não tem itens, valores nem pagamentos editáveis; só nota, cliente, atendimento e observação (`atualizar_venda`).
 - Os dados nas imagens são de exemplo. Tudo vem do banco.
 
 ## Banco
 
+- Ordem para criar o banco: `supabase/schema.sql`, `supabase/seed.sql`, depois `supabase/migracoes/*.sql` em ordem numérica.
 - `supabase/schema.sql` e `supabase/seed.sql` já estão prontos e testados. Não reescreva; se precisar mudar, crie um novo arquivo de migração.
-- Testes locais do banco (Postgres 16): `./testes/rodar.sh` (precisa de `PGHOST`/`PGPORT`/`PGUSER` apontando para um Postgres local). São 20 cenários.
+- Testes locais do banco (Postgres 16): `./testes/rodar.sh` (precisa de `PGHOST`/`PGPORT`/`PGUSER` apontando para um Postgres local). São 32 cenários (20 do schema + 12 da nota fiscal).
 
 ## Estrutura sugerida do front
 

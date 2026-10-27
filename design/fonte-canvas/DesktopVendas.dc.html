@@ -8,13 +8,13 @@
 <body>
 <x-dc>
 <helmet>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&family=Inter:wght@400;500;600&display=swap">
 <style>
 body{margin:0}
 a{color:#1D4ED8}a:hover{color:#1E40AF}
 </style>
 </helmet>
-<div style="min-height: 100vh; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-wrap: wrap; align-items: stretch">
+<div style="min-height: 100vh; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-wrap: wrap; align-items: stretch; position: relative">
 
   <aside style="flex: 1 1 232px; max-width: 100%; box-sizing: border-box; background: #12161C; color: #FFFFFF; padding: 20px 14px; display: flex; flex-direction: column; gap: 20px">
     <div style="display: flex; align-items: center; gap: 10px; padding: 0 6px">
@@ -35,7 +35,7 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
     <header style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px">
       <div>
         <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 32px">Vendas</h1>
-        <div style="font-size: 14px; color: #5B6472">Outubro de 2026 · 42 vendas · R$ 18.420,00 · 1 cancelada</div>
+        <div style="font-size: 14px; color: #5B6472">Outubro de 2026 · 43 vendas · R$ 18.870,00 · 1 cancelada</div>
       </div>
       <a href="DesktopVender.dc.html" style="display: flex; align-items: center; min-height: 46px; padding: 0 18px; border-radius: 12px; background: #FFC21A; color: #12161C; text-decoration: none; font-weight: 700; font-size: 15px">+ Nova venda</a>
     </header>
@@ -57,11 +57,19 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
         <label for="st" style="font-size: 13px; font-weight: 600">Situação</label>
         <select id="st" style="height: 44px; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif; background: #FFFFFF"><option>Todas</option></select>
       </div>
+      <div style="display: flex; flex-direction: column; gap: 4px; flex: 1 1 260px">
+        <span style="font-size: 13px; font-weight: 600">Nota fiscal</span>
+        <div role="group" aria-label="Filtrar por nota fiscal" style="display: flex; gap: 4px; background: #E9EBEF; padding: 4px; border-radius: 10px">
+          <sc-for list="{{filtrosNota}}" as="f" hint-placeholder-count="3">
+            <button aria-pressed="{{f.ativo}}" onClick="{{f.pick}}" style="flex: 1; height: 36px; padding: 0 10px; border-radius: 8px; border: none; background: {{f.fundo}}; color: #12161C; font-family: Inter, sans-serif; font-size: 13px; font-weight: {{f.peso}}; cursor: pointer; white-space: nowrap">{{f.nome}}</button>
+          </sc-for>
+        </div>
+      </div>
     </section>
 
     <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
       <section aria-label="Lista de vendas" style="flex: 2 1 560px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; overflow-x: auto">
-        <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 740px">
           <thead>
             <tr style="text-align: left; color: #5B6472; font-size: 12px; background: #FAFBFC">
               <th style="padding: 12px 10px; font-weight: 600">Nº</th>
@@ -69,6 +77,7 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
               <th style="padding: 12px 10px; font-weight: 600">Cliente</th>
               <th style="padding: 12px 10px; font-weight: 600">Baterias</th>
               <th style="padding: 12px 10px; font-weight: 600">Pagamento</th>
+              <th style="padding: 12px 10px; font-weight: 600">Nota</th>
               <th style="padding: 12px 10px; font-weight: 600; text-align: right">Total</th>
               <th style="padding: 12px 10px; font-weight: 600; text-align: right">Lucro</th>
               <th style="padding: 12px 10px"><span style="position: absolute; left: -9999px">Ações</span></th>
@@ -82,6 +91,7 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
                 <td style="padding: 12px 10px">{{v.cliente}}</td>
                 <td style="padding: 12px 10px">{{v.itens}}</td>
                 <td style="padding: 12px 10px; color: #5B6472">{{v.pagamento}}</td>
+                <td style="padding: 12px 10px"><span style="font-size: 12px; font-weight: 600; padding: 3px 8px; border-radius: 999px; white-space: nowrap; background: {{v.notaFundo}}; color: {{v.notaCor}}">{{v.notaTexto}}</span></td>
                 <td style="padding: 12px 10px; text-align: right; font-weight: 600; text-decoration: {{v.risco}}">{{v.total}}</td>
                 <td style="padding: 12px 10px; text-align: right; color: {{v.corLucro}}">{{v.lucro}}</td>
                 <td style="padding: 8px 10px; text-align: right">
@@ -92,7 +102,7 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
           </tbody>
         </table>
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 14px; border-top: 1px solid #EEF0F3; font-size: 13px; color: #5B6472">
-          <span>Mostrando 8 de 42</span>
+          <span>{{mostrando}}</span>
           <button style="height: 36px; padding: 0 14px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Carregar mais</button>
         </div>
       </section>
@@ -103,6 +113,14 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
           <span style="font-size: 13px; font-weight: 600; color: {{sel.corStatus}}">{{sel.status}}</span>
         </div>
         <div style="font-size: 14px; color: #5B6472">{{sel.data}} · {{sel.atendimento}}</div>
+        <div style="padding: 12px 14px; border-radius: 12px; background: {{sel.nota.fundo}}; border: 1px solid {{sel.nota.borda}}; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px">
+            <span style="font-size: 14px; font-weight: 600">Nota fiscal</span>
+            <span style="font-size: 12px; font-weight: 600; color: {{sel.nota.cor}}">{{sel.nota.rotulo}}</span>
+          </div>
+          <div style="font-size: 13px; color: #3D4652">{{sel.nota.texto}}</div>
+          <button onClick="{{abrir}}" style="height: 40px; border-radius: 10px; border: {{sel.nota.bordaBotao}}; background: {{sel.nota.fundoBotao}}; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 700; cursor: pointer">{{sel.nota.botao}}</button>
+        </div>
         <div style="padding: 12px; border-radius: 12px; background: #F5F6F8; font-size: 14px">
           <div style="font-weight: 600">{{sel.cliente}}</div>
           <div style="color: #5B6472">{{sel.contato}}</div>
@@ -116,19 +134,28 @@ a{color:#1D4ED8}a:hover{color:#1E40AF}
           <div style="display: flex; justify-content: space-between; color: #5B6472"><span>Garantia até</span><span>{{sel.garantia}}</span></div>
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <button onClick="{{abrir}}" style="flex: 1 1 100%; height: 44px; border-radius: 10px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Editar venda</button>
           <button style="flex: 1 1 140px; height: 44px; border-radius: 10px; border: none; background: #12161C; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Reenviar comprovante</button>
           <button style="flex: 1 1 120px; height: 44px; border-radius: 10px; border: 1px solid #F1B5AF; background: #FFFFFF; color: #B42318; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Cancelar venda</button>
         </div>
       </section>
     </div>
   </main>
+
+  <sc-if value="{{aberta}}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; background: rgba(18, 22, 28, 0.55); display: flex; justify-content: center; align-items: flex-start; padding: 48px 16px; box-sizing: border-box">
+      <div role="dialog" aria-label="Editar venda" style="width: 100%; max-width: 820px; border-radius: 20px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3)">
+        <dc-import name="EditarVenda" on-fechar="{{fechar}}" preenchido="{{preencher}}" hint-size="100%,1000px"></dc-import>
+      </div>
+    </div>
+  </sc-if>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+<script type="text/x-dc" data-dc-script data-props='{"janela":{"editor":"enum","options":["fechada","editar"],"default":"fechada"},"$preview":{"width":1440,"height":1000}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { sel: 0 };
+    this.state = { sel: 0, filtro: 'Todas', aberta: props.janela === 'editar' };
   }
   renderVals() {
     const menuItens = [
@@ -137,32 +164,59 @@ class Component extends DCLogic {
       ['Clientes', 'DesktopClientes.dc.html'], ['Produtos', 'DesktopProdutos.dc.html'], ['Configurações', 'DesktopConfiguracoes.dc.html']
     ];
     const lista = [
-      { numero: '129', data: '27/10 14:32', cliente: 'João da Silva', contato: '(85) 99999-1234 · Onix · ABC1D23', itens: '1× M60GD', bruto: 'R$ 450,00', desconto: '− R$ 45,00 (10%)', pagamento: 'Pix + Dinheiro', total: 'R$ 405,00', lucro: 'R$ 115,00', garantia: '27/10/2027', atendimento: 'Entrega · Aldeota', status: 'Concluída', ok: true },
-      { numero: '128', data: '27/10 11:10', cliente: 'Sem cadastro', contato: '—', itens: '1× M150BD', bruto: 'R$ 1.100,00', desconto: 'R$ 0,00', pagamento: 'Crédito 3x', total: 'R$ 1.100,00', lucro: 'R$ 439,25', garantia: '27/10/2027', atendimento: 'Socorro · Messejana', status: 'Concluída', ok: true },
-      { numero: '127', data: '27/10 09:05', cliente: 'Sem cadastro', contato: '—', itens: '2× M40SD', bruto: 'R$ 760,00', desconto: 'R$ 0,00', pagamento: 'Pix', total: 'R$ 760,00', lucro: 'R$ 264,46', garantia: '27/10/2027', atendimento: 'Balcão', status: 'Concluída', ok: true },
-      { numero: '126', data: '26/10 17:48', cliente: 'Maria Souza', contato: '(85) 98888-0000 · HB20 · POX4G21', itens: '1× M60GD', bruto: 'R$ 450,00', desconto: 'R$ 0,00', pagamento: 'Débito', total: 'R$ 450,00', lucro: 'R$ 160,00', garantia: '26/10/2027', atendimento: 'Balcão', status: 'Cancelada', ok: false },
-      { numero: '125', data: '26/10 15:20', cliente: 'Carlos Lima', contato: '(85) 98765-4321 · Compass', itens: '1× M70LD', bruto: 'R$ 620,00', desconto: '− R$ 20,00', pagamento: 'Crédito 2x', total: 'R$ 600,00', lucro: 'R$ 178,00', garantia: '26/10/2027', atendimento: 'Entrega · Meireles', status: 'Concluída', ok: true },
-      { numero: '124', data: '26/10 10:02', cliente: 'Sem cadastro', contato: '—', itens: '1× MA5-D', bruto: 'R$ 190,00', desconto: 'R$ 0,00', pagamento: 'Dinheiro', total: 'R$ 190,00', lucro: 'R$ 65,00', garantia: '26/10/2027', atendimento: 'Balcão', status: 'Concluída', ok: true },
-      { numero: '123', data: '25/10 16:40', cliente: 'Ana Rocha', contato: '(85) 99123-4567 · T-Cross', itens: '1× M60AX', bruto: 'R$ 690,00', desconto: 'R$ 0,00', pagamento: 'Pix', total: 'R$ 690,00', lucro: 'R$ 190,00', garantia: '25/10/2027', atendimento: 'Socorro · Cocó', status: 'Concluída', ok: true },
-      { numero: '122', data: '25/10 09:15', cliente: 'Sem cadastro', contato: '—', itens: '2× M60GD', bruto: 'R$ 900,00', desconto: '− R$ 50,00', pagamento: 'Pix', total: 'R$ 850,00', lucro: 'R$ 270,00', garantia: '25/10/2027', atendimento: 'Balcão', status: 'Concluída', ok: true }
+      { numero: '130', data: '27/10 14:50', cliente: 'Maria Souza', contato: '(85) 98888-0000 · HB20 · POX4G21', itens: '1× M60GD', bruto: 'R$ 450,00', desconto: 'R$ 0,00', pagamento: 'Pix', total: 'R$ 450,00', lucro: 'R$ 160,00', garantia: '27/10/2027', atendimento: 'Entrega · Messejana', status: 'Concluída', ok: true, nota: 'pendente' },
+      { numero: '129', data: '27/10 14:32', cliente: 'João da Silva', contato: '(85) 99999-1234 · Onix · ABC1D23', itens: '1× M60GD', bruto: 'R$ 450,00', desconto: '− R$ 45,00 (10%)', pagamento: 'Pix + Dinheiro', total: 'R$ 405,00', lucro: 'R$ 115,00', garantia: '27/10/2027', atendimento: 'Entrega · Aldeota', status: 'Concluída', ok: true, nota: 'emitida', nf: 'NFC-e 129', emissao: '27/10/2026' },
+      { numero: '128', data: '27/10 11:10', cliente: 'Sem cadastro', contato: '—', itens: '1× M150BD', bruto: 'R$ 1.100,00', desconto: 'R$ 0,00', pagamento: 'Crédito 3x', total: 'R$ 1.100,00', lucro: 'R$ 439,25', garantia: '27/10/2027', atendimento: 'Socorro · Messejana', status: 'Concluída', ok: true, nota: 'emitida', nf: 'NF-e 43', emissao: '27/10/2026' },
+      { numero: '127', data: '27/10 09:05', cliente: 'Sem cadastro', contato: '—', itens: '2× M40SD', bruto: 'R$ 760,00', desconto: 'R$ 0,00', pagamento: 'Pix', total: 'R$ 760,00', lucro: 'R$ 264,46', garantia: '27/10/2027', atendimento: 'Balcão', status: 'Concluída', ok: true, nota: 'pendente' },
+      { numero: '126', data: '26/10 17:48', cliente: 'Maria Souza', contato: '(85) 98888-0000 · HB20 · POX4G21', itens: '1× M60GD', bruto: 'R$ 450,00', desconto: 'R$ 0,00', pagamento: 'Débito', total: 'R$ 450,00', lucro: 'R$ 160,00', garantia: '26/10/2027', atendimento: 'Balcão', status: 'Cancelada', ok: false, nota: 'cancelar', nf: 'NFC-e 127', emissao: '26/10/2026' },
+      { numero: '125', data: '26/10 15:20', cliente: 'Carlos Lima', contato: '(85) 98765-4321 · Compass', itens: '1× M70LD', bruto: 'R$ 620,00', desconto: '− R$ 20,00', pagamento: 'Crédito 2x', total: 'R$ 600,00', lucro: 'R$ 178,00', garantia: '26/10/2027', atendimento: 'Entrega · Meireles', status: 'Concluída', ok: true, nota: 'emitida', nf: 'NFC-e 126', emissao: '26/10/2026' },
+      { numero: '124', data: '26/10 10:02', cliente: 'Sem cadastro', contato: '—', itens: '1× MA5-D', bruto: 'R$ 190,00', desconto: 'R$ 0,00', pagamento: 'Dinheiro', total: 'R$ 190,00', lucro: 'R$ 65,00', garantia: '26/10/2027', atendimento: 'Balcão', status: 'Concluída', ok: true, nota: 'emitida', nf: 'NFC-e 125', emissao: '26/10/2026' },
+      { numero: '123', data: '25/10 16:40', cliente: 'Ana Rocha', contato: '(85) 99123-4567 · T-Cross', itens: '1× M60AX', bruto: 'R$ 690,00', desconto: 'R$ 0,00', pagamento: 'Pix', total: 'R$ 690,00', lucro: 'R$ 190,00', garantia: '25/10/2027', atendimento: 'Socorro · Cocó', status: 'Concluída', ok: true, nota: 'emitida', nf: 'NFC-e 124', emissao: '25/10/2026' },
+      { numero: '122', data: '25/10 09:15', cliente: 'Sem cadastro', contato: '—', itens: '2× M60GD', bruto: 'R$ 900,00', desconto: '− R$ 50,00', pagamento: 'Pix', total: 'R$ 850,00', lucro: 'R$ 270,00', garantia: '25/10/2027', atendimento: 'Balcão', status: 'Concluída', ok: true, nota: 'emitida', nf: 'NFC-e 123', emissao: '25/10/2026' }
     ];
-    const s = lista[this.state.sel] || lista[0];
+    const f = this.state.filtro;
+    const visiveis = lista.filter((v) => f === 'Todas' || (f === 'Sem nota' && v.nota === 'pendente') || (f === 'Cancelar nota' && v.nota === 'cancelar'));
+    const s = visiveis[this.state.sel] || visiveis[0] || lista[0];
+    const badge = {
+      emitida:  ['#E3F4EA', '#1F7A4D'],
+      pendente: ['#FFF4D6', '#7A4E00'],
+      cancelar: ['#FDE7E5', '#B42318']
+    };
+    const notaDetalhe = {
+      pendente: { rotulo: 'Pendente', cor: '#7A4E00', fundo: '#FFF4D6', borda: '#F2D27A', texto: 'Emita no Tiranota e cole a chave aqui.', botao: 'Informar nota fiscal', bordaBotao: 'none', fundoBotao: '#FFC21A' },
+      emitida:  { rotulo: 'Emitida', cor: '#1F7A4D', fundo: '#FFFFFF', borda: '#E1E4E9', texto: (s.nf || '') + ' · série 1 · emitida em ' + (s.emissao || ''), botao: 'Ver ou corrigir a nota', bordaBotao: '1px solid #C9CED6', fundoBotao: '#FFFFFF' },
+      cancelar: { rotulo: 'Cancelar no Tiranota', cor: '#B42318', fundo: '#FDE7E5', borda: '#F1B5AF', texto: 'A venda foi cancelada, mas a ' + (s.nf || 'nota') + ' continua válida. Cancele no Tiranota e marque aqui.', botao: 'Marcar nota como cancelada', bordaBotao: '1px solid #F1B5AF', fundoBotao: '#FFFFFF' }
+    };
+    const qtdSem = lista.filter((v) => v.nota === 'pendente').length;
+    const qtdCancelar = lista.filter((v) => v.nota === 'cancelar').length;
     return {
+      aberta: this.state.aberta,
+      preencher: this.props.janela === 'editar',
+      abrir: () => this.setState({ aberta: true }),
+      fechar: () => this.setState({ aberta: false }),
+      mostrando: 'Mostrando ' + visiveis.length + ' de 43',
+      filtrosNota: [['Todas', 'Todas'], ['Sem nota', 'Sem nota (' + qtdSem + ')'], ['Cancelar nota', 'Cancelar (' + qtdCancelar + ')']].map(([chave, nome]) => {
+        const on = chave === f;
+        return { nome, ativo: on ? 'true' : 'false', fundo: on ? '#FFFFFF' : 'transparent', peso: on ? 700 : 500, pick: () => this.setState({ filtro: chave, sel: 0 }) };
+      }),
       menu: menuItens.map(([nome, href]) => {
         const on = nome === 'Vendas';
         return { nome, href, atual: on ? 'page' : 'false', cor: on ? '#12161C' : '#C9CED6', fundo: on ? '#FFC21A' : 'transparent', peso: on ? 700 : 500 };
       }),
-      vendas: lista.map((v, i) => ({
+      vendas: visiveis.map((v, i) => ({
         ...v,
         numero: '#' + v.numero,
         fundo: i === this.state.sel ? '#FFF8E1' : 'transparent',
         risco: v.ok ? 'none' : 'line-through',
         corLucro: v.ok ? '#1F7A4D' : '#9AA2AE',
         lucro: v.ok ? v.lucro : '—',
+        notaTexto: v.nota === 'emitida' ? v.nf : (v.nota === 'pendente' ? 'Sem nota' : 'Cancelar nota'),
+        notaFundo: badge[v.nota][0],
+        notaCor: badge[v.nota][1],
         verLabel: 'Ver venda ' + v.numero,
         ver: () => this.setState({ sel: i })
       })),
-      sel: { ...s, numero: 'nº ' + s.numero, corStatus: s.ok ? '#1F7A4D' : '#B42318' }
+      sel: { ...s, numero: 'nº ' + s.numero, corStatus: s.ok ? '#1F7A4D' : '#B42318', nota: notaDetalhe[s.nota] }
     };
   }
 }

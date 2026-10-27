@@ -315,3 +315,95 @@ body.com-janela { overflow: hidden; }
 .comprovante pre { margin: 0; white-space: pre-wrap; font-family: var(--fonte); font-size: 15px; line-height: 1.55; }
 .botoes-ok { gap: 12px; }
 .botoes-ok .link-btn { align-self: center; }
+
+/* ---------- Nota fiscal e edição da venda ---------- */
+.selo { display: inline-block; line-height: 26px; height: 26px; padding: 0 10px; border-radius: 999px; font-size: 13px; font-weight: 600; white-space: nowrap; max-width: 150px; overflow: hidden; text-overflow: ellipsis; }
+.selo-alerta { background: var(--alerta-fundo); color: var(--alerta-texto); }
+.selo-ok { background: var(--ok-fundo); color: var(--ok); }
+.selo-perigo { background: var(--perigo-fundo); color: var(--perigo); }
+.rotulo-campo { font-size: 14px; font-weight: 600; }
+.rotulo-linha .selo { flex-shrink: 0; max-width: none; }
+.pilha-p { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.grade-editar { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; }
+@media (min-width: 900px) { .grade-editar { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.editar-venda textarea {
+  width: 100%; min-height: 84px; border-radius: var(--raio-campo); border: 1px solid var(--borda-campo);
+  background: var(--cartao); padding: 12px 14px; font-size: 16px; resize: vertical;
+}
+.editar-venda #ev-local {
+  margin-top: 8px; height: var(--altura-campo); border-radius: var(--raio-campo);
+  border: 1px solid var(--borda-campo); background: var(--cartao); padding: 0 14px; font-size: 16px; width: 100%;
+}
+.linha-chave { display: flex; gap: 8px; }
+.linha-chave input { flex: 1; min-width: 0; letter-spacing: .02em; }
+.linha-chave .btn { flex-shrink: 0; }
+.campo input.campo-ok { border: 2px solid var(--ok); }
+.campo input.campo-erro { border: 2px solid var(--perigo); }
+.campo input.auto { background: #F2FAF5; border-color: #BFE3CD; }
+@media (prefers-color-scheme: dark) { .campo input.auto { background: #12291D; border-color: #2D5A40; } }
+#nf-chave-msg { margin: 0; display: flex; align-items: center; gap: 6px; }
+#nf-chave-msg:empty { display: none; }
+.btn-anexo { margin-top: 0; width: 100%; font-size: 16px; }
+.rodape-janela {
+  position: sticky; bottom: calc(-20px - env(safe-area-inset-bottom)); display: grid; grid-template-columns: 1fr 2fr; gap: 12px;
+  background: var(--cartao); border-top: 1px solid var(--divisoria); padding: 14px 0 4px; margin-top: 16px;
+}
+.rodape-janela .btn { min-height: 52px; }
+.editar-venda > .msg-erro { margin-top: 12px; }
+
+/* aviso de notas no Início */
+.aviso-notas {
+  display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: var(--raio-cartao);
+  border: 1px solid var(--alerta-borda); background: var(--cartao); color: var(--texto); text-decoration: none;
+}
+.aviso-notas > svg:first-child { color: var(--alerta-texto); }
+.aviso-notas .min0 { flex: 1; }
+.aviso-notas strong { font-size: 17px; }
+@media (min-width: 900px) {
+  .aviso-notas { background: var(--alerta-fundo); padding: 12px 20px; }
+  .aviso-notas strong { font-size: 15px; }
+  .aviso-notas .link-alerta { white-space: nowrap; }
+}
+
+/* ---------- Histórico de vendas e detalhe ---------- */
+.filtros-vendas { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr auto; gap: 12px; align-items: end; }
+.filtros-vendas .campo input, .filtros-vendas .campo select { height: 44px; }
+.seg-nota { display: inline-flex; background: var(--divisoria); border-radius: 12px; padding: 4px; gap: 2px; }
+.seg-nota button { border: none; background: none; border-radius: 9px; padding: 0 14px; height: 36px; font-size: 14px; cursor: pointer; white-space: nowrap; color: var(--texto); }
+.seg-nota button[aria-pressed="true"] { background: var(--cartao); font-weight: 600; box-shadow: 0 1px 2px rgba(0, 0, 0, .08); }
+.rodape-lista { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border-top: 1px solid var(--divisoria); }
+.riscavel.cancelada { text-decoration: line-through; }
+.linhas > li > a.linha-botao { text-decoration: none; }
+.detalhe-venda { display: flex; flex-direction: column; gap: 14px; }
+.detalhe-cheio .cartao { padding: 16px; }
+.cartao-nota { border-radius: var(--raio-cartao); padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; }
+.cartao-nota p { margin: 0; }
+.nota-pendente { background: var(--alerta-fundo); border: 1px solid var(--alerta-borda); }
+.nota-pendente p { color: var(--alerta-texto); }
+.nota-ok { background: var(--ok-fundo); border: 1px solid #BFE3CD; }
+.nota-perigo { background: var(--perigo-fundo); border: 1px solid var(--perigo-borda); }
+.cartao-nota-topo { display: flex; gap: 14px; align-items: flex-start; }
+.cartao-nota-topo > svg { color: var(--alerta-texto); margin-top: 2px; }
+.cartao-nota-topo strong { font-size: 18px; }
+.chave-txt { font-family: ui-monospace, Consolas, monospace; font-size: 12px; overflow-wrap: anywhere; color: var(--texto-medio); }
+.contas { display: flex; flex-direction: column; gap: 6px; }
+.linha-conta { display: flex; justify-content: space-between; gap: 12px; font-size: 15px; }
+.linha-conta > :last-child { white-space: nowrap; text-align: right; }
+.detalhe-cheio .linha-conta { font-size: 16px; }
+.linha-conta-total { border-top: 1px solid var(--divisoria); padding-top: 10px; margin-top: 4px; align-items: baseline; }
+.linha-conta-total strong:last-child { font-family: var(--fonte-titulo); font-size: 22px; }
+.detalhe-cheio .linha-conta-total strong:last-child { font-size: 30px; }
+.acoes-detalhe { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.acoes-detalhe .btn { min-height: 52px; }
+.acoes-detalhe [data-editar] { grid-column: span 2; }
+.detalhe-cheio .acoes-detalhe [data-editar] { grid-column: auto; }
+.acoes-detalhe [data-cancelar] { grid-column: span 2; }
+.painel-detalhe .acoes-detalhe [data-cancelar] { grid-column: auto; }
+.painel-detalhe .acoes-detalhe .btn { min-height: 44px; font-size: 15px; padding: 0 10px; }
+
+/* Início no celular: aviso de nota e estoque baixo antes das últimas vendas */
+@media (max-width: 899.98px) {
+  .grade-inicio { display: flex; flex-direction: column; gap: 16px; }
+  .grade-inicio > .pilha { order: -1; }
+  .grade-inicio > .pilha:not(:has(.alerta:not([hidden]))) { display: none; }
+}

@@ -93,6 +93,9 @@ Os números, nomes e clientes nas telas são **dados de exemplo**. No app real, 
 | Clientes | `celular/10-clientes` | `notebook/09-clientes` | `#clientes` |
 | Produtos | `celular/11-produtos` | `notebook/10-produtos` | `#produtos` |
 | Mais / Configurações | `celular/09-mais-configuracoes` | `notebook/11-configuracoes` | `#mais` |
+| Histórico de vendas (celular) | `celular/12-historico-vendas` (filtro Sem nota) | (ver acima) | `#vendas` |
+| Detalhe da venda | `celular/13-detalhe-da-venda` | painel ao lado em `notebook/08-historico-vendas` | `#vendas/<numero>` |
+| Editar venda e nota fiscal | `celular/14-editar-venda-nota` (tela cheia) | `notebook/12-editar-venda-nota` (janela) | sem rota (sobrepõe a tela) |
 | Novo cliente (janela) | `janelas/01`, `03` | `janelas/05` | sem rota (sobrepõe a tela) |
 | Nova bateria (janela) | `janelas/02`, `04` | `janelas/06` | sem rota (sobrepõe a tela) |
 
@@ -107,3 +110,5 @@ Um único código, responsivo: abaixo de ~900 px de largura usa o layout de celu
 - Botão de confirmar fica desabilitado enquanto salva (evita venda duplicada).
 - Comprovante: abre `https://wa.me/55<telefone>?text=...` com o texto da tela "Venda registrada".
 - Atalho `#estoque` abre direto a consulta, com o cursor na busca.
+- Editar venda: **um único componente** (`janelas/07-janela-editar-venda-nota`) nos dois tamanhos. Botão "Colar" lê a área de transferência (`navigator.clipboard.readText()`), limpa espaços e preenche tipo, série e número a partir da chave; os campos preenchidos sozinhos ficam com fundo verde-claro `#F2FAF5`.
+- Selos de nota: Sem nota (amarelo `#FFF4D6`/`#7A4E00`), NFC-e/NF-e nº (verde `#E3F4EA`/`#1F7A4D`), Cancelar nota (vermelho `#FDE7E5`/`#B42318`).

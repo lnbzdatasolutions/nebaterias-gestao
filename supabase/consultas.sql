@@ -218,3 +218,37 @@ select venda_numero, data_hora, modelo, total_item, garantia_ate, status
 
 -- H-8 · Exportar vendas do mês em CSV (botão "Exportar dados")
 -- JS: supabase.from('vw_venda_itens_detalhe').select('*').gte('data_local', ini).lte('data_local', fim).csv()
+
+
+-- =====================================================================
+-- NOTA FISCAL E EDIÇÃO DA VENDA (migração 002) — o sistema não emite nota
+-- =====================================================================
+
+-- N-1 · Vendas sem nota (filtro "Sem nota" e alerta do Início)
+-- JS: supabase.from('vw_vendas_lista').select('id, numero, data_hora, total, cliente_nome')
+--       .eq('situacao_nota', 'pendente').order('data_hora', { ascending: false })
+select id, numero, data_hora, total, cliente_nome from vw_vendas_lista where situacao_nota = 'pendente' order by data_hora desc;
+
+-- N-2 · Contadores do alerta
+-- JS: supabase.from('vw_resumo_notas').select('*').single()
+select * from vw_resumo_notas;
+
+-- N-3 · Registrar a nota colando só a chave (modelo, série e número saem dela; valor = total da venda)
+-- JS: supabase.from('notas_fiscais').insert({ venda_id, chave, data_emissao, cpf_cnpj_destinatario, obs }).select().single()
+--     Sem chave: insert({ venda_id, modelo: 65, serie: 1, numero: 130 })
+-- Erros (error.message, prontos para mostrar): chave com tamanho errado, dígito verificador errado,
+--   chave que não confere com o número, nota em venda cancelada, segunda nota na mesma venda (código 23505).
+
+-- N-4 · Validar a chave enquanto digita (opcional; o insert valida de novo)
+-- JS: supabase.rpc('fn_chave_nfe_valida', { p_chave: chaveSoNumeros })
+select fn_chave_nfe_valida('23261012345678000195550010000000421876543217');
+
+-- N-5 · Corrigir ou marcar a nota como cancelada (não há delete)
+-- JS: supabase.from('notas_fiscais').update({ numero: 131 }).eq('id', notaId)
+--     supabase.from('notas_fiscais').update({ situacao: 'cancelada', motivo_cancelamento }).eq('id', notaId)
+
+-- N-6 · Histórico de notas de uma venda
+-- JS: supabase.from('vw_notas_fiscais').select('*').eq('venda_id', vendaId).order('created_at')
+
+-- N-7 · Editar cliente, atendimento e observação (itens/valores/pagamentos não)
+-- JS: supabase.rpc('atualizar_venda', { p_venda_id: vendaId, p: { cliente_id, tipo_atendimento, local_atendimento, obs } })

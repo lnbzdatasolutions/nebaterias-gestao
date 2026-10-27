@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Detalhe da venda · celular</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+body{margin:0}
+a{color:#1D4ED8}a:hover{color:#1E40AF}
+</style>
+</helmet>
+<div style="width: 390px; min-height: 844px; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-direction: column; position: relative">
+
+  <header style="display: flex; align-items: center; gap: 8px; padding: 16px 12px 8px">
+    <a href="Vendas.dc.html" aria-label="Voltar para o histórico" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #12161C">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+    </a>
+    <div style="flex: 1">
+      <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 26px">Venda nº 130</h1>
+      <div style="font-size: 13px; color: #5B6472">27/10/2026 14:50 · Concluída</div>
+    </div>
+  </header>
+
+  <main style="flex: 1; padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 14px">
+
+    <section aria-label="Nota fiscal" style="background: {{nota.fundo}}; border: 1px solid {{nota.borda}}; border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; align-items: center; gap: 10px">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="{{nota.corIcone}}" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0" aria-hidden="true"><path d="M6 2h9l5 5v15H6z"></path><path d="M14 2v6h6M9 13h7M9 17h5"></path></svg>
+        <div style="flex: 1">
+          <div style="font-weight: 600; font-size: 16px">{{nota.titulo}}</div>
+          <div style="font-size: 13px; color: {{nota.corTexto}}">{{nota.texto}}</div>
+        </div>
+      </div>
+      <button onClick="{{abrir}}" style="min-height: 50px; border-radius: 12px; border: {{nota.bordaBotao}}; background: {{nota.fundoBotao}}; color: #12161C; font-family: Inter, sans-serif; font-size: 16px; font-weight: 700; cursor: pointer">{{nota.botao}}</button>
+    </section>
+
+    <section aria-label="Resumo" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; font-size: 15px">
+      <div style="display: flex; justify-content: space-between"><span>1× Bateria Moura M60GD</span><span>R$ 450,00</span></div>
+      <div style="display: flex; justify-content: space-between; color: #5B6472"><span>Desconto</span><span>R$ 0,00</span></div>
+      <div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 8px; border-top: 1px solid #EEF0F3"><span style="font-weight: 600">Total</span><span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 26px">R$ 450,00</span></div>
+      <div style="display: flex; justify-content: space-between; color: #5B6472"><span>Pagamento</span><span>Pix</span></div>
+      <div style="display: flex; justify-content: space-between; color: #5B6472"><span>Garantia até</span><span>27/10/2027</span></div>
+    </section>
+
+    <section aria-label="Cliente e atendimento" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <div style="width: 40px; height: 40px; border-radius: 20px; background: #12161C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px">MS</div>
+        <div style="flex: 1; min-width: 0">
+          <div style="font-weight: 600; font-size: 15px">Maria Souza</div>
+          <div style="font-size: 13px; color: #5B6472">(85) 98888-0000 · HB20</div>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 14px; padding-top: 10px; border-top: 1px solid #EEF0F3"><span style="color: #5B6472">Atendimento</span><span>Entrega · Messejana</span></div>
+      <div style="font-size: 14px"><span style="color: #5B6472">Observação:</span> Cliente pediu CPF na nota</div>
+    </section>
+
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      <button onClick="{{abrir}}" style="min-height: 52px; border-radius: 14px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; color: #12161C; cursor: pointer">Editar venda</button>
+      <a href="VendaConcluida.dc.html" style="display: flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 14px; background: #12161C; color: #FFFFFF; text-decoration: none; font-size: 15px; font-weight: 600">Reenviar comprovante</a>
+    </div>
+    <button style="min-height: 48px; border-radius: 14px; border: 1px solid #F1B5AF; background: #FFFFFF; color: #B42318; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; cursor: pointer">Cancelar venda</button>
+  </main>
+
+  <sc-if value="{{aberta}}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-label="Editar venda" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; background: rgba(18, 22, 28, 0.55); padding-top: 24px; box-sizing: border-box; overflow: auto">
+      <dc-import name="EditarVenda" on-fechar="{{fechar}}" preenchido="{{preencher}}" hint-size="100%,1600px"></dc-import>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"nota":{"editor":"enum","options":["pendente","emitida"],"default":"pendente"},"janela":{"editor":"enum","options":["fechada","editar"],"default":"fechada"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { aberta: props.janela === 'editar' };
+  }
+  renderVals() {
+    const emitida = (this.props.nota || 'pendente') === 'emitida';
+    return {
+      aberta: this.state.aberta,
+      preencher: this.props.janela === 'editar',
+      abrir: () => this.setState({ aberta: true }),
+      fechar: () => this.setState({ aberta: false }),
+      nota: emitida
+        ? { titulo: 'NFC-e nº 130 · série 1', texto: 'Emitida em 27/10/2026 · chave 2326…3440', fundo: '#FFFFFF', borda: '#E1E4E9',
+            corIcone: '#1F7A4D', corTexto: '#1F7A4D', botao: 'Ver ou corrigir a nota', bordaBotao: '1px solid #C9CED6', fundoBotao: '#FFFFFF' }
+        : { titulo: 'Nota fiscal ainda não informada', texto: 'Emita no Tiranota e registre aqui o número ou a chave.', fundo: '#FFF4D6', borda: '#F2D27A',
+            corIcone: '#7A4E00', corTexto: '#5C3D00', botao: 'Informar nota fiscal', bordaBotao: 'none', fundoBotao: '#FFC21A' }
+    };
+  }
+}
+</script>
+</body>
+</html>
