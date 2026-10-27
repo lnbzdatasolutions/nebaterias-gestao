@@ -21,6 +21,8 @@ const caminhos = {
   check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
   alerta: '<circle cx="12" cy="12" r="9"/><path d="M12 7.5v5.5M12 16.5v.01"/>',
   avancar: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  anexo: '<path d="m20.5 11.5-8.6 8.6a5 5 0 0 1-7.1-7.1l8.6-8.6a3.3 3.3 0 0 1 4.7 4.7l-8.6 8.6a1.7 1.7 0 0 1-2.4-2.4l7.9-7.9"/>',
+  documento: '<path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h6M9 9h2"/>',
   mais: '<path d="M12 5v14M5 12h14"/>',
   busca: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
   voltar: '<path d="m15 18-6-6 6-6"/>',
