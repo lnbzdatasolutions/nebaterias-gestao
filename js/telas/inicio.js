@@ -49,13 +49,13 @@ export async function render(raiz) {
     </header>
 
     <section class="cartoes-resumo" aria-label="Resumo">
-      <div class="cartao kpi"><div class="kpi-rotulo">Vendas hoje</div><div class="kpi-valor" id="k-vendas">—</div><div class="kpi-sub" id="k-vendas-sub">&nbsp;</div></div>
-      <div class="cartao kpi"><div class="kpi-rotulo">Lucro hoje</div><div class="kpi-valor verde" id="k-lucro">—</div><div class="kpi-sub" id="k-lucro-sub">&nbsp;</div></div>
+      <div class="cartao kpi"><div class="kpi-rotulo">Vendas hoje</div><div class="kpi-valor" id="k-vendas">-</div><div class="kpi-sub" id="k-vendas-sub">&nbsp;</div></div>
+      <div class="cartao kpi"><div class="kpi-rotulo">Lucro hoje</div><div class="kpi-valor verde" id="k-lucro">-</div><div class="kpi-sub" id="k-lucro-sub">&nbsp;</div></div>
       <div class="cartao kpi kpi-escuro">
-        <div><div class="kpi-rotulo">Faturamento de ${nomeDoMes()}</div><div class="kpi-valor" id="k-mes">—</div></div>
+        <div><div class="kpi-rotulo">Faturamento de ${nomeDoMes()}</div><div class="kpi-valor" id="k-mes">-</div></div>
         <div class="kpi-var"><div class="kpi-rotulo">vs. ${nomeMesAnterior()}</div><div id="k-mes-var">&nbsp;</div></div>
       </div>
-      <div class="cartao kpi so-notebook"><div class="kpi-rotulo">Valor em estoque</div><div class="kpi-valor" id="k-estoque">—</div><div class="kpi-sub" id="k-estoque-sub">&nbsp;</div></div>
+      <div class="cartao kpi so-notebook"><div class="kpi-rotulo">Valor em estoque</div><div class="kpi-valor" id="k-estoque">-</div><div class="kpi-sub" id="k-estoque-sub">&nbsp;</div></div>
     </section>
 
     <a href="#vender" class="btn btn-primario btn-nova-venda so-celular">${icone('mais', 26, 2.4)}Nova venda</a>
@@ -113,7 +113,7 @@ export async function render(raiz) {
     $('#k-mes', raiz).textContent = dinheiro(mes.faturamento);
     const v = variacao(Number(mes.faturamento), Number(mesAnt.faturamento));
     const elVar = $('#k-mes-var', raiz);
-    if (v === null) elVar.textContent = '—';
+    if (v === null) { elVar.className = 'neutro'; elVar.textContent = '-'; }
     else {
       elVar.className = v >= 0 ? 'sobe' : 'desce';
       elVar.textContent = `${v >= 0 ? '▲' : '▼'} ${percentual(Math.abs(Math.round(v)))}`;
@@ -152,7 +152,7 @@ function mostrarEstoqueBaixo(el, baixo) {
     </ul>`;
 }
 
-const fmtSaldo = (n) => (n < 0 ? `−${Math.abs(n)}` : String(n));
+const fmtSaldo = (n) => (n < 0 ? `-${Math.abs(n)}` : String(n));
 const linhaCurta = (linha) => String(linha ?? '').replace(/^Moura\s+(Log\s+)?/i, '');
 const itens = (txt) => esc(String(txt ?? '').replace(/(\d+)x /g, '$1× '));
 

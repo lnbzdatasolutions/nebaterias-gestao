@@ -7,13 +7,13 @@ import { esc } from './util.js';
 // Cada rota carrega sua tela sob demanda. `rodape: true` = aparece no rodapé do celular.
 const ROTAS = {
   inicio:   { titulo: 'Início',        icone: 'inicio',   rodape: true,  tela: () => import('./telas/inicio.js') },
-  vender:   { titulo: 'Vender',        icone: 'vender',   rodape: true,  tela: () => import('./telas/em-breve.js') },
-  estoque:  { titulo: 'Estoque',       icone: 'estoque',  rodape: true,  tela: () => import('./telas/em-breve.js') },
-  entrada:  { titulo: 'Entrada',       icone: 'entrada',  rodape: true,  tela: () => import('./telas/em-breve.js') },
+  vender:   { titulo: 'Vender',        icone: 'vender',   rodape: true,  tela: () => import('./telas/vender.js') },
+  estoque:  { titulo: 'Estoque',       icone: 'estoque',  rodape: true,  tela: () => import('./telas/estoque.js') },
+  entrada:  { titulo: 'Entrada',       icone: 'entrada',  rodape: true,  tela: () => import('./telas/entrada.js') },
   painel:   { titulo: 'Painel',        icone: 'painel',   rodape: true,  tela: () => import('./telas/em-breve.js') },
   vendas:   { titulo: 'Vendas',        icone: 'vendas',   tela: () => import('./telas/em-breve.js') },
-  clientes: { titulo: 'Clientes',      icone: 'clientes', tela: () => import('./telas/em-breve.js') },
-  produtos: { titulo: 'Produtos',      icone: 'produtos', tela: () => import('./telas/em-breve.js') },
+  clientes: { titulo: 'Clientes',      icone: 'clientes', tela: () => import('./telas/clientes.js') },
+  produtos: { titulo: 'Produtos',      icone: 'produtos', tela: () => import('./telas/produtos.js') },
   mais:     { titulo: 'Configurações', icone: 'config',   tela: () => import('./telas/mais.js') },
 };
 const ROTAS_PUBLICAS = {
@@ -91,7 +91,10 @@ async function navegar() {
   montarShell();
   marcarNavegacao(nome);
   document.title = `${rota.titulo} · N E Baterias`;
-  const tela = document.getElementById('tela');
+  // Um <main> novo a cada tela: os eventos da tela anterior somem junto com ele.
+  const anterior = document.getElementById('tela');
+  const tela = anterior.cloneNode(false);
+  anterior.replaceWith(tela);
   tela.innerHTML = '<div class="carregando" aria-live="polite">Carregando…</div>';
   window.scrollTo(0, 0);
   try {

@@ -361,3 +361,5 @@ svg { flex-shrink: 0; }
 .recolhivel .sinal { color: var(--texto-2); font-size: 22px; font-weight: 400; }
 .recolhivel[open] .sinal { transform: rotate(45deg); }
 .recolhivel-corpo { padding: 4px 16px 16px; }
+.kpi-var .neutro { color: var(--escuro-sub); }
+.kpi-var:has(.neutro) .kpi-rotulo { color: var(--escuro-sub) !important; }
