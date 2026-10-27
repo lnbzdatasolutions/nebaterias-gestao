@@ -1,0 +1,23 @@
+# Segredos e config gerada
+.env
+.env.*
+!.env.example
+js/config.js
+
+# Build do Netlify
+dist/
+.netlify/
+
+# Node
+node_modules/
+
+# Backups do banco (nunca versionar dados reais)
+*.sql.gz
+backup-*.sql
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/*
+!.vscode/extensions.json

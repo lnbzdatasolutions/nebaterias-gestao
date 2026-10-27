@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Produtos · celular</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4ED8}a:hover{color:#1E40AF}
+</style>
+</helmet>
+<div style="width: 390px; height: 980px; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-direction: column; position: relative">
+
+  <header style="padding: 16px 12px 8px; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; align-items: center; gap: 8px">
+      <a href="Mais.dc.html" aria-label="Voltar" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #12161C">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+      </a>
+      <div style="flex: 1">
+        <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 26px">Produtos</h1>
+        <div style="font-size: 12px; color: #5B6472">Cadastro e preço de venda</div>
+      </div>
+      <button onClick="{{abrir}}" style="height: 44px; padding: 0 14px; border-radius: 12px; border: none; background: #FFC21A; color: #12161C; font-family: Inter, sans-serif; font-size: 15px; font-weight: 700; cursor: pointer">+ Nova</button>
+    </div>
+    <div role="group" aria-label="Filtrar por marca" style="display: flex; gap: 8px; padding: 0 4px">
+      <sc-for list="{{marcas}}" as="m" hint-placeholder-count="4">
+        <button aria-pressed="{{m.ativo}}" onClick="{{m.pick}}" style="height: 40px; padding: 0 16px; border-radius: 999px; border: {{m.borda}}; background: {{m.fundo}}; color: {{m.cor}}; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">{{m.nome}}</button>
+      </sc-for>
+    </div>
+  </header>
+
+  <main style="flex: 1; padding: 4px 16px 16px">
+    <section aria-label="Lista de produtos" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; overflow: hidden">
+      <sc-for list="{{produtos}}" as="p" hint-placeholder-count="7">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #EEF0F3">
+          <div style="flex: 1; min-width: 0">
+            <div style="display: flex; align-items: baseline; gap: 8px">
+              <span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 19px">{{p.modelo}}</span>
+              <span style="font-size: 12px; color: #5B6472">{{p.marca}} · {{p.linha}}</span>
+            </div>
+            <div style="font-size: 13px; color: #3D4652">{{p.preco}} <span style="color: #5B6472">· sem usada {{p.semSucata}}</span></div>
+          </div>
+          <button aria-label="{{p.editarLabel}}" style="height: 40px; padding: 0 12px; border-radius: 10px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Editar</button>
+        </div>
+      </sc-for>
+      <sc-if value="{{vazio}}" hint-placeholder-val="{{ false }}">
+        <div style="padding: 24px 16px; text-align: center; font-size: 15px; color: #5B6472">Nenhuma bateria desta marca ainda.</div>
+      </sc-if>
+    </section>
+    <p style="margin: 12px 4px 0; font-size: 13px; color: #5B6472">Estoque e custo não se editam aqui: mudam pela Entrada, pela venda ou pelo ajuste no Estoque.</p>
+  </main>
+
+  <nav aria-label="Navegação principal" style="display: flex; background: #FFFFFF; border-top: 1px solid #E1E4E9; padding: 6px 4px 14px">
+    <a href="Main.dc.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></span>Início</a>
+    <a href="Vender.dc.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.6a1 1 0 0 0 1-.8L21 7H6"></path></svg></span>Vender</a>
+    <a href="Estoque.dc.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg></span>Estoque</a>
+    <a href="Entrada.dc.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4"></path><path d="M4 16v4h16v-4"></path></svg></span>Entrada</a>
+    <a href="Painel.dc.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M5 20V11M11 20V5M17 20v-6M3 20h18"></path></svg></span>Painel</a>
+  </nav>
+
+  <sc-if value="{{aberta}}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-label="Nova bateria" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; background: rgba(18, 22, 28, 0.55); display: flex; flex-direction: column; justify-content: flex-end">
+      <dc-import name="ProdutoRapido" on-fechar="{{fechar}}" hint-size="100%,860px"></dc-import>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":980}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { aberta: false, marca: 'Todas' };
+  }
+  renderVals() {
+    const todos = [
+      { modelo: 'M60GD', marca: 'Moura', linha: 'Automotiva', preco: 'R$ 450,00', semSucata: 'R$ 490,00' },
+      { modelo: 'M60GE', marca: 'Moura', linha: 'Automotiva', preco: 'R$ 460,00', semSucata: 'R$ 500,00' },
+      { modelo: 'M40SD', marca: 'Moura', linha: 'Automotiva', preco: 'R$ 380,00', semSucata: 'R$ 410,00' },
+      { modelo: 'M60AX', marca: 'Moura', linha: 'EFB', preco: 'R$ 690,00', semSucata: 'R$ 740,00' },
+      { modelo: 'MA5-D', marca: 'Moura', linha: 'Moto', preco: 'R$ 190,00', semSucata: 'R$ 210,00' },
+      { modelo: 'HF60DD', marca: 'Heliar', linha: 'Automotiva', preco: 'R$ 440,00', semSucata: 'R$ 480,00' },
+      { modelo: 'ZTX60HD', marca: 'Zetta', linha: 'Automotiva', preco: 'R$ 360,00', semSucata: 'R$ 390,00' }
+    ];
+    const atual = this.state.marca;
+    const visiveis = todos.filter((p) => atual === 'Todas' || p.marca === atual);
+    return {
+      aberta: this.state.aberta,
+      abrir: () => this.setState({ aberta: true }),
+      fechar: () => this.setState({ aberta: false }),
+      vazio: visiveis.length === 0,
+      produtos: visiveis.map((p) => ({ ...p, editarLabel: 'Editar ' + p.modelo })),
+      marcas: ['Todas', 'Moura', 'Heliar', 'Zetta'].map((nome) => {
+        const on = nome === atual;
+        return { nome, ativo: on ? 'true' : 'false', borda: on ? '2px solid #12161C' : '1px solid #C9CED6', fundo: on ? '#12161C' : '#FFFFFF', cor: on ? '#FFFFFF' : '#12161C', pick: () => this.setState({ marca: nome }) };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

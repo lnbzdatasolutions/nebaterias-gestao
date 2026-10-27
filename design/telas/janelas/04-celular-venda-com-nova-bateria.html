@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Venda com nova bateria aberta</title>
+<!-- Referência visual estática gerada do protótipo. Dados são de exemplo. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</head>
+<body>
+<div style="width: 390px; height: 980px">
+  
+
+<div style="width: 390px; height: 980px; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-direction: column; position: relative">
+
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 20px 16px 8px">
+    <div>
+      <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 26px">Nova venda</h1>
+      <div style="font-size: 13px; color: #5B6472">Passo 1 de 2 · baterias</div>
+    </div>
+    <button style="height: 44px; padding: 0 14px; border-radius: 12px; border: 1px solid #E1E4E9; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; color: #12161C; cursor: pointer">Limpar</button>
+  </header>
+
+  <main style="flex: 1; padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 14px">
+
+    <div style="position: relative">
+      <label for="busca" style="position: absolute; left: -9999px">Buscar bateria por modelo ou carro</label>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B6472" style="position: absolute; left: 14px; top: 15px; stroke-width: 2; stroke-linecap: round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <input id="busca" type="search" value="onix" placeholder="Modelo ou carro (ex.: M60, Onix)" style="width: 100%; box-sizing: border-box; height: 52px; border-radius: 14px; border: 2px solid #12161C; background: #FFFFFF; padding: 0 14px 0 46px; font-size: 17px; font-family: Inter, sans-serif; color: #12161C">
+    </div>
+
+    <section aria-label="Resultados da busca" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; overflow: hidden">
+      
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #EEF0F3">
+          <div style="flex: 1; min-width: 0">
+            <div style="display: flex; align-items: baseline; gap: 8px">
+              <span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">M60GD</span>
+              <span style="font-size: 12px; color: #5B6472">Moura Automotiva</span>
+            </div>
+            <div style="font-size: 13px; color: #5B6472; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Onix, HB20, Argo, Corolla, Civic</div>
+            <div style="font-size: 13px; margin-top: 2px"><span style="font-weight: 600; color: #1F7A4D">4 em estoque</span> · R$ 450,00</div>
+          </div>
+          <button aria-label="Adicionar M60GD" style="width: 48px; height: 48px; border-radius: 12px; border: none; background: #FFC21A; color: #12161C; display: flex; align-items: center; justify-content: center; cursor: pointer">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2.4; stroke-linecap: round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+          </button>
+        </div>
+      
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #EEF0F3">
+          <div style="flex: 1; min-width: 0">
+            <div style="display: flex; align-items: baseline; gap: 8px">
+              <span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">M60GE</span>
+              <span style="font-size: 12px; color: #5B6472">Moura Automotiva</span>
+            </div>
+            <div style="font-size: 13px; color: #5B6472; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Onix, HB20, Argo, Corolla, Civic</div>
+            <div style="font-size: 13px; margin-top: 2px"><span style="font-weight: 600; color: #B42318">Sem estoque</span> · R$ 460,00</div>
+          </div>
+          <button aria-label="Adicionar M60GE (sem estoque)" style="width: 48px; height: 48px; border-radius: 12px; border: none; background: #EEF0F3; color: #5B6472; display: flex; align-items: center; justify-content: center; cursor: pointer">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2.4; stroke-linecap: round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+          </button>
+        </div>
+      
+      <button style="width: 100%; min-height: 52px; border: none; background: #FAFBFC; color: #1D4ED8; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; cursor: pointer">Não achou? Cadastrar bateria nova</button>
+    </section>
+
+    <section aria-label="Itens da venda" style="display: flex; flex-direction: column; gap: 10px">
+      <h2 style="margin: 4px 0 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 19px">Itens da venda</h2>
+
+      <div style="background: #FFFFFF; border: 2px solid #FFC21A; border-radius: 16px; padding: 14px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <div>
+            <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">M60GD</div>
+            <div style="font-size: 13px; color: #5B6472">Moura Automotiva · 4 em estoque</div>
+          </div>
+          <button aria-label="Remover M60GD" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid #E1E4E9; background: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B42318" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg>
+          </button>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 12px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <span style="font-size: 13px; font-weight: 600">Quantidade</span>
+            <div style="display: flex; align-items: center; height: 48px; border: 1px solid #C9CED6; border-radius: 12px; overflow: hidden">
+              <button aria-label="Diminuir quantidade" style="width: 48px; height: 48px; border: none; background: #F5F6F8; font-size: 22px; cursor: pointer">−</button>
+              <span style="flex: 1; text-align: center; font-weight: 600; font-size: 18px">1</span>
+              <button aria-label="Aumentar quantidade" style="width: 48px; height: 48px; border: none; background: #F5F6F8; font-size: 22px; cursor: pointer">+</button>
+            </div>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="preco1" style="font-size: 13px; font-weight: 600">Preço unitário</label>
+            <input id="preco1" inputmode="decimal" value="R$ 450,00" style="height: 48px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 17px; font-weight: 600; font-family: Inter, sans-serif; color: #12161C">
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 14px">
+        <div style="font-size: 15px; font-weight: 600">Cliente entregou a bateria usada?</div>
+        <div style="font-size: 13px; color: #5B6472; margin-top: 2px">Sem a usada, o preço muda para R$ 490,00</div>
+        <div role="group" aria-label="Sucata" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px">
+          <button aria-pressed="true" style="height: 48px; border-radius: 12px; border: 2px solid #12161C; background: #12161C; color: #FFFFFF; font-size: 16px; font-weight: 600; font-family: Inter, sans-serif; cursor: pointer">Sim</button>
+          <button aria-pressed="false" style="height: 48px; border-radius: 12px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-size: 16px; font-weight: 600; font-family: Inter, sans-serif; cursor: pointer">Não</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div style="display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: #FFFFFF; border-top: 1px solid #E1E4E9">
+    <div style="flex: 1">
+      <div style="font-size: 13px; color: #5B6472">1 bateria</div>
+      <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 26px">R$ 450,00</div>
+    </div>
+    <a href="../celular/04-vender-pagamento.html" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 56px; padding: 0 22px; border-radius: 14px; background: #FFC21A; color: #12161C; text-decoration: none; font-weight: 700; font-size: 17px">Continuar
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+    </a>
+  </div>
+
+  <nav aria-label="Navegação principal" style="display: flex; background: #FFFFFF; border-top: 1px solid #E1E4E9; padding: 6px 4px 14px">
+    <a href="../celular/02-inicio.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></span>Início</a>
+    <a href="../celular/03-vender-itens.html" aria-current="page" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #12161C; font-size: 12px; font-weight: 600">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px; border-radius: 15px; background: #FFE8A3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.6a1 1 0 0 0 1-.8L21 7H6"></path></svg></span>Vender</a>
+    <a href="../celular/06-estoque.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg></span>Estoque</a>
+    <a href="../celular/07-entrada.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4"></path><path d="M4 16v4h16v-4"></path></svg></span>Entrada</a>
+    <a href="../celular/08-painel.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M5 20V11M11 20V5M17 20v-6M3 20h18"></path></svg></span>Painel</a>
+  </nav>
+
+  
+    <div role="dialog" aria-label="Nova bateria" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; background: rgba(18, 22, 28, 0.55); display: flex; flex-direction: column; justify-content: flex-end">
+      
+
+<div style="width: 100%; box-sizing: border-box; background: #FFFFFF; font-family: Inter, system-ui, sans-serif; color: #12161C; padding: 20px; border-radius: 20px; display: flex; flex-direction: column; gap: 14px">
+  <div style="display: flex; align-items: center; justify-content: space-between">
+    <div>
+      <h2 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 24px">Nova bateria</h2>
+      <div style="font-size: 13px; color: #5B6472">Cadastro rápido para vender agora</div>
+    </div>
+    <button aria-label="Fechar" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid #E1E4E9; background: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#12161C" style="stroke-width: 2.2; stroke-linecap: round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+    </button>
+  </div>
+
+  <div>
+    <div style="font-size: 14px; font-weight: 600; margin-bottom: 6px">Marca</div>
+    <div role="group" aria-label="Marca" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+      
+        <button aria-pressed="false" style="height: 44px; border-radius: 10px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Moura</button>
+      
+        <button aria-pressed="true" style="height: 44px; border-radius: 10px; border: 2px solid #12161C; background: #12161C; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Heliar</button>
+      
+        <button aria-pressed="false" style="height: 44px; border-radius: 10px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Zetta</button>
+      
+        <button aria-pressed="false" style="height: 44px; border-radius: 10px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Outra</button>
+      
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="pr-modelo" style="font-size: 14px; font-weight: 600">Modelo *</label>
+      <input id="pr-modelo" value="HF60DD" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 2px solid #12161C; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; width: 100%; text-transform: uppercase">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="pr-linha" style="font-size: 14px; font-weight: 600">Linha *</label>
+      <select id="pr-linha" style="height: 50px; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif; background: #FFFFFF; color: #12161C; width: 100%"><option>Automotiva</option><option>EFB</option><option>AGM</option><option>Moto</option><option>Diesel</option></select>
+    </div>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <label for="pr-apl" style="font-size: 14px; font-weight: 600">Carros que atende</label>
+    <input id="pr-apl" value="Onix, HB20, Argo" placeholder="Separe por vírgula" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 14px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C">
+    <span style="font-size: 12px; color: #5B6472">É o que faz a bateria aparecer quando você busca pelo carro.</span>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="pr-preco" style="font-size: 14px; font-weight: 600">Preço de venda *</label>
+      <input id="pr-preco" inputmode="decimal" value="R$ 440,00" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-weight: 600; font-family: Inter, sans-serif; color: #12161C; width: 100%">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="pr-sem" style="font-size: 14px; font-weight: 600">Sem a usada</label>
+      <input id="pr-sem" inputmode="decimal" value="R$ 480,00" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; width: 100%">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="pr-min" style="font-size: 14px; font-weight: 600">Estoque mínimo</label>
+      <input id="pr-min" inputmode="numeric" value="1" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; width: 100%">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="pr-gar" style="font-size: 14px; font-weight: 600">Garantia (meses)</label>
+      <input id="pr-gar" inputmode="numeric" value="12" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; width: 100%">
+    </div>
+  </div>
+
+  <div style="display: flex; align-items: flex-start; gap: 8px; padding: 10px 12px; border-radius: 12px; background: #F5F6F8; font-size: 13px; color: #3D4652">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; flex-shrink: 0; margin-top: 1px" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16.5v.5"></path></svg>
+    O estoque e o custo entram pela tela Entrada. Se vender antes disso, o estoque fica negativo até lançar a compra.
+  </div>
+
+  <button style="min-height: 56px; border-radius: 14px; border: none; background: #FFC21A; color: #12161C; font-family: Inter, sans-serif; font-weight: 700; font-size: 17px; cursor: pointer">Salvar e adicionar à venda</button>
+</div>
+
+    </div>
+  
+</div>
+
+</div>
+</body>
+</html>

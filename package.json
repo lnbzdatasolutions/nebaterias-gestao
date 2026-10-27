@@ -1,0 +1,11 @@
+{
+  "name": "nebaterias-gestao",
+  "private": true,
+  "description": "Sistema de gestão interno da N E Baterias (HTML/CSS/JS puro + Supabase + Netlify)",
+  "type": "module",
+  "scripts": {
+    "config": "node scripts/build.mjs",
+    "build": "node scripts/build.mjs --dist",
+    "dev": "node scripts/build.mjs && npx --yes serve@14.2.4 -l 5173 ."
+  }
+}

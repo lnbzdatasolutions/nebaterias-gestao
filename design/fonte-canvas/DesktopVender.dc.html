@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Nova venda · notebook</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4ED8}a:hover{color:#1E40AF}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-wrap: wrap; align-items: stretch; position: relative">
+
+  <aside style="flex: 1 1 232px; max-width: 100%; box-sizing: border-box; background: #12161C; color: #FFFFFF; padding: 20px 14px; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 6px">
+      <div style="width: 38px; height: 38px; border-radius: 10px; background: #FFC21A; display: flex; align-items: center; justify-content: center">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12161C" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><rect x="2" y="7" width="20" height="13" rx="2"></rect><path d="M6 7V4h3v3M15 7V4h3v3M6 13.5h4M14 13.5h4M16 11.5v4"></path></svg>
+      </div>
+      <span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">N E Baterias</span>
+    </div>
+    <nav aria-label="Menu" style="display: flex; flex-direction: column; gap: 4px">
+      <sc-for list="{{menu}}" as="m" hint-placeholder-count="9">
+        <a href="{{m.href}}" aria-current="{{m.atual}}" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: {{m.cor}}; background: {{m.fundo}}; font-size: 15px; font-weight: {{m.peso}}">{{m.nome}}</a>
+      </sc-for>
+    </nav>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 32px 40px; display: flex; flex-direction: column; gap: 18px">
+
+    <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+      <div>
+        <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 32px">Nova venda</h1>
+        <div style="font-size: 14px; color: #5B6472">Busque, adicione e feche o pagamento na mesma tela</div>
+      </div>
+      <button style="height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; color: #12161C; cursor: pointer">Limpar venda</button>
+    </header>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start">
+
+      <div style="flex: 3 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <section aria-label="Buscar bateria" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 16px 18px">
+          <div style="position: relative">
+            <label for="busca" style="position: absolute; left: -9999px">Buscar bateria por modelo ou carro</label>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B6472" style="position: absolute; left: 14px; top: 15px; stroke-width: 2; stroke-linecap: round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+            <input id="busca" type="search" value="onix" placeholder="Modelo ou carro (ex.: M60, Onix)" style="width: 100%; box-sizing: border-box; height: 52px; border-radius: 12px; border: 2px solid #12161C; padding: 0 14px 0 46px; font-size: 17px; font-family: Inter, sans-serif; color: #12161C">
+          </div>
+          <div style="overflow-x: auto; margin-top: 10px">
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 520px">
+              <thead>
+                <tr style="text-align: left; color: #5B6472; font-size: 12px">
+                  <th style="padding: 8px 6px; font-weight: 600">Modelo</th>
+                  <th style="padding: 8px 6px; font-weight: 600">Atende</th>
+                  <th style="padding: 8px 6px; font-weight: 600; text-align: right">Estoque</th>
+                  <th style="padding: 8px 6px; font-weight: 600; text-align: right">Preço</th>
+                  <th style="padding: 8px 6px"><span style="position: absolute; left: -9999px">Adicionar</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <sc-for list="{{resultados}}" as="r" hint-placeholder-count="2">
+                  <tr style="border-top: 1px solid #EEF0F3">
+                    <td style="padding: 10px 6px"><strong style="font-family: Barlow, sans-serif; font-size: 18px">{{r.modelo}}</strong><br><span style="font-size: 12px; color: #5B6472">{{r.linha}}</span></td>
+                    <td style="padding: 10px 6px; color: #5B6472">{{r.aplicacoes}}</td>
+                    <td style="padding: 10px 6px; text-align: right; font-weight: 600; color: {{r.corSaldo}}">{{r.saldo}}</td>
+                    <td style="padding: 10px 6px; text-align: right; font-weight: 600">{{r.preco}}</td>
+                    <td style="padding: 8px 6px; text-align: right"><button aria-label="{{r.acaoLabel}}" style="height: 40px; padding: 0 14px; border-radius: 10px; border: none; background: {{r.botaoFundo}}; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 700; cursor: pointer">+ Adicionar</button></td>
+                  </tr>
+                </sc-for>
+              </tbody>
+            </table>
+          </div>
+          <button onClick="{{abrirProduto}}" style="margin-top: 10px; min-height: 44px; padding: 0 4px; border: none; background: none; color: #1D4ED8; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Não achou? Cadastrar bateria nova</button>
+        </section>
+
+        <section aria-label="Itens da venda" style="background: #FFFFFF; border: 2px solid #FFC21A; border-radius: 16px; padding: 16px 18px">
+          <h2 style="margin: 0 0 8px; font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">Itens da venda</h2>
+          <div style="overflow-x: auto">
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 520px">
+              <thead>
+                <tr style="text-align: left; color: #5B6472; font-size: 12px">
+                  <th style="padding: 8px 6px; font-weight: 600">Bateria</th>
+                  <th style="padding: 8px 6px; font-weight: 600">Quantidade</th>
+                  <th style="padding: 8px 6px; font-weight: 600">Preço unitário</th>
+                  <th style="padding: 8px 6px; font-weight: 600; text-align: right">Subtotal</th>
+                  <th style="padding: 8px 6px"><span style="position: absolute; left: -9999px">Remover</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-top: 1px solid #EEF0F3">
+                  <td style="padding: 10px 6px"><strong style="font-family: Barlow, sans-serif; font-size: 18px">M60GD</strong><br><span style="font-size: 12px; color: #5B6472">4 em estoque · garantia 12 meses</span></td>
+                  <td style="padding: 10px 6px">
+                    <div style="display: inline-flex; align-items: center; height: 40px; border: 1px solid #C9CED6; border-radius: 10px; overflow: hidden">
+                      <button aria-label="Diminuir quantidade" style="width: 40px; height: 40px; border: none; background: #F5F6F8; font-size: 18px; cursor: pointer">−</button>
+                      <span style="width: 40px; text-align: center; font-weight: 600">1</span>
+                      <button aria-label="Aumentar quantidade" style="width: 40px; height: 40px; border: none; background: #F5F6F8; font-size: 18px; cursor: pointer">+</button>
+                    </div>
+                  </td>
+                  <td style="padding: 10px 6px">
+                    <label for="pu" style="position: absolute; left: -9999px">Preço unitário do M60GD</label>
+                    <input id="pu" inputmode="decimal" value="R$ 450,00" style="width: 130px; height: 40px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-weight: 600; font-family: Inter, sans-serif; color: #12161C">
+                  </td>
+                  <td style="padding: 10px 6px; text-align: right; font-weight: 600">R$ 450,00</td>
+                  <td style="padding: 8px 6px; text-align: right">
+                    <button aria-label="Remover M60GD" style="width: 40px; height: 40px; border-radius: 10px; border: 1px solid #E1E4E9; background: #FFFFFF; cursor: pointer; display: inline-flex; align-items: center; justify-content: center">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B42318" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #EEF0F3">
+            <span style="font-size: 14px; font-weight: 600">Cliente entregou a bateria usada?</span>
+            <div role="group" aria-label="Sucata" style="display: flex; gap: 6px">
+              <button aria-pressed="true" style="height: 40px; padding: 0 18px; border-radius: 10px; border: 2px solid #12161C; background: #12161C; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Sim</button>
+              <button aria-pressed="false" style="height: 40px; padding: 0 18px; border-radius: 10px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Não</button>
+            </div>
+            <span style="font-size: 13px; color: #5B6472">Sem a usada: R$ 490,00</span>
+          </div>
+        </section>
+      </div>
+
+      <section aria-label="Pagamento e fechamento" style="flex: 2 1 340px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 16px">
+        <h2 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">Pagamento</h2>
+
+        <div>
+          <div style="font-size: 13px; font-weight: 600; margin-bottom: 6px">Desconto</div>
+          <div style="display: flex; gap: 8px; align-items: center">
+            <div role="group" aria-label="Tipo de desconto" style="display: flex; border: 1px solid #C9CED6; border-radius: 10px; overflow: hidden">
+              <button aria-pressed="false" style="width: 46px; height: 42px; border: none; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; cursor: pointer">R$</button>
+              <button aria-pressed="true" style="width: 46px; height: 42px; border: none; background: #12161C; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 15px; font-weight: 600; cursor: pointer">%</button>
+            </div>
+            <label for="desc" style="position: absolute; left: -9999px">Valor do desconto</label>
+            <input id="desc" inputmode="decimal" value="10" style="flex: 1; min-width: 0; height: 42px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif">
+            <span style="font-size: 14px; font-weight: 600; color: #B42318; white-space: nowrap">− R$ 45,00</span>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size: 13px; font-weight: 600; margin-bottom: 6px">Forma de pagamento</div>
+          <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+            <sc-for list="{{formas}}" as="f" hint-placeholder-count="4">
+              <button aria-pressed="{{f.ativo}}" onClick="{{f.pick}}" style="height: 46px; border-radius: 10px; border: {{f.borda}}; background: {{f.fundo}}; color: {{f.cor}}; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">{{f.nome}}</button>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px">
+            <div style="display: flex; align-items: center; gap: 8px"><span style="width: 80px; font-size: 14px">Pix</span><label for="p1" style="position: absolute; left: -9999px">Valor no Pix</label><input id="p1" value="R$ 200,00" style="flex: 1; min-width: 0; height: 40px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif"></div>
+            <div style="display: flex; align-items: center; gap: 8px"><span style="width: 80px; font-size: 14px">Dinheiro</span><label for="p2" style="position: absolute; left: -9999px">Valor em dinheiro</label><input id="p2" value="R$ 205,00" style="flex: 1; min-width: 0; height: 40px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif"></div>
+            <div style="font-size: 13px; font-weight: 600; color: #1F7A4D">Valores fecham com o total</div>
+          </div>
+        </div>
+
+        <div>
+          <div style="font-size: 13px; font-weight: 600; margin-bottom: 6px">Atendimento</div>
+          <div role="group" aria-label="Tipo de atendimento" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px">
+            <button aria-pressed="false" style="height: 42px; border-radius: 10px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Balcão</button>
+            <button aria-pressed="true" style="height: 42px; border-radius: 10px; border: 2px solid #12161C; background: #12161C; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Entrega</button>
+            <button aria-pressed="false" style="height: 42px; border-radius: 10px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Socorro</button>
+          </div>
+          <label for="bairro" style="position: absolute; left: -9999px">Bairro ou endereço</label>
+          <input id="bairro" value="Aldeota" placeholder="Bairro ou endereço" style="width: 100%; box-sizing: border-box; margin-top: 8px; height: 42px; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif">
+        </div>
+
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px">
+            <span style="font-size: 13px; font-weight: 600">Cliente (opcional)</span>
+            <button onClick="{{abrirCliente}}" style="border: none; background: none; color: #1D4ED8; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; padding: 10px 6px">+ Novo cliente</button>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; background: #F5F6F8">
+            <div style="width: 36px; height: 36px; border-radius: 18px; background: #12161C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600">JS</div>
+            <div style="flex: 1; min-width: 0; font-size: 14px"><strong>João da Silva</strong><br><span style="color: #5B6472">(85) 99999-1234 · Onix · ABC1D23</span></div>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; font-size: 13px; color: #5B6472">
+          <span>Data: agora (27/10, 14:32) · <button style="border: none; background: none; padding: 0; color: #1D4ED8; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">alterar</button></span>
+          <span>Lucro estimado: <strong style="color: #1F7A4D">R$ 115,00</strong></span>
+        </div>
+
+        <div style="padding-top: 12px; border-top: 1px solid #EEF0F3; display: flex; flex-direction: column; gap: 10px">
+          <div style="display: flex; align-items: baseline; justify-content: space-between">
+            <span style="font-size: 14px; color: #5B6472">R$ 450,00 − R$ 45,00</span>
+            <span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 32px">R$ 405,00</span>
+          </div>
+          <a href="DesktopVendaConcluida.dc.html" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 54px; border-radius: 12px; background: #FFC21A; color: #12161C; text-decoration: none; font-weight: 700; font-size: 17px">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M5 12.5 10 17l9-10"></path></svg>
+            Confirmar venda
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <sc-if value="{{janelaAberta}}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; background: rgba(18, 22, 28, 0.55); display: flex; justify-content: center; align-items: flex-start; padding: 72px 16px; box-sizing: border-box">
+      <div role="dialog" aria-label="{{tituloJanela}}" style="width: 100%; max-width: 460px; border-radius: 20px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3)">
+        <sc-if value="{{janelaCliente}}" hint-placeholder-val="{{ false }}">
+          <dc-import name="ClienteRapido" on-fechar="{{fecharJanela}}" hint-size="100%,640px"></dc-import>
+        </sc-if>
+        <sc-if value="{{janelaProduto}}" hint-placeholder-val="{{ false }}">
+          <dc-import name="ProdutoRapido" on-fechar="{{fecharJanela}}" hint-size="100%,860px"></dc-import>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"janela":{"editor":"enum","options":["fechada","cliente","produto"],"default":"fechada"},"$preview":{"width":1440,"height":1160}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { formas: ['Pix', 'Dinheiro'], janela: props.janela || 'fechada' };
+  }
+  renderVals() {
+    const menuItens = [
+      ['Início', 'DesktopInicio.dc.html'], ['Vender', 'DesktopVender.dc.html'], ['Estoque', 'DesktopEstoque.dc.html'],
+      ['Entrada', 'DesktopEntrada.dc.html'], ['Painel', 'DesktopPainel.dc.html'], ['Vendas', 'DesktopVendas.dc.html'],
+      ['Clientes', 'DesktopClientes.dc.html'], ['Produtos', 'DesktopProdutos.dc.html'], ['Configurações', 'DesktopConfiguracoes.dc.html']
+    ];
+    const marcadas = this.state.formas;
+    const janela = this.state.janela;
+    return {
+      janelaAberta: janela !== 'fechada',
+      janelaCliente: janela === 'cliente',
+      janelaProduto: janela === 'produto',
+      tituloJanela: janela === 'produto' ? 'Nova bateria' : 'Novo cliente',
+      abrirCliente: () => this.setState({ janela: 'cliente' }),
+      abrirProduto: () => this.setState({ janela: 'produto' }),
+      fecharJanela: () => this.setState({ janela: 'fechada' }),
+      menu: menuItens.map(([nome, href]) => {
+        const on = nome === 'Vender';
+        return { nome, href, atual: on ? 'page' : 'false', cor: on ? '#12161C' : '#C9CED6', fundo: on ? '#FFC21A' : 'transparent', peso: on ? 700 : 500 };
+      }),
+      resultados: [
+        { modelo: 'M60GD', linha: 'Moura Automotiva', aplicacoes: 'Onix, HB20, Argo, Corolla, Civic', saldo: '4', corSaldo: '#1F7A4D', preco: 'R$ 450,00', acaoLabel: 'Adicionar M60GD', botaoFundo: '#FFC21A' },
+        { modelo: 'M60GE', linha: 'Moura Automotiva', aplicacoes: 'Onix, HB20, Argo, Corolla, Civic', saldo: '0', corSaldo: '#B42318', preco: 'R$ 460,00', acaoLabel: 'Adicionar M60GE (sem estoque)', botaoFundo: '#EEF0F3' }
+      ],
+      formas: ['Dinheiro', 'Pix', 'Débito', 'Crédito'].map((nome) => {
+        const on = marcadas.indexOf(nome) >= 0;
+        return {
+          nome,
+          ativo: on ? 'true' : 'false',
+          borda: on ? '2px solid #12161C' : '1px solid #C9CED6',
+          fundo: on ? '#12161C' : '#FFFFFF',
+          cor: on ? '#FFFFFF' : '#12161C',
+          pick: () => this.setState({ formas: on ? marcadas.filter((x) => x !== nome) : marcadas.concat([nome]) })
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

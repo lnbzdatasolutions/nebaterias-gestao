@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clientes · notebook</title>
+<!-- Referência visual estática gerada do protótipo. Dados são de exemplo. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4ED8}a:hover{color:#1E40AF}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-wrap: wrap; align-items: stretch; position: relative">
+
+  <aside style="flex: 1 1 232px; max-width: 100%; box-sizing: border-box; background: #12161C; color: #FFFFFF; padding: 20px 14px; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 6px">
+      <div style="width: 38px; height: 38px; border-radius: 10px; background: #FFC21A; display: flex; align-items: center; justify-content: center">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12161C" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><rect x="2" y="7" width="20" height="13" rx="2"></rect><path d="M6 7V4h3v3M15 7V4h3v3M6 13.5h4M14 13.5h4M16 11.5v4"></path></svg>
+      </div>
+      <span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">N E Baterias</span>
+    </div>
+    <nav aria-label="Menu" style="display: flex; flex-direction: column; gap: 4px">
+      
+        <a href="02-inicio.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Início</a>
+      
+        <a href="03-vender.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Vender</a>
+      
+        <a href="05-estoque.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Estoque</a>
+      
+        <a href="06-entrada.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Entrada</a>
+      
+        <a href="07-painel.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Painel</a>
+      
+        <a href="08-historico-vendas.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Vendas</a>
+      
+        <a href="09-clientes.html" aria-current="page" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #12161C; background: #FFC21A; font-size: 15px; font-weight: 700">Clientes</a>
+      
+        <a href="10-produtos.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Produtos</a>
+      
+        <a href="11-configuracoes.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Configurações</a>
+      
+    </nav>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 32px 40px; display: flex; flex-direction: column; gap: 18px">
+
+    <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+      <div>
+        <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 32px">Clientes</h1>
+        <div style="font-size: 14px; color: #5B6472">86 clientes · 31 compraram nos últimos 90 dias</div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px">
+        <button style="height: 46px; padding: 0 16px; border-radius: 12px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Exportar CSV</button>
+        <button style="height: 46px; padding: 0 18px; border-radius: 12px; border: none; background: #FFC21A; color: #12161C; font-family: Inter, sans-serif; font-size: 15px; font-weight: 700; cursor: pointer">+ Novo cliente</button>
+      </div>
+    </header>
+
+    <div style="position: relative; max-width: 520px">
+      <label for="q" style="position: absolute; left: -9999px">Buscar cliente</label>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B6472" style="position: absolute; left: 12px; top: 13px; stroke-width: 2; stroke-linecap: round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <input id="q" type="search" placeholder="Nome, telefone, placa ou veículo" style="width: 100%; box-sizing: border-box; height: 46px; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px 0 40px; font-size: 15px; font-family: Inter, sans-serif">
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+      <section aria-label="Lista de clientes" style="flex: 2 1 560px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; overflow-x: auto">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 620px">
+          <thead>
+            <tr style="text-align: left; color: #5B6472; font-size: 12px; background: #FAFBFC">
+              <th style="padding: 12px 10px; font-weight: 600">Cliente</th>
+              <th style="padding: 12px 10px; font-weight: 600">Telefone</th>
+              <th style="padding: 12px 10px; font-weight: 600">Veículo · placa</th>
+              <th style="padding: 12px 10px; font-weight: 600; text-align: right">Compras</th>
+              <th style="padding: 12px 10px; font-weight: 600; text-align: right">Última</th>
+              <th style="padding: 12px 10px"><span style="position: absolute; left: -9999px">Ações</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: #FFF8E1">
+                <td style="padding: 11px 10px; font-weight: 600">João da Silva</td>
+                <td style="padding: 11px 10px; color: #5B6472">(85) 99999-1234</td>
+                <td style="padding: 11px 10px">Onix 2019 · ABC1D23</td>
+                <td style="padding: 11px 10px; text-align: right">2</td>
+                <td style="padding: 11px 10px; text-align: right; color: #5B6472">27/10</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver João da Silva" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Ver</button></td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
+                <td style="padding: 11px 10px; font-weight: 600">Maria Souza</td>
+                <td style="padding: 11px 10px; color: #5B6472">(85) 98888-0000</td>
+                <td style="padding: 11px 10px">HB20 2020 · POX4G21</td>
+                <td style="padding: 11px 10px; text-align: right">1</td>
+                <td style="padding: 11px 10px; text-align: right; color: #5B6472">26/10</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver Maria Souza" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Ver</button></td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
+                <td style="padding: 11px 10px; font-weight: 600">Carlos Lima</td>
+                <td style="padding: 11px 10px; color: #5B6472">(85) 98765-4321</td>
+                <td style="padding: 11px 10px">Compass</td>
+                <td style="padding: 11px 10px; text-align: right">1</td>
+                <td style="padding: 11px 10px; text-align: right; color: #5B6472">26/10</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver Carlos Lima" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Ver</button></td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
+                <td style="padding: 11px 10px; font-weight: 600">Ana Rocha</td>
+                <td style="padding: 11px 10px; color: #5B6472">(85) 99123-4567</td>
+                <td style="padding: 11px 10px">T-Cross</td>
+                <td style="padding: 11px 10px; text-align: right">1</td>
+                <td style="padding: 11px 10px; text-align: right; color: #5B6472">25/10</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver Ana Rocha" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Ver</button></td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
+                <td style="padding: 11px 10px; font-weight: 600">Pedro Alves</td>
+                <td style="padding: 11px 10px; color: #5B6472">(85) 99654-3210</td>
+                <td style="padding: 11px 10px">Hilux Diesel</td>
+                <td style="padding: 11px 10px; text-align: right">3</td>
+                <td style="padding: 11px 10px; text-align: right; color: #5B6472">03/2025</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver Pedro Alves" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Ver</button></td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
+                <td style="padding: 11px 10px; font-weight: 600">Transportes Ceará</td>
+                <td style="padding: 11px 10px; color: #5B6472">(85) 3222-0000</td>
+                <td style="padding: 11px 10px">Scania R440</td>
+                <td style="padding: 11px 10px; text-align: right">4</td>
+                <td style="padding: 11px 10px; text-align: right; color: #5B6472">14/08</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver Transportes Ceará" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Ver</button></td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
+                <td style="padding: 11px 10px; font-weight: 600">Luana Martins</td>
+                <td style="padding: 11px 10px; color: #5B6472">(85) 99777-1122</td>
+                <td style="padding: 11px 10px">Honda Biz</td>
+                <td style="padding: 11px 10px; text-align: right">1</td>
+                <td style="padding: 11px 10px; text-align: right; color: #5B6472">01/2025</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver Luana Martins" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Ver</button></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      </section>
+
+      <section aria-label="Detalhe do cliente" style="flex: 1 1 300px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; gap: 12px">
+          <div style="width: 48px; height: 48px; border-radius: 24px; background: #12161C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600">Jd</div>
+          <div>
+            <h2 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 22px">João da Silva</h2>
+            <div style="font-size: 13px; color: #5B6472">(85) 99999-1234 · Onix 2019 · ABC1D23</div>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+          <div style="padding: 10px 12px; border-radius: 10px; background: #F5F6F8"><div style="font-size: 12px; color: #5B6472">Total gasto</div><div style="font-weight: 600; font-size: 16px">R$ 785,00</div></div>
+          <div style="padding: 10px 12px; border-radius: 10px; background: #F5F6F8"><div style="font-size: 12px; color: #5B6472">Compras</div><div style="font-weight: 600; font-size: 16px">2</div></div>
+        </div>
+        <div>
+          <h3 style="margin: 0 0 6px; font-size: 14px; font-weight: 600">Compras e garantias</h3>
+          
+            <div style="padding: 9px 0; border-top: 1px solid #EEF0F3; font-size: 13px">
+              <div style="display: flex; justify-content: space-between"><strong>1× M60GD</strong><span>R$ 405,00</span></div>
+              <div style="display: flex; justify-content: space-between; color: #5B6472"><span>27/10/2026</span><span style="color: #1F7A4D; font-weight: 600">Garantia até 27/10/2027</span></div>
+            </div>
+          
+            <div style="padding: 9px 0; border-top: 1px solid #EEF0F3; font-size: 13px">
+              <div style="display: flex; justify-content: space-between"><strong>1× M40SD</strong><span>R$ 380,00</span></div>
+              <div style="display: flex; justify-content: space-between; color: #5B6472"><span>12/03/2024</span><span style="color: #5B6472; font-weight: 600">Vencida</span></div>
+            </div>
+          
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <button style="flex: 1 1 140px; height: 44px; border-radius: 10px; border: none; background: #12161C; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Chamar no WhatsApp</button>
+          <button style="flex: 1 1 100px; height: 44px; border-radius: 10px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Editar</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  
+</div>
+</body>
+</html>

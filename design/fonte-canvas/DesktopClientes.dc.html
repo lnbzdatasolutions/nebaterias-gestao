@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Clientes · notebook</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4ED8}a:hover{color:#1E40AF}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-wrap: wrap; align-items: stretch; position: relative">
+
+  <aside style="flex: 1 1 232px; max-width: 100%; box-sizing: border-box; background: #12161C; color: #FFFFFF; padding: 20px 14px; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 6px">
+      <div style="width: 38px; height: 38px; border-radius: 10px; background: #FFC21A; display: flex; align-items: center; justify-content: center">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12161C" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><rect x="2" y="7" width="20" height="13" rx="2"></rect><path d="M6 7V4h3v3M15 7V4h3v3M6 13.5h4M14 13.5h4M16 11.5v4"></path></svg>
+      </div>
+      <span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">N E Baterias</span>
+    </div>
+    <nav aria-label="Menu" style="display: flex; flex-direction: column; gap: 4px">
+      <sc-for list="{{menu}}" as="m" hint-placeholder-count="9">
+        <a href="{{m.href}}" aria-current="{{m.atual}}" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: {{m.cor}}; background: {{m.fundo}}; font-size: 15px; font-weight: {{m.peso}}">{{m.nome}}</a>
+      </sc-for>
+    </nav>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 32px 40px; display: flex; flex-direction: column; gap: 18px">
+
+    <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+      <div>
+        <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 32px">Clientes</h1>
+        <div style="font-size: 14px; color: #5B6472">86 clientes · 31 compraram nos últimos 90 dias</div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px">
+        <button style="height: 46px; padding: 0 16px; border-radius: 12px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Exportar CSV</button>
+        <button onClick="{{abrir}}" style="height: 46px; padding: 0 18px; border-radius: 12px; border: none; background: #FFC21A; color: #12161C; font-family: Inter, sans-serif; font-size: 15px; font-weight: 700; cursor: pointer">+ Novo cliente</button>
+      </div>
+    </header>
+
+    <div style="position: relative; max-width: 520px">
+      <label for="q" style="position: absolute; left: -9999px">Buscar cliente</label>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B6472" style="position: absolute; left: 12px; top: 13px; stroke-width: 2; stroke-linecap: round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <input id="q" type="search" placeholder="Nome, telefone, placa ou veículo" style="width: 100%; box-sizing: border-box; height: 46px; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px 0 40px; font-size: 15px; font-family: Inter, sans-serif">
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+      <section aria-label="Lista de clientes" style="flex: 2 1 560px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; overflow-x: auto">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 620px">
+          <thead>
+            <tr style="text-align: left; color: #5B6472; font-size: 12px; background: #FAFBFC">
+              <th style="padding: 12px 10px; font-weight: 600">Cliente</th>
+              <th style="padding: 12px 10px; font-weight: 600">Telefone</th>
+              <th style="padding: 12px 10px; font-weight: 600">Veículo · placa</th>
+              <th style="padding: 12px 10px; font-weight: 600; text-align: right">Compras</th>
+              <th style="padding: 12px 10px; font-weight: 600; text-align: right">Última</th>
+              <th style="padding: 12px 10px"><span style="position: absolute; left: -9999px">Ações</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{clientes}}" as="c" hint-placeholder-count="7">
+              <tr style="border-top: 1px solid #EEF0F3; background: {{c.fundo}}">
+                <td style="padding: 11px 10px; font-weight: 600">{{c.nome}}</td>
+                <td style="padding: 11px 10px; color: #5B6472">{{c.telefone}}</td>
+                <td style="padding: 11px 10px">{{c.veiculo}}</td>
+                <td style="padding: 11px 10px; text-align: right">{{c.compras}}</td>
+                <td style="padding: 11px 10px; text-align: right; color: #5B6472">{{c.ultima}}</td>
+                <td style="padding: 8px 10px; text-align: right"><button onClick="{{c.ver}}" aria-label="{{c.verLabel}}" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Ver</button></td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </section>
+
+      <section aria-label="Detalhe do cliente" style="flex: 1 1 300px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 14px">
+        <div style="display: flex; align-items: center; gap: 12px">
+          <div style="width: 48px; height: 48px; border-radius: 24px; background: #12161C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600">{{sel.iniciais}}</div>
+          <div>
+            <h2 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 22px">{{sel.nome}}</h2>
+            <div style="font-size: 13px; color: #5B6472">{{sel.telefone}} · {{sel.veiculo}}</div>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+          <div style="padding: 10px 12px; border-radius: 10px; background: #F5F6F8"><div style="font-size: 12px; color: #5B6472">Total gasto</div><div style="font-weight: 600; font-size: 16px">{{sel.gasto}}</div></div>
+          <div style="padding: 10px 12px; border-radius: 10px; background: #F5F6F8"><div style="font-size: 12px; color: #5B6472">Compras</div><div style="font-weight: 600; font-size: 16px">{{sel.compras}}</div></div>
+        </div>
+        <div>
+          <h3 style="margin: 0 0 6px; font-size: 14px; font-weight: 600">Compras e garantias</h3>
+          <sc-for list="{{sel.historico}}" as="h" hint-placeholder-count="2">
+            <div style="padding: 9px 0; border-top: 1px solid #EEF0F3; font-size: 13px">
+              <div style="display: flex; justify-content: space-between"><strong>{{h.item}}</strong><span>{{h.valor}}</span></div>
+              <div style="display: flex; justify-content: space-between; color: #5B6472"><span>{{h.data}}</span><span style="color: {{h.cor}}; font-weight: 600">{{h.garantia}}</span></div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <button style="flex: 1 1 140px; height: 44px; border-radius: 10px; border: none; background: #12161C; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Chamar no WhatsApp</button>
+          <button style="flex: 1 1 100px; height: 44px; border-radius: 10px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Editar</button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <sc-if value="{{aberta}}" hint-placeholder-val="{{ false }}">
+    <div style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; background: rgba(18, 22, 28, 0.55); display: flex; justify-content: center; align-items: flex-start; padding: 72px 16px; box-sizing: border-box">
+      <div role="dialog" aria-label="Novo cliente" style="width: 100%; max-width: 460px; border-radius: 20px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3)">
+        <dc-import name="ClienteRapido" on-fechar="{{fechar}}" hint-size="100%,640px"></dc-import>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { aberta: false, sel: 0 };
+  }
+  renderVals() {
+    const menuItens = [
+      ['Início', 'DesktopInicio.dc.html'], ['Vender', 'DesktopVender.dc.html'], ['Estoque', 'DesktopEstoque.dc.html'],
+      ['Entrada', 'DesktopEntrada.dc.html'], ['Painel', 'DesktopPainel.dc.html'], ['Vendas', 'DesktopVendas.dc.html'],
+      ['Clientes', 'DesktopClientes.dc.html'], ['Produtos', 'DesktopProdutos.dc.html'], ['Configurações', 'DesktopConfiguracoes.dc.html']
+    ];
+    const lista = [
+      { nome: 'João da Silva', telefone: '(85) 99999-1234', veiculo: 'Onix 2019 · ABC1D23', compras: '2', ultima: '27/10', gasto: 'R$ 785,00',
+        historico: [{ item: '1× M60GD', valor: 'R$ 405,00', data: '27/10/2026', garantia: 'Garantia até 27/10/2027', cor: '#1F7A4D' },
+                    { item: '1× M40SD', valor: 'R$ 380,00', data: '12/03/2024', garantia: 'Vencida', cor: '#5B6472' }] },
+      { nome: 'Maria Souza', telefone: '(85) 98888-0000', veiculo: 'HB20 2020 · POX4G21', compras: '1', ultima: '26/10', gasto: 'R$ 450,00',
+        historico: [{ item: '1× M60GD (cancelada)', valor: 'R$ 450,00', data: '26/10/2026', garantia: '—', cor: '#5B6472' }] },
+      { nome: 'Carlos Lima', telefone: '(85) 98765-4321', veiculo: 'Compass', compras: '1', ultima: '26/10', gasto: 'R$ 600,00',
+        historico: [{ item: '1× M70LD', valor: 'R$ 600,00', data: '26/10/2026', garantia: 'Garantia até 26/10/2027', cor: '#1F7A4D' }] },
+      { nome: 'Ana Rocha', telefone: '(85) 99123-4567', veiculo: 'T-Cross', compras: '1', ultima: '25/10', gasto: 'R$ 690,00',
+        historico: [{ item: '1× M60AX', valor: 'R$ 690,00', data: '25/10/2026', garantia: 'Garantia até 25/10/2027', cor: '#1F7A4D' }] },
+      { nome: 'Pedro Alves', telefone: '(85) 99654-3210', veiculo: 'Hilux Diesel', compras: '3', ultima: '03/2025', gasto: 'R$ 2.310,00',
+        historico: [{ item: '1× M100QD', valor: 'R$ 890,00', data: '10/03/2025', garantia: 'Vencida em 03/2026', cor: '#5B6472' }] },
+      { nome: 'Transportes Ceará', telefone: '(85) 3222-0000', veiculo: 'Scania R440', compras: '4', ultima: '14/08', gasto: 'R$ 5.200,00',
+        historico: [{ item: '2× M180BD', valor: 'R$ 2.600,00', data: '14/08/2026', garantia: 'Garantia até 14/08/2027', cor: '#1F7A4D' }] },
+      { nome: 'Luana Martins', telefone: '(85) 99777-1122', veiculo: 'Honda Biz', compras: '1', ultima: '01/2025', gasto: 'R$ 180,00',
+        historico: [{ item: '1× MA5-D', valor: 'R$ 180,00', data: '20/01/2025', garantia: 'Vencida em 01/2026', cor: '#5B6472' }] }
+    ];
+    const s = lista[this.state.sel] || lista[0];
+    const iniciais = (n) => n.split(' ').slice(0, 2).map((p) => p[0]).join('');
+    return {
+      aberta: this.state.aberta,
+      abrir: () => this.setState({ aberta: true }),
+      fechar: () => this.setState({ aberta: false }),
+      menu: menuItens.map(([nome, href]) => {
+        const on = nome === 'Clientes';
+        return { nome, href, atual: on ? 'page' : 'false', cor: on ? '#12161C' : '#C9CED6', fundo: on ? '#FFC21A' : 'transparent', peso: on ? 700 : 500 };
+      }),
+      clientes: lista.map((c, i) => ({
+        ...c,
+        fundo: i === this.state.sel ? '#FFF8E1' : 'transparent',
+        verLabel: 'Ver ' + c.nome,
+        ver: () => this.setState({ sel: i })
+      })),
+      sel: { ...s, iniciais: iniciais(s.nome) }
+    };
+  }
+}
+</script>
+</body>
+</html>

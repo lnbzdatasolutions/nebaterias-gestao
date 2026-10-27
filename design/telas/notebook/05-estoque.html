@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estoque · notebook</title>
+<!-- Referência visual estática gerada do protótipo. Dados são de exemplo. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4ED8}a:hover{color:#1E40AF}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-wrap: wrap; align-items: stretch">
+
+  <aside style="flex: 1 1 232px; max-width: 100%; box-sizing: border-box; background: #12161C; color: #FFFFFF; padding: 20px 14px; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 6px">
+      <div style="width: 38px; height: 38px; border-radius: 10px; background: #FFC21A; display: flex; align-items: center; justify-content: center">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12161C" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><rect x="2" y="7" width="20" height="13" rx="2"></rect><path d="M6 7V4h3v3M15 7V4h3v3M6 13.5h4M14 13.5h4M16 11.5v4"></path></svg>
+      </div>
+      <span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">N E Baterias</span>
+    </div>
+    <nav aria-label="Menu" style="display: flex; flex-direction: column; gap: 4px">
+      
+        <a href="02-inicio.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Início</a>
+      
+        <a href="03-vender.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Vender</a>
+      
+        <a href="05-estoque.html" aria-current="page" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #12161C; background: #FFC21A; font-size: 15px; font-weight: 700">Estoque</a>
+      
+        <a href="06-entrada.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Entrada</a>
+      
+        <a href="07-painel.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Painel</a>
+      
+        <a href="08-historico-vendas.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Vendas</a>
+      
+        <a href="09-clientes.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Clientes</a>
+      
+        <a href="10-produtos.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Produtos</a>
+      
+        <a href="11-configuracoes.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Configurações</a>
+      
+    </nav>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 32px 40px; display: flex; flex-direction: column; gap: 18px">
+
+    <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+      <div>
+        <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 32px">Estoque</h1>
+        <div style="font-size: 14px; color: #5B6472">19 modelos · 41 baterias · R$ 14.860 a preço de custo · 3 no mínimo</div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px">
+        <button style="height: 46px; padding: 0 16px; border-radius: 12px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Exportar CSV</button>
+        <button style="height: 46px; padding: 0 18px; border-radius: 12px; border: none; background: #12161C; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">+ Nova bateria</button>
+      </div>
+    </header>
+
+    <section aria-label="Filtros" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+      <div style="position: relative; flex: 1 1 320px">
+        <label for="q" style="position: absolute; left: -9999px">Buscar por modelo ou carro</label>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B6472" style="position: absolute; left: 12px; top: 13px; stroke-width: 2; stroke-linecap: round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        <input id="q" type="search" placeholder="Modelo ou carro (ex.: Hilux, M60)" style="width: 100%; box-sizing: border-box; height: 46px; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px 0 40px; font-size: 15px; font-family: Inter, sans-serif">
+      </div>
+      <div role="group" aria-label="Filtrar por linha" style="display: flex; flex-wrap: wrap; gap: 6px">
+        
+          <button aria-pressed="true" style="height: 40px; padding: 0 14px; border-radius: 999px; border: 2px solid #12161C; background: #12161C; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Todas</button>
+        
+          <button aria-pressed="false" style="height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Automotiva</button>
+        
+          <button aria-pressed="false" style="height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">EFB</button>
+        
+          <button aria-pressed="false" style="height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">AGM</button>
+        
+          <button aria-pressed="false" style="height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Moto</button>
+        
+          <button aria-pressed="false" style="height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Diesel</button>
+        
+      </div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+      <section aria-label="Tabela de estoque" style="flex: 2 1 600px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; overflow-x: auto">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 700px">
+          <thead>
+            <tr style="text-align: left; color: #5B6472; font-size: 12px; background: #FAFBFC">
+              <th style="padding: 12px 10px; font-weight: 600">Modelo</th>
+              <th style="padding: 12px 10px; font-weight: 600">Atende</th>
+              <th style="padding: 12px 10px; font-weight: 600; text-align: center">Saldo</th>
+              <th style="padding: 12px 10px; font-weight: 600; text-align: right">Custo médio</th>
+              <th style="padding: 12px 10px; font-weight: 600; text-align: right">Preço</th>
+              <th style="padding: 12px 10px; font-weight: 600; text-align: right">Margem</th>
+              <th style="padding: 12px 10px"><span style="position: absolute; left: -9999px">Ações</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: #FFF8E1">
+                <td style="padding: 11px 10px"><strong style="font-family: Barlow, sans-serif; font-size: 17px">M60GD</strong><br><span style="font-size: 12px; color: #5B6472">Moura Automotiva</span></td>
+                <td style="padding: 11px 10px; color: #5B6472; max-width: 260px">Onix, HB20, Argo, Corolla, Civic</td>
+                <td style="padding: 11px 10px; text-align: center"><span style="display: inline-flex; min-width: 40px; justify-content: center; padding: 4px 8px; border-radius: 8px; background: #E3F4EA; color: #1F7A4D; font-family: Barlow, sans-serif; font-weight: 700; font-size: 17px">4</span></td>
+                <td style="padding: 11px 10px; text-align: right">R$ 290,00</td>
+                <td style="padding: 11px 10px; text-align: right; font-weight: 600">R$ 450,00</td>
+                <td style="padding: 11px 10px; text-align: right">35,6%</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver detalhe de M60GD" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Detalhe</button></td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
+                <td style="padding: 11px 10px"><strong style="font-family: Barlow, sans-serif; font-size: 17px">M60GE</strong><br><span style="font-size: 12px; color: #5B6472">Moura Automotiva</span></td>
+                <td style="padding: 11px 10px; color: #5B6472; max-width: 260px">Onix, HB20, Argo, Corolla, Civic</td>
+                <td style="padding: 11px 10px; text-align: center"><span style="display: inline-flex; min-width: 40px; justify-content: center; padding: 4px 8px; border-radius: 8px; background: #FDE7E5; color: #B42318; font-family: Barlow, sans-serif; font-weight: 700; font-size: 17px">0</span></td>
+                <td style="padding: 11px 10px; text-align: right">R$ 298,00</td>
+                <td style="padding: 11px 10px; text-align: right; font-weight: 600">R$ 460,00</td>
+                <td style="padding: 11px 10px; text-align: right">35,2%</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver detalhe de M60GE" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Detalhe</button></td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
+                <td style="padding: 11px 10px"><strong style="font-family: Barlow, sans-serif; font-size: 17px">M40SD</strong><br><span style="font-size: 12px; color: #5B6472">Moura Automotiva</span></td>
+                <td style="padding: 11px 10px; color: #5B6472; max-width: 260px">Uno, Celta, Ka, Gol 1.0</td>
+                <td style="padding: 11px 10px; text-align: center"><span style="display: inline-flex; min-width: 40px; justify-content: center; padding: 4px 8px; border-radius: 8px; background: #E3F4EA; color: #1F7A4D; font-family: Barlow, sans-serif; font-weight: 700; font-size: 17px">3</span></td>
+                <td style="padding: 11px 10px; text-align: right">R$ 247,77</td>
+                <td style="padding: 11px 10px; text-align: right; font-weight: 600">R$ 380,00</td>
+                <td style="padding: 11px 10px; text-align: right">34,8%</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver detalhe de M40SD" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Detalhe</button></td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
+                <td style="padding: 11px 10px"><strong style="font-family: Barlow, sans-serif; font-size: 17px">M70LD</strong><br><span style="font-size: 12px; color: #5B6472">Moura Automotiva</span></td>
+                <td style="padding: 11px 10px; color: #5B6472; max-width: 260px">Compass, S10 Flex, Hilux Flex, Tucson</td>
+                <td style="padding: 11px 10px; text-align: center"><span style="display: inline-flex; min-width: 40px; justify-content: center; padding: 4px 8px; border-radius: 8px; background: #E3F4EA; color: #1F7A4D; font-family: Barlow, sans-serif; font-weight: 700; font-size: 17px">2</span></td>
+                <td style="padding: 11px 10px; text-align: right">R$ 411,00</td>
+                <td style="padding: 11px 10px; text-align: right; font-weight: 600">R$ 620,00</td>
+                <td style="padding: 11px 10px; text-align: right">33,7%</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver detalhe de M70LD" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Detalhe</button></td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
+                <td style="padding: 11px 10px"><strong style="font-family: Barlow, sans-serif; font-size: 17px">M60AX</strong><br><span style="font-size: 12px; color: #5B6472">Moura EFB</span></td>
+                <td style="padding: 11px 10px; color: #5B6472; max-width: 260px">Polo, Nivus, T-Cross TSI, Renegade</td>
+                <td style="padding: 11px 10px; text-align: center"><span style="display: inline-flex; min-width: 40px; justify-content: center; padding: 4px 8px; border-radius: 8px; background: #FFF4D6; color: #7A4E00; font-family: Barlow, sans-serif; font-weight: 700; font-size: 17px">1</span></td>
+                <td style="padding: 11px 10px; text-align: right">R$ 500,00</td>
+                <td style="padding: 11px 10px; text-align: right; font-weight: 600">R$ 690,00</td>
+                <td style="padding: 11px 10px; text-align: right">27,5%</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver detalhe de M60AX" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Detalhe</button></td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
+                <td style="padding: 11px 10px"><strong style="font-family: Barlow, sans-serif; font-size: 17px">M72TX</strong><br><span style="font-size: 12px; color: #5B6472">Moura EFB</span></td>
+                <td style="padding: 11px 10px; color: #5B6472; max-width: 260px">Polo, Nivus, T-Cross TSI, Renegade</td>
+                <td style="padding: 11px 10px; text-align: center"><span style="display: inline-flex; min-width: 40px; justify-content: center; padding: 4px 8px; border-radius: 8px; background: #E3F4EA; color: #1F7A4D; font-family: Barlow, sans-serif; font-weight: 700; font-size: 17px">2</span></td>
+                <td style="padding: 11px 10px; text-align: right">R$ 560,00</td>
+                <td style="padding: 11px 10px; text-align: right; font-weight: 600">R$ 780,00</td>
+                <td style="padding: 11px 10px; text-align: right">28,2%</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver detalhe de M72TX" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Detalhe</button></td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
+                <td style="padding: 11px 10px"><strong style="font-family: Barlow, sans-serif; font-size: 17px">M60AD</strong><br><span style="font-size: 12px; color: #5B6472">Moura AGM</span></td>
+                <td style="padding: 11px 10px; color: #5B6472; max-width: 260px">BMW, Mercedes, Audi, Volvo, Jetta</td>
+                <td style="padding: 11px 10px; text-align: center"><span style="display: inline-flex; min-width: 40px; justify-content: center; padding: 4px 8px; border-radius: 8px; background: #FFF4D6; color: #7A4E00; font-family: Barlow, sans-serif; font-weight: 700; font-size: 17px">1</span></td>
+                <td style="padding: 11px 10px; text-align: right">R$ 966,00</td>
+                <td style="padding: 11px 10px; text-align: right; font-weight: 600">R$ 1.290,00</td>
+                <td style="padding: 11px 10px; text-align: right">25,1%</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver detalhe de M60AD" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Detalhe</button></td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
+                <td style="padding: 11px 10px"><strong style="font-family: Barlow, sans-serif; font-size: 17px">MA5-D</strong><br><span style="font-size: 12px; color: #5B6472">Moura Moto</span></td>
+                <td style="padding: 11px 10px; color: #5B6472; max-width: 260px">Honda CG, Biz</td>
+                <td style="padding: 11px 10px; text-align: center"><span style="display: inline-flex; min-width: 40px; justify-content: center; padding: 4px 8px; border-radius: 8px; background: #E3F4EA; color: #1F7A4D; font-family: Barlow, sans-serif; font-weight: 700; font-size: 17px">6</span></td>
+                <td style="padding: 11px 10px; text-align: right">R$ 125,00</td>
+                <td style="padding: 11px 10px; text-align: right; font-weight: 600">R$ 190,00</td>
+                <td style="padding: 11px 10px; text-align: right">34,2%</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver detalhe de MA5-D" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Detalhe</button></td>
+              </tr>
+            
+              <tr style="border-top: 1px solid #EEF0F3; background: transparent">
+                <td style="padding: 11px 10px"><strong style="font-family: Barlow, sans-serif; font-size: 17px">M150BD</strong><br><span style="font-size: 12px; color: #5B6472">Moura Diesel</span></td>
+                <td style="padding: 11px 10px; color: #5B6472; max-width: 260px">VW Delivery, Cargo leve, Accelo</td>
+                <td style="padding: 11px 10px; text-align: center"><span style="display: inline-flex; min-width: 40px; justify-content: center; padding: 4px 8px; border-radius: 8px; background: #FDE7E5; color: #B42318; font-family: Barlow, sans-serif; font-weight: 700; font-size: 17px">−1</span></td>
+                <td style="padding: 11px 10px; text-align: right">R$ 660,75</td>
+                <td style="padding: 11px 10px; text-align: right; font-weight: 600">R$ 1.100,00</td>
+                <td style="padding: 11px 10px; text-align: right">39,9%</td>
+                <td style="padding: 8px 10px; text-align: right"><button aria-label="Ver detalhe de M150BD" style="height: 34px; padding: 0 12px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; font-weight: 600; cursor: pointer">Detalhe</button></td>
+              </tr>
+            
+          </tbody>
+        </table>
+        
+      </section>
+
+      <section aria-label="Detalhe da bateria" style="flex: 1 1 300px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 14px">
+        <div>
+          <h2 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 26px">M60GD</h2>
+          <div style="font-size: 13px; color: #5B6472">Moura Automotiva · garantia 12 meses</div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+          <div style="padding: 10px 12px; border-radius: 10px; background: #F5F6F8"><div style="font-size: 12px; color: #5B6472">Em estoque</div><div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 22px; color: #1F7A4D">4</div></div>
+          <div style="padding: 10px 12px; border-radius: 10px; background: #F5F6F8"><div style="font-size: 12px; color: #5B6472">Mínimo</div><div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 22px">1</div></div>
+          <div style="padding: 10px 12px; border-radius: 10px; background: #F5F6F8"><div style="font-size: 12px; color: #5B6472">Custo médio</div><div style="font-weight: 600; font-size: 16px">R$ 290,00</div></div>
+          <div style="padding: 10px 12px; border-radius: 10px; background: #F5F6F8"><div style="font-size: 12px; color: #5B6472">Preço · margem</div><div style="font-weight: 600; font-size: 16px">R$ 450,00 · 35,6%</div></div>
+        </div>
+
+        <div>
+          <h3 style="margin: 0 0 6px; font-size: 14px; font-weight: 600">Últimas movimentações</h3>
+          
+            <div style="display: flex; justify-content: space-between; gap: 8px; padding: 8px 0; border-top: 1px solid #EEF0F3; font-size: 13px">
+              <span><span style="color: #5B6472">27/10</span> · Venda nº 129</span>
+              <strong style="color: #B42318">−1</strong>
+            </div>
+          
+            <div style="display: flex; justify-content: space-between; gap: 8px; padding: 8px 0; border-top: 1px solid #EEF0F3; font-size: 13px">
+              <span><span style="color: #5B6472">26/10</span> · Cancelamento da venda nº 126</span>
+              <strong style="color: #1F7A4D">+1</strong>
+            </div>
+          
+            <div style="display: flex; justify-content: space-between; gap: 8px; padding: 8px 0; border-top: 1px solid #EEF0F3; font-size: 13px">
+              <span><span style="color: #5B6472">15/10</span> · Compra nº 2 · R$ 300,00</span>
+              <strong style="color: #1F7A4D">+2</strong>
+            </div>
+          
+            <div style="display: flex; justify-content: space-between; gap: 8px; padding: 8px 0; border-top: 1px solid #EEF0F3; font-size: 13px">
+              <span><span style="color: #5B6472">02/10</span> · Compra nº 1 · R$ 280,00</span>
+              <strong style="color: #1F7A4D">+2</strong>
+            </div>
+          
+        </div>
+
+        <div style="padding: 12px; border-radius: 12px; border: 1px dashed #C9CED6; display: flex; flex-direction: column; gap: 8px">
+          <h3 style="margin: 0; font-size: 14px; font-weight: 600">Ajustar estoque</h3>
+          <div style="display: flex; gap: 8px">
+            <label for="aj" style="position: absolute; left: -9999px">Quantidade a ajustar</label>
+            <input id="aj" inputmode="numeric" placeholder="+1 ou −1" style="width: 100px; height: 40px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif">
+            <label for="mot" style="position: absolute; left: -9999px">Motivo</label>
+            <select id="mot" style="flex: 1; min-width: 0; height: 40px; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 8px; font-size: 14px; font-family: Inter, sans-serif; background: #FFFFFF"><option>Contagem</option><option>Garantia / troca</option><option>Avaria</option><option>Outro</option></select>
+          </div>
+          <button style="height: 40px; border-radius: 10px; border: none; background: #12161C; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Salvar ajuste</button>
+        </div>
+        <button style="height: 40px; border-radius: 10px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">Editar preço e cadastro</button>
+      </section>
+    </div>
+  </main>
+</div>
+</body>
+</html>

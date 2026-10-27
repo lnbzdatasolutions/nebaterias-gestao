@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Painel · notebook</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4ED8}a:hover{color:#1E40AF}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-wrap: wrap; align-items: stretch">
+
+  <aside style="flex: 1 1 232px; max-width: 100%; box-sizing: border-box; background: #12161C; color: #FFFFFF; padding: 20px 14px; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 6px">
+      <div style="width: 38px; height: 38px; border-radius: 10px; background: #FFC21A; display: flex; align-items: center; justify-content: center">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12161C" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><rect x="2" y="7" width="20" height="13" rx="2"></rect><path d="M6 7V4h3v3M15 7V4h3v3M6 13.5h4M14 13.5h4M16 11.5v4"></path></svg>
+      </div>
+      <span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">N E Baterias</span>
+    </div>
+    <nav aria-label="Menu" style="display: flex; flex-wrap: wrap; flex-direction: column; gap: 4px">
+      <sc-for list="{{menu}}" as="m" hint-placeholder-count="8">
+        <a href="{{m.href}}" aria-current="{{m.atual}}" style="display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: {{m.cor}}; background: {{m.fundo}}; font-size: 15px; font-weight: {{m.peso}}">{{m.nome}}</a>
+      </sc-for>
+    </nav>
+    <div style="margin-top: auto; padding: 12px; border-radius: 12px; background: #1E242D; font-size: 13px; color: #C9CED6">Conectada como<br><strong style="color: #FFFFFF">esposa@nebaterias.com.br</strong></div>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 32px 40px; display: flex; flex-direction: column; gap: 20px">
+
+    <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+      <div>
+        <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 32px">Painel</h1>
+        <div style="font-size: 14px; color: #5B6472">Outubro de 2026 · comparado a setembro</div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
+        <div role="group" aria-label="Período" style="display: flex; gap: 4px; background: #E9EBEF; padding: 4px; border-radius: 12px">
+          <sc-for list="{{periodos}}" as="p" hint-placeholder-count="5">
+            <button aria-pressed="{{p.ativo}}" onClick="{{p.pick}}" style="height: 38px; padding: 0 14px; border-radius: 9px; border: none; background: {{p.fundo}}; color: #12161C; font-size: 14px; font-weight: {{p.peso}}; font-family: Inter, sans-serif; cursor: pointer">{{p.nome}}</button>
+          </sc-for>
+        </div>
+        <button style="height: 46px; padding: 0 16px; border-radius: 12px; border: 1px solid #C9CED6; background: #FFFFFF; font-size: 14px; font-weight: 600; font-family: Inter, sans-serif; color: #12161C; cursor: pointer">Exportar CSV</button>
+      </div>
+    </header>
+
+    <section aria-label="Indicadores" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px">
+      <sc-for list="{{kpis}}" as="k" hint-placeholder-count="6">
+        <div style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 14px; padding: 16px">
+          <div style="font-size: 13px; color: #5B6472">{{k.nome}}</div>
+          <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 28px; margin-top: 4px">{{k.valor}}</div>
+          <div style="font-size: 13px; font-weight: 600; color: {{k.corVar}}">{{k.variacao}}</div>
+        </div>
+      </sc-for>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px">
+      <section aria-label="Faturamento e lucro por mês" style="flex: 2 1 520px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 18px 20px">
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px">
+          <h2 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">Outubro foi o melhor mês do ano: R$ 18.420</h2>
+          <div style="display: flex; gap: 14px; font-size: 13px; color: #5B6472">
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 3px; background: #9AA2AE"></span>Faturamento</span>
+            <span style="display: flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 3px; background: #1F7A4D"></span>Lucro bruto</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: flex-end; gap: 8px; height: 240px; margin-top: 18px; border-bottom: 1px solid #C9CED6">
+          <sc-for list="{{meses}}" as="m" hint-placeholder-count="12">
+            <div title="{{m.dica}}" style="flex: 1; min-width: 0; height: 100%; display: flex; align-items: flex-end; justify-content: center; gap: 2px">
+              <div style="flex: 1; max-width: 22px; height: {{m.hFat}}; background: {{m.corFat}}; border-radius: 4px 4px 0 0"></div>
+              <div style="flex: 1; max-width: 22px; height: {{m.hLuc}}; background: #1F7A4D; border-radius: 4px 4px 0 0"></div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display: flex; gap: 8px; margin-top: 8px">
+          <sc-for list="{{meses}}" as="m" hint-placeholder-count="12">
+            <span style="flex: 1; min-width: 0; text-align: center; font-size: 12px; color: #5B6472">{{m.mes}}</span>
+          </sc-for>
+        </div>
+      </section>
+
+      <div style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <section aria-label="Valor em estoque" style="background: #12161C; color: #FFFFFF; border-radius: 16px; padding: 18px 20px">
+          <div style="font-size: 13px; color: #C9CED6">Dinheiro parado em bateria</div>
+          <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 30px">R$ 14.860</div>
+          <div style="font-size: 13px; color: #C9CED6">41 unidades · R$ 22.300 a preço de venda</div>
+        </section>
+        <section aria-label="Estoque baixo" style="flex: 1; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 16px 20px">
+          <h2 style="margin: 0 0 6px; font-size: 15px; font-weight: 600">Repor estoque</h2>
+          <sc-for list="{{baixo}}" as="b" hint-placeholder-count="4">
+            <div style="display: flex; justify-content: space-between; padding: 9px 0; border-top: 1px solid #EEF0F3; font-size: 14px">
+              <span><strong>{{b.modelo}}</strong> <span style="color: #5B6472">{{b.linha}}</span></span>
+              <span style="font-weight: 600; color: {{b.cor}}">{{b.saldo}}</span>
+            </div>
+          </sc-for>
+        </section>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px">
+      <section aria-label="Ranking de baterias" style="flex: 2 1 520px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 16px 20px">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px">
+          <h2 style="margin: 0; font-size: 15px; font-weight: 600">Top baterias do mês</h2>
+          <div role="group" aria-label="Ordenar por" style="display: flex; gap: 4px; font-size: 13px">
+            <button aria-pressed="false" style="height: 34px; padding: 0 10px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; cursor: pointer">Quantidade</button>
+            <button aria-pressed="false" style="height: 34px; padding: 0 10px; border-radius: 8px; border: 1px solid #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; cursor: pointer">Faturamento</button>
+            <button aria-pressed="true" style="height: 34px; padding: 0 10px; border-radius: 8px; border: 1px solid #12161C; background: #12161C; color: #FFFFFF; font-family: Inter, sans-serif; font-size: 13px; cursor: pointer">Lucro</button>
+          </div>
+        </div>
+        <div style="overflow-x: auto">
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 480px">
+            <thead>
+              <tr style="text-align: left; color: #5B6472; font-size: 12px">
+                <th style="padding: 8px 6px; font-weight: 600">Modelo</th>
+                <th style="padding: 8px 6px; font-weight: 600">Linha</th>
+                <th style="padding: 8px 6px; font-weight: 600; text-align: right">Qtd</th>
+                <th style="padding: 8px 6px; font-weight: 600; text-align: right">Faturamento</th>
+                <th style="padding: 8px 6px; font-weight: 600; text-align: right">Lucro</th>
+                <th style="padding: 8px 6px; font-weight: 600; text-align: right">Margem</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{top}}" as="t" hint-placeholder-count="5">
+                <tr style="border-top: 1px solid #EEF0F3">
+                  <td style="padding: 10px 6px; font-weight: 600">{{t.modelo}}</td>
+                  <td style="padding: 10px 6px; color: #5B6472">{{t.linha}}</td>
+                  <td style="padding: 10px 6px; text-align: right">{{t.qtd}}</td>
+                  <td style="padding: 10px 6px; text-align: right">{{t.fat}}</td>
+                  <td style="padding: 10px 6px; text-align: right; font-weight: 600; color: #1F7A4D">{{t.lucro}}</td>
+                  <td style="padding: 10px 6px; text-align: right">{{t.margem}}</td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section aria-label="Pagamento e atendimento" style="flex: 1 1 280px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 16px 20px; display: flex; flex-direction: column; gap: 16px">
+        <div>
+          <h2 style="margin: 0 0 4px; font-size: 15px; font-weight: 600">Como pagaram</h2>
+          <sc-for list="{{formas}}" as="f" hint-placeholder-count="4">
+            <div style="display: flex; align-items: center; gap: 10px; margin-top: 9px">
+              <span style="width: 72px; font-size: 14px">{{f.nome}}</span>
+              <div style="flex: 1; height: 12px; border-radius: 6px; background: #EEF0F3; overflow: hidden"><div style="height: 100%; width: {{f.pct}}; background: #12161C; border-radius: 6px"></div></div>
+              <span style="width: 40px; text-align: right; font-size: 14px; font-weight: 600">{{f.pct}}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div>
+          <h2 style="margin: 0 0 4px; font-size: 15px; font-weight: 600">Atendimento</h2>
+          <sc-for list="{{atend}}" as="a" hint-placeholder-count="3">
+            <div style="display: flex; align-items: center; gap: 10px; margin-top: 9px">
+              <span style="width: 72px; font-size: 14px">{{a.nome}}</span>
+              <div style="flex: 1; height: 12px; border-radius: 6px; background: #EEF0F3; overflow: hidden"><div style="height: 100%; width: {{a.pct}}; background: #E0A500; border-radius: 6px"></div></div>
+              <span style="width: 40px; text-align: right; font-size: 14px; font-weight: 600">{{a.pct}}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div>
+          <h2 style="margin: 0 0 4px; font-size: 15px; font-weight: 600">Margem por linha</h2>
+          <sc-for list="{{linhas}}" as="l" hint-placeholder-count="5">
+            <div style="display: flex; justify-content: space-between; padding: 7px 0; border-top: 1px solid #EEF0F3; font-size: 14px">
+              <span>{{l.nome}}</span><span style="font-weight: 600">{{l.margem}}</span>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1240}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { periodo: 'Mês' };
+  }
+  renderVals() {
+    const menuItens = [
+      ['Início', 'DesktopInicio.dc.html'], ['Vender', 'DesktopVender.dc.html'], ['Estoque', 'DesktopEstoque.dc.html'],
+      ['Entrada', 'DesktopEntrada.dc.html'], ['Painel', 'DesktopPainel.dc.html'], ['Vendas', 'DesktopVendas.dc.html'],
+      ['Clientes', 'DesktopClientes.dc.html'], ['Produtos', 'DesktopProdutos.dc.html'], ['Configurações', 'DesktopConfiguracoes.dc.html']
+    ];
+    const fat = [11200, 10400, 9800, 10900, 12100, 11700, 12300, 14100, 15800, 13900, 16450, 18420];
+    const nomesMes = ['nov', 'dez', 'jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out'];
+    const max = Math.max(...fat);
+    const brl = (n) => 'R$ ' + Math.round(n).toLocaleString('pt-BR');
+    return {
+      menu: menuItens.map(([nome, href]) => {
+        const on = nome === 'Painel';
+        return { nome, href, atual: on ? 'page' : 'false', cor: on ? '#12161C' : '#C9CED6', fundo: on ? '#FFC21A' : 'transparent', peso: on ? 700 : 500 };
+      }),
+      periodos: ['Hoje', '7 dias', 'Mês', 'Ano', 'Personalizado'].map((nome) => {
+        const on = nome === this.state.periodo;
+        return { nome, ativo: on ? 'true' : 'false', fundo: on ? '#FFFFFF' : 'transparent', peso: on ? 700 : 500, pick: () => this.setState({ periodo: nome }) };
+      }),
+      kpis: [
+        { nome: 'Faturamento', valor: 'R$ 18.420', variacao: '▲ 12% vs. setembro', corVar: '#1F7A4D' },
+        { nome: 'Lucro bruto', valor: 'R$ 6.190', variacao: '▲ 9%', corVar: '#1F7A4D' },
+        { nome: 'Lucro líquido', valor: 'R$ 5.980', variacao: 'após R$ 210 de taxas', corVar: '#5B6472' },
+        { nome: 'Margem', valor: '33,6%', variacao: '▼ 0,8 ponto', corVar: '#B42318' },
+        { nome: 'Markup', valor: '50,6%', variacao: 'sobre o custo', corVar: '#5B6472' },
+        { nome: 'Ticket médio', valor: 'R$ 438,57', variacao: '42 vendas · 57 baterias', corVar: '#5B6472' }
+      ],
+      meses: fat.map((v, i) => ({
+        mes: nomesMes[i],
+        hFat: Math.round((v / max) * 220) + 'px',
+        hLuc: Math.round((v * 0.336 / max) * 220) + 'px',
+        corFat: v === max ? '#FFC21A' : '#9AA2AE',
+        dica: nomesMes[i] + ': faturamento ' + brl(v) + ', lucro ' + brl(v * 0.336)
+      })),
+      baixo: [
+        { modelo: 'M150BD', linha: 'Diesel', saldo: '−1', cor: '#B42318' },
+        { modelo: 'M60GE', linha: 'Automotiva', saldo: '0', cor: '#B42318' },
+        { modelo: 'M60AX', linha: 'EFB', saldo: '1 (mín. 1)', cor: '#7A4E00' },
+        { modelo: 'M60AD', linha: 'AGM', saldo: '1 (mín. 1)', cor: '#7A4E00' }
+      ],
+      top: [
+        { modelo: 'M60GD', linha: 'Automotiva', qtd: '14', fat: 'R$ 6.300', lucro: 'R$ 2.240', margem: '35,6%' },
+        { modelo: 'M40SD', linha: 'Automotiva', qtd: '9', fat: 'R$ 3.420', lucro: 'R$ 1.130', margem: '33,0%' },
+        { modelo: 'M150BD', linha: 'Diesel', qtd: '2', fat: 'R$ 2.200', lucro: 'R$ 880', margem: '40,0%' },
+        { modelo: 'M60AX', linha: 'EFB', qtd: '4', fat: 'R$ 2.760', lucro: 'R$ 760', margem: '27,5%' },
+        { modelo: 'MA5-D', linha: 'Moto', qtd: '8', fat: 'R$ 1.520', lucro: 'R$ 520', margem: '34,2%' }
+      ],
+      formas: [
+        { nome: 'Pix', pct: '46%' }, { nome: 'Crédito', pct: '28%' },
+        { nome: 'Dinheiro', pct: '16%' }, { nome: 'Débito', pct: '10%' }
+      ],
+      atend: [
+        { nome: 'Balcão', pct: '58%' }, { nome: 'Entrega', pct: '30%' }, { nome: 'Socorro', pct: '12%' }
+      ],
+      linhas: [
+        { nome: 'Moura Log Diesel', margem: '40,0%' }, { nome: 'Moura Automotiva', margem: '34,6%' },
+        { nome: 'Moura Moto', margem: '34,2%' }, { nome: 'Moura EFB', margem: '27,5%' }, { nome: 'Moura AGM', margem: '25,1%' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

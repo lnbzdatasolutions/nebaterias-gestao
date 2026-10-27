@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Painel · celular</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4ED8}a:hover{color:#1E40AF}
+</style>
+</helmet>
+<div style="width: 390px; height: 1300px; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-direction: column">
+
+  <header style="padding: 20px 16px 8px; display: flex; flex-direction: column; gap: 12px">
+    <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 26px">Painel</h1>
+    <div role="group" aria-label="Período" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; background: #E9EBEF; padding: 4px; border-radius: 12px">
+      <sc-for list="{{periodos}}" as="p" hint-placeholder-count="4">
+        <button aria-pressed="{{p.ativo}}" onClick="{{p.pick}}" style="height: 40px; border-radius: 9px; border: none; background: {{p.fundo}}; color: #12161C; font-size: 14px; font-weight: {{p.peso}}; font-family: Inter, sans-serif; cursor: pointer">{{p.nome}}</button>
+      </sc-for>
+    </div>
+  </header>
+
+  <main style="flex: 1; padding: 6px 16px 16px; display: flex; flex-direction: column; gap: 14px">
+
+    <section aria-label="Indicadores" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      <sc-for list="{{kpis}}" as="k" hint-placeholder-count="6">
+        <div style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 14px; padding: 12px 14px">
+          <div style="font-size: 13px; color: #5B6472">{{k.nome}}</div>
+          <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 24px; margin-top: 2px">{{k.valor}}</div>
+          <div style="font-size: 12px; font-weight: 600; color: {{k.corVar}}">{{k.variacao}}</div>
+        </div>
+      </sc-for>
+    </section>
+
+    <section aria-label="Faturamento por mês" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 14px">
+      <div style="display: flex; align-items: baseline; justify-content: space-between">
+        <h2 style="margin: 0; font-size: 15px; font-weight: 600">Faturamento por mês</h2>
+        <span style="font-size: 12px; color: #5B6472">últimos 6 meses</span>
+      </div>
+      <div style="margin-top: 6px; font-size: 13px; color: #7A4E00; font-weight: 600">Melhor mês: outubro · R$ 18.420</div>
+      <div style="display: flex; align-items: flex-end; gap: 10px; height: 150px; margin-top: 12px; border-bottom: 1px solid #C9CED6">
+        <sc-for list="{{meses}}" as="m" hint-placeholder-count="6">
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%">
+            <span style="font-size: 11px; color: #5B6472">{{m.rotulo}}</span>
+            <div style="width: 100%; height: {{m.altura}}; border-radius: 6px 6px 0 0; background: {{m.cor}}"></div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: flex; gap: 10px; margin-top: 6px">
+        <sc-for list="{{meses}}" as="m" hint-placeholder-count="6">
+          <span style="flex: 1; text-align: center; font-size: 12px; color: #5B6472">{{m.mes}}</span>
+        </sc-for>
+      </div>
+    </section>
+
+    <section aria-label="Baterias que mais venderam" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 14px">
+      <h2 style="margin: 0 0 6px; font-size: 15px; font-weight: 600">Mais vendidas no mês</h2>
+      <sc-for list="{{top}}" as="t" hint-placeholder-count="5">
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #EEF0F3">
+          <span style="width: 22px; font-size: 13px; color: #5B6472">{{t.pos}}</span>
+          <span style="flex: 1; font-weight: 600; font-size: 15px">{{t.modelo}}</span>
+          <span style="width: 54px; text-align: right; font-size: 14px; color: #5B6472">{{t.qtd}}</span>
+          <span style="width: 88px; text-align: right; font-size: 14px; font-weight: 600; color: #1F7A4D">{{t.lucro}}</span>
+        </div>
+      </sc-for>
+    </section>
+
+    <section aria-label="Formas de pagamento e atendimento" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 14px">
+      <div>
+        <h2 style="margin: 0 0 8px; font-size: 15px; font-weight: 600">Como pagaram</h2>
+        <sc-for list="{{formas}}" as="f" hint-placeholder-count="4">
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px">
+            <span style="width: 70px; font-size: 14px">{{f.nome}}</span>
+            <div style="flex: 1; height: 12px; border-radius: 6px; background: #EEF0F3; overflow: hidden"><div style="height: 100%; width: {{f.pct}}; background: #12161C; border-radius: 6px"></div></div>
+            <span style="width: 40px; text-align: right; font-size: 14px; font-weight: 600">{{f.pct}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div>
+        <h2 style="margin: 0 0 8px; font-size: 15px; font-weight: 600">Atendimento</h2>
+        <sc-for list="{{atend}}" as="a" hint-placeholder-count="3">
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px">
+            <span style="width: 70px; font-size: 14px">{{a.nome}}</span>
+            <div style="flex: 1; height: 12px; border-radius: 6px; background: #EEF0F3; overflow: hidden"><div style="height: 100%; width: {{a.pct}}; background: #E0A500; border-radius: 6px"></div></div>
+            <span style="width: 40px; text-align: right; font-size: 14px; font-weight: 600">{{a.pct}}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </main>
+
+  <nav aria-label="Navegação principal" style="display: flex; background: #FFFFFF; border-top: 1px solid #E1E4E9; padding: 6px 4px 14px">
+    <a href="Main.dc.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></span>Início</a>
+    <a href="Vender.dc.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.6a1 1 0 0 0 1-.8L21 7H6"></path></svg></span>Vender</a>
+    <a href="Estoque.dc.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg></span>Estoque</a>
+    <a href="Entrada.dc.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4"></path><path d="M4 16v4h16v-4"></path></svg></span>Entrada</a>
+    <a href="Painel.dc.html" aria-current="page" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #12161C; font-size: 12px; font-weight: 600">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px; border-radius: 15px; background: #FFE8A3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M5 20V11M11 20V5M17 20v-6M3 20h18"></path></svg></span>Painel</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":1300}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { periodo: 'Mês' };
+  }
+  renderVals() {
+    const nomes = ['Hoje', '7 dias', 'Mês', 'Ano'];
+    const valores = [12300, 14100, 15800, 13900, 16450, 18420];
+    const mesesNome = ['mai', 'jun', 'jul', 'ago', 'set', 'out'];
+    const max = Math.max(...valores);
+    const subiu = '#1F7A4D';
+    return {
+      periodos: nomes.map((nome) => {
+        const on = nome === this.state.periodo;
+        return { nome, ativo: on ? 'true' : 'false', fundo: on ? '#FFFFFF' : 'transparent', peso: on ? 700 : 500, pick: () => this.setState({ periodo: nome }) };
+      }),
+      kpis: [
+        { nome: 'Faturamento', valor: 'R$ 18.420', variacao: '▲ 12% vs. setembro', corVar: subiu },
+        { nome: 'Lucro bruto', valor: 'R$ 6.190', variacao: '▲ 9%', corVar: subiu },
+        { nome: 'Margem', valor: '33,6%', variacao: 'do preço vira lucro', corVar: '#5B6472' },
+        { nome: 'Markup', valor: '50,6%', variacao: 'sobre o custo', corVar: '#5B6472' },
+        { nome: 'Vendas', valor: '42', variacao: '57 baterias', corVar: '#5B6472' },
+        { nome: 'Ticket médio', valor: 'R$ 438', variacao: '▼ 3%', corVar: '#B42318' }
+      ],
+      meses: valores.map((v, i) => ({
+        mes: mesesNome[i],
+        rotulo: (v / 1000).toFixed(1).replace('.', ',') + 'k',
+        altura: Math.round((v / max) * 120) + 'px',
+        cor: v === max ? '#FFC21A' : '#C9CED6'
+      })),
+      top: [
+        { pos: '1', modelo: 'M60GD', qtd: '14 un', lucro: 'R$ 2.240' },
+        { pos: '2', modelo: 'M40SD', qtd: '9 un', lucro: 'R$ 1.130' },
+        { pos: '3', modelo: 'MA5-D', qtd: '8 un', lucro: 'R$ 520' },
+        { pos: '4', modelo: 'M60AX', qtd: '4 un', lucro: 'R$ 760' },
+        { pos: '5', modelo: 'M150BD', qtd: '2 un', lucro: 'R$ 880' }
+      ],
+      formas: [
+        { nome: 'Pix', pct: '46%' },
+        { nome: 'Crédito', pct: '28%' },
+        { nome: 'Dinheiro', pct: '16%' },
+        { nome: 'Débito', pct: '10%' }
+      ],
+      atend: [
+        { nome: 'Balcão', pct: '58%' },
+        { nome: 'Entrega', pct: '30%' },
+        { nome: 'Socorro', pct: '12%' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

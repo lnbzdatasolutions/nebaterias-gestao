@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nova entrada · notebook</title>
+<!-- Referência visual estática gerada do protótipo. Dados são de exemplo. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4ED8}a:hover{color:#1E40AF}
+</style>
+</head>
+<body>
+<div style="min-height: 100vh; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-wrap: wrap; align-items: stretch">
+
+  <aside style="flex: 1 1 232px; max-width: 100%; box-sizing: border-box; background: #12161C; color: #FFFFFF; padding: 20px 14px; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 6px">
+      <div style="width: 38px; height: 38px; border-radius: 10px; background: #FFC21A; display: flex; align-items: center; justify-content: center">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12161C" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><rect x="2" y="7" width="20" height="13" rx="2"></rect><path d="M6 7V4h3v3M15 7V4h3v3M6 13.5h4M14 13.5h4M16 11.5v4"></path></svg>
+      </div>
+      <span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">N E Baterias</span>
+    </div>
+    <nav aria-label="Menu" style="display: flex; flex-direction: column; gap: 4px">
+      
+        <a href="02-inicio.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Início</a>
+      
+        <a href="03-vender.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Vender</a>
+      
+        <a href="05-estoque.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Estoque</a>
+      
+        <a href="06-entrada.html" aria-current="page" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #12161C; background: #FFC21A; font-size: 15px; font-weight: 700">Entrada</a>
+      
+        <a href="07-painel.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Painel</a>
+      
+        <a href="08-historico-vendas.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Vendas</a>
+      
+        <a href="09-clientes.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Clientes</a>
+      
+        <a href="10-produtos.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Produtos</a>
+      
+        <a href="11-configuracoes.html" aria-current="false" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: #C9CED6; background: transparent; font-size: 15px; font-weight: 500">Configurações</a>
+      
+    </nav>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 32px 40px; display: flex; flex-direction: column; gap: 18px">
+
+    <header>
+      <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 32px">Nova entrada</h1>
+      <div style="font-size: 14px; color: #5B6472">Compra no revendedor: soma ao estoque e atualiza o custo médio</div>
+    </header>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 18px; align-items: flex-start">
+
+      <div style="flex: 3 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <section aria-label="Dados da compra" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 16px 18px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="forn" style="font-size: 13px; font-weight: 600">Fornecedor</label>
+            <select id="forn" style="height: 44px; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif; background: #FFFFFF"><option>Revendedor Moura Centro</option></select>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="data" style="font-size: 13px; font-weight: 600">Data</label>
+            <input id="data" value="27/10/2026" style="height: 44px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="nota" style="font-size: 13px; font-weight: 600">Nº da nota (opcional)</label>
+            <input id="nota" value="4521" style="height: 44px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif">
+          </div>
+        </section>
+
+        <section aria-label="Baterias compradas" style="background: #FFFFFF; border: 2px solid #FFC21A; border-radius: 16px; padding: 16px 18px">
+          <h2 style="margin: 0 0 8px; font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">Baterias</h2>
+          <div style="overflow-x: auto">
+            <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 640px">
+              <thead>
+                <tr style="text-align: left; color: #5B6472; font-size: 12px">
+                  <th style="padding: 8px 6px; font-weight: 600">Bateria</th>
+                  <th style="padding: 8px 6px; font-weight: 600">Qtd</th>
+                  <th style="padding: 8px 6px; font-weight: 600">Preço de tabela</th>
+                  <th style="padding: 8px 6px; font-weight: 600">Desconto (un.)</th>
+                  <th style="padding: 8px 6px; font-weight: 600; text-align: right">Custo final (un.)</th>
+                  <th style="padding: 8px 6px; font-weight: 600; text-align: right">Última compra</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                  <tr style="border-top: 1px solid #EEF0F3">
+                    <td style="padding: 10px 6px"><strong style="font-family: Barlow, sans-serif; font-size: 17px">M60GD</strong><br><span style="font-size: 12px; color: #5B6472">Moura Automotiva</span></td>
+                    <td style="padding: 10px 6px"><input aria-label="Quantidade de M60GD" value="2" style="width: 60px; height: 40px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 8px; font-size: 15px; font-family: Inter, sans-serif"></td>
+                    <td style="padding: 10px 6px"><input aria-label="Preço de tabela de M60GD" value="R$ 320,00" style="width: 120px; height: 40px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 8px; font-size: 15px; font-family: Inter, sans-serif"></td>
+                    <td style="padding: 10px 6px"><input aria-label="Desconto por unidade de M60GD" value="R$ 20,00" style="width: 110px; height: 40px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 8px; font-size: 15px; font-family: Inter, sans-serif"></td>
+                    <td style="padding: 10px 6px; text-align: right; font-weight: 600">R$ 296,52</td>
+                    <td style="padding: 10px 6px; text-align: right; color: #5B6472">R$ 300,00 · 15/10</td>
+                  </tr>
+                
+                  <tr style="border-top: 1px solid #EEF0F3">
+                    <td style="padding: 10px 6px"><strong style="font-family: Barlow, sans-serif; font-size: 17px">M40SD</strong><br><span style="font-size: 12px; color: #5B6472">Moura Automotiva</span></td>
+                    <td style="padding: 10px 6px"><input aria-label="Quantidade de M40SD" value="1" style="width: 60px; height: 40px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 8px; font-size: 15px; font-family: Inter, sans-serif"></td>
+                    <td style="padding: 10px 6px"><input aria-label="Preço de tabela de M40SD" value="R$ 260,00" style="width: 120px; height: 40px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 8px; font-size: 15px; font-family: Inter, sans-serif"></td>
+                    <td style="padding: 10px 6px"><input aria-label="Desconto por unidade de M40SD" value="R$ 0,00" style="width: 110px; height: 40px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 8px; font-size: 15px; font-family: Inter, sans-serif"></td>
+                    <td style="padding: 10px 6px; text-align: right; font-weight: 600">R$ 256,97</td>
+                    <td style="padding: 10px 6px; text-align: right; color: #5B6472">R$ 250,00 · 03/10</td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          </div>
+          <button style="margin-top: 10px; min-height: 44px; padding: 0 16px; border-radius: 10px; border: 1px dashed #9AA2AE; background: #FFFFFF; font-family: Inter, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer">+ Adicionar bateria</button>
+        </section>
+
+        <section aria-label="Frete e sucata" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 16px 18px">
+          <h2 style="margin: 0 0 10px; font-size: 15px; font-weight: 600">Frete e sucata <span style="font-weight: 400; color: #5B6472">(divididos entre as baterias pelo valor)</span></h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px">
+            <div style="display: flex; flex-direction: column; gap: 6px"><label for="fr" style="font-size: 13px; font-weight: 600">Frete (R$)</label><input id="fr" value="40,00" style="height: 44px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif"></div>
+            <div style="display: flex; flex-direction: column; gap: 6px"><label for="ou" style="font-size: 13px; font-weight: 600">Outros custos (R$)</label><input id="ou" value="0,00" style="height: 44px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif"></div>
+            <div style="display: flex; flex-direction: column; gap: 6px"><label for="sq" style="font-size: 13px; font-weight: 600">Sucatas entregues</label><input id="sq" value="2" style="height: 44px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif"></div>
+            <div style="display: flex; flex-direction: column; gap: 6px"><label for="sv" style="font-size: 13px; font-weight: 600">Abatimento (R$)</label><input id="sv" value="50,00" style="height: 44px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 10px; font-size: 15px; font-family: Inter, sans-serif"></div>
+          </div>
+        </section>
+      </div>
+
+      <div style="flex: 2 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <section aria-label="Resumo da entrada" style="background: #12161C; color: #FFFFFF; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+          <h2 style="margin: 0 0 4px; font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">Resumo</h2>
+          <div style="display: flex; justify-content: space-between"><span style="color: #C9CED6">Baterias (3 un.)</span><span>R$ 860,00</span></div>
+          <div style="display: flex; justify-content: space-between"><span style="color: #C9CED6">Frete</span><span>+ R$ 40,00</span></div>
+          <div style="display: flex; justify-content: space-between"><span style="color: #C9CED6">Sucata (2)</span><span>− R$ 50,00</span></div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 8px; border-top: 1px solid #333A45"><span style="color: #C9CED6">Total pago</span><span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 28px">R$ 850,00</span></div>
+          <div style="margin-top: 6px; font-size: 13px; color: #C9CED6">Depois de registrar</div>
+          <div style="display: flex; justify-content: space-between"><span>M60GD · estoque 4 → <strong style="color: #FFC21A">6</strong></span><span>custo R$ 290,00 → <strong style="color: #FFC21A">R$ 292,17</strong></span></div>
+          <div style="display: flex; justify-content: space-between"><span>M40SD · estoque 3 → <strong style="color: #FFC21A">4</strong></span><span>custo R$ 247,77 → <strong style="color: #FFC21A">R$ 250,07</strong></span></div>
+          <a href="05-estoque.html" style="display: flex; align-items: center; justify-content: center; min-height: 52px; margin-top: 10px; border-radius: 12px; background: #FFC21A; color: #12161C; text-decoration: none; font-weight: 700; font-size: 16px">Registrar entrada</a>
+        </section>
+
+        <section aria-label="Últimas entradas" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 16px 20px">
+          <h2 style="margin: 0 0 6px; font-size: 15px; font-weight: 600">Últimas entradas</h2>
+          
+            <div style="display: flex; justify-content: space-between; gap: 8px; padding: 9px 0; border-top: 1px solid #EEF0F3; font-size: 14px">
+              <span><strong>Nº 3</strong> <span style="color: #5B6472">20/10 · 3× M150BD, 1× M40SD</span></span>
+              <span style="font-weight: 600">R$ 2.230,01</span>
+            </div>
+          
+            <div style="display: flex; justify-content: space-between; gap: 8px; padding: 9px 0; border-top: 1px solid #EEF0F3; font-size: 14px">
+              <span><strong>Nº 2</strong> <span style="color: #5B6472">15/10 · 2× M60GD</span></span>
+              <span style="font-weight: 600">R$ 600,00</span>
+            </div>
+          
+            <div style="display: flex; justify-content: space-between; gap: 8px; padding: 9px 0; border-top: 1px solid #EEF0F3; font-size: 14px">
+              <span><strong>Nº 1</strong> <span style="color: #5B6472">02/10 · 2× M60GD</span></span>
+              <span style="font-weight: 600">R$ 560,00</span>
+            </div>
+          
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

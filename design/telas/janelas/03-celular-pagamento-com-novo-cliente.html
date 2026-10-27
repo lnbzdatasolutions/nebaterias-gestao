@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pagamento com novo cliente aberto</title>
+<!-- Referência visual estática gerada do protótipo. Dados são de exemplo. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</head>
+<body>
+<div style="width: 390px; height: 1260px">
+  
+
+<div style="width: 390px; height: 1260px; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-direction: column; position: relative">
+
+  <header style="display: flex; align-items: center; gap: 8px; padding: 16px 12px 8px">
+    <a href="../celular/03-vender-itens.html" aria-label="Voltar para os itens" style="width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #12161C">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+    </a>
+    <div>
+      <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 26px">Pagamento</h1>
+      <div style="font-size: 13px; color: #5B6472">Passo 2 de 2 · 1× M60GD · R$ 450,00</div>
+    </div>
+  </header>
+
+  <main style="flex: 1; padding: 8px 16px 16px; display: flex; flex-direction: column; gap: 14px">
+
+    <section aria-label="Desconto" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 14px">
+      <h2 style="margin: 0 0 10px; font-size: 15px; font-weight: 600">Desconto</h2>
+      <div style="display: flex; gap: 8px; align-items: center">
+        <div role="group" aria-label="Tipo de desconto" style="display: flex; border: 1px solid #C9CED6; border-radius: 12px; overflow: hidden">
+          <button aria-pressed="false" style="width: 52px; height: 48px; border: none; background: #FFFFFF; font-size: 16px; font-weight: 600; font-family: Inter, sans-serif; color: #12161C; cursor: pointer">R$</button>
+          <button aria-pressed="true" style="width: 52px; height: 48px; border: none; background: #12161C; color: #FFFFFF; font-size: 16px; font-weight: 600; font-family: Inter, sans-serif; cursor: pointer">%</button>
+        </div>
+        <label for="desc" style="position: absolute; left: -9999px">Valor do desconto</label>
+        <input id="desc" inputmode="decimal" value="10" style="flex: 1; min-width: 0; height: 48px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 17px; font-weight: 600; font-family: Inter, sans-serif; color: #12161C">
+        <span style="font-size: 15px; font-weight: 600; color: #B42318; white-space: nowrap">− R$ 45,00</span>
+      </div>
+    </section>
+
+    <section aria-label="Forma de pagamento" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 14px">
+      <h2 style="margin: 0 0 10px; font-size: 15px; font-weight: 600">Forma de pagamento</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px">
+        
+          <button aria-pressed="true" style="height: 56px; border-radius: 12px; border: 2px solid #12161C; background: #12161C; color: #FFFFFF; font-size: 16px; font-weight: 600; font-family: Inter, sans-serif; cursor: pointer">Dinheiro</button>
+        
+          <button aria-pressed="true" style="height: 56px; border-radius: 12px; border: 2px solid #12161C; background: #12161C; color: #FFFFFF; font-size: 16px; font-weight: 600; font-family: Inter, sans-serif; cursor: pointer">Pix</button>
+        
+          <button aria-pressed="false" style="height: 56px; border-radius: 12px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-size: 16px; font-weight: 600; font-family: Inter, sans-serif; cursor: pointer">Débito</button>
+        
+          <button aria-pressed="false" style="height: 56px; border-radius: 12px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-size: 16px; font-weight: 600; font-family: Inter, sans-serif; cursor: pointer">Crédito</button>
+        
+      </div>
+
+      <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #EEF0F3; display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; align-items: center; justify-content: space-between">
+          <span style="font-size: 14px; font-weight: 600">Pagamento dividido</span>
+          <button style="height: 36px; padding: 0 10px; border: none; background: none; color: #1D4ED8; font-size: 14px; font-weight: 600; font-family: Inter, sans-serif; cursor: pointer">+ Outra forma</button>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px">
+          <span style="width: 90px; font-size: 15px">Pix</span>
+          <label for="v1" style="position: absolute; left: -9999px">Valor no Pix</label>
+          <input id="v1" inputmode="decimal" value="R$ 200,00" style="flex: 1; min-width: 0; height: 44px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C">
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px">
+          <span style="width: 90px; font-size: 15px">Dinheiro</span>
+          <label for="v2" style="position: absolute; left: -9999px">Valor em dinheiro</label>
+          <input id="v2" inputmode="decimal" value="R$ 205,00" style="flex: 1; min-width: 0; height: 44px; box-sizing: border-box; border-radius: 10px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C">
+        </div>
+        <div style="display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #1F7A4D">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M5 12.5 10 17l9-10"></path></svg>
+          Valores fecham com o total
+        </div>
+      </div>
+    </section>
+
+    <section aria-label="Atendimento" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 14px">
+      <h2 style="margin: 0 0 10px; font-size: 15px; font-weight: 600">Atendimento</h2>
+      <div role="group" aria-label="Tipo de atendimento" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px">
+        <button aria-pressed="false" style="height: 48px; border-radius: 12px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-size: 15px; font-weight: 600; font-family: Inter, sans-serif; cursor: pointer">Balcão</button>
+        <button aria-pressed="true" style="height: 48px; border-radius: 12px; border: 2px solid #12161C; background: #12161C; color: #FFFFFF; font-size: 15px; font-weight: 600; font-family: Inter, sans-serif; cursor: pointer">Entrega</button>
+        <button aria-pressed="false" style="height: 48px; border-radius: 12px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; font-size: 15px; font-weight: 600; font-family: Inter, sans-serif; cursor: pointer">Socorro</button>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 10px">
+        <label for="bairro" style="font-size: 13px; font-weight: 600">Bairro ou endereço</label>
+        <input id="bairro" value="Aldeota" style="height: 48px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C">
+      </div>
+    </section>
+
+    <section aria-label="Cliente" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 14px">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px">
+        <h2 style="margin: 0; font-size: 15px; font-weight: 600">Cliente <span style="font-weight: 400; color: #5B6472">(opcional)</span></h2>
+        <button style="height: 44px; padding: 0 10px; border: none; background: none; color: #1D4ED8; font-size: 14px; font-weight: 600; font-family: Inter, sans-serif; cursor: pointer">+ Novo cliente</button>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 12px; background: #F5F6F8">
+        <div style="width: 40px; height: 40px; border-radius: 20px; background: #12161C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600">JS</div>
+        <div style="flex: 1; min-width: 0">
+          <div style="font-weight: 600; font-size: 15px">João da Silva</div>
+          <div style="font-size: 13px; color: #5B6472">(85) 99999-1234 · Onix · ABC1D23</div>
+        </div>
+        <button aria-label="Remover cliente" style="width: 40px; height: 40px; border: none; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5B6472" style="stroke-width: 2.2; stroke-linecap: round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+        </button>
+      </div>
+    </section>
+
+    <section aria-label="Data e lucro" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+      <button style="text-align: left; padding: 12px 14px; min-height: 64px; border-radius: 16px; border: 1px solid #E1E4E9; background: #FFFFFF; font-family: Inter, sans-serif; color: #12161C; cursor: pointer">
+        <span style="display: block; font-size: 13px; color: #5B6472">Data da venda</span>
+        <span style="display: block; font-size: 15px; font-weight: 600">Agora · 14:32</span>
+      </button>
+      <button style="text-align: left; padding: 12px 14px; min-height: 64px; border-radius: 16px; border: 1px dashed #C9CED6; background: #FFFFFF; font-family: Inter, sans-serif; color: #12161C; cursor: pointer; display: flex; align-items: center; gap: 8px">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        <span style="font-size: 15px; font-weight: 600">Ver lucro</span>
+      </button>
+    </section>
+  </main>
+
+  <div style="padding: 12px 16px 18px; background: #FFFFFF; border-top: 1px solid #E1E4E9; display: flex; flex-direction: column; gap: 10px">
+    <div style="display: flex; align-items: baseline; justify-content: space-between">
+      <span style="font-size: 14px; color: #5B6472">R$ 450,00 − R$ 45,00</span>
+      <span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 30px">R$ 405,00</span>
+    </div>
+    <a href="../celular/05-venda-registrada.html" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 58px; border-radius: 14px; background: #FFC21A; color: #12161C; text-decoration: none; font-weight: 700; font-size: 18px">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M5 12.5 10 17l9-10"></path></svg>
+      Confirmar venda
+    </a>
+  </div>
+
+  
+    <div role="dialog" aria-label="Novo cliente" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; background: rgba(18, 22, 28, 0.55); display: flex; flex-direction: column; justify-content: flex-end">
+      
+
+<div style="width: 100%; box-sizing: border-box; background: #FFFFFF; font-family: Inter, system-ui, sans-serif; color: #12161C; padding: 20px; border-radius: 20px; display: flex; flex-direction: column; gap: 14px">
+  <div style="display: flex; align-items: center; justify-content: space-between">
+    <div>
+      <h2 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 24px">Novo cliente</h2>
+      <div style="font-size: 13px; color: #5B6472">Só o nome é obrigatório</div>
+    </div>
+    <button aria-label="Fechar" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid #E1E4E9; background: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#12161C" style="stroke-width: 2.2; stroke-linecap: round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+    </button>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <label for="cr-nome" style="font-size: 14px; font-weight: 600">Nome *</label>
+    <input id="cr-nome" autocomplete="name" value="Maria Souza" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 2px solid #12161C; padding: 0 14px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C">
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <label for="cr-tel" style="font-size: 14px; font-weight: 600">Telefone / WhatsApp</label>
+    <input id="cr-tel" type="tel" inputmode="tel" value="(85) 98888-0000" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 14px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C">
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="cr-veic" style="font-size: 14px; font-weight: 600">Veículo</label>
+      <input id="cr-veic" value="HB20 2020" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; width: 100%">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="cr-placa" style="font-size: 14px; font-weight: 600">Placa</label>
+      <input id="cr-placa" value="POX-4G21" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; width: 100%; text-transform: uppercase">
+    </div>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <label for="cr-doc" style="font-size: 14px; font-weight: 600">CPF ou CNPJ <span style="font-weight: 400; color: #5B6472">(opcional)</span></label>
+    <input id="cr-doc" inputmode="numeric" placeholder="Só se o cliente pedir" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 14px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C">
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: #FFF4D6; font-size: 13px; color: #5C3D00">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; flex-shrink: 0" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16.5v.5"></path></svg>
+    Já existe cliente com este telefone? O sistema avisa antes de salvar.
+  </div>
+
+  <button style="min-height: 56px; border-radius: 14px; border: none; background: #FFC21A; color: #12161C; font-family: Inter, sans-serif; font-weight: 700; font-size: 17px; cursor: pointer">Salvar e usar nesta venda</button>
+</div>
+
+    </div>
+  
+</div>
+
+</div>
+</body>
+</html>

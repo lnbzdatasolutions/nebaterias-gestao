@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clientes · celular</title>
+<!-- Referência visual estática gerada do protótipo. Dados são de exemplo. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4ED8}a:hover{color:#1E40AF}
+</style>
+</head>
+<body>
+<div style="width: 390px; height: 980px; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-direction: column; position: relative">
+
+  <header style="padding: 16px 12px 8px; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; align-items: center; gap: 8px">
+      <a href="09-mais-configuracoes.html" aria-label="Voltar" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #12161C">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"></path></svg>
+      </a>
+      <h1 style="margin: 0; flex: 1; font-family: Barlow, sans-serif; font-weight: 700; font-size: 26px">Clientes</h1>
+      <button style="height: 44px; padding: 0 14px; border-radius: 12px; border: none; background: #FFC21A; color: #12161C; font-family: Inter, sans-serif; font-size: 15px; font-weight: 700; cursor: pointer">+ Novo</button>
+    </div>
+    <div style="position: relative; padding: 0 4px">
+      <label for="bc" style="position: absolute; left: -9999px">Buscar cliente</label>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B6472" style="position: absolute; left: 18px; top: 15px; stroke-width: 2; stroke-linecap: round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <input id="bc" type="search" placeholder="Nome, telefone ou placa" style="width: 100%; box-sizing: border-box; height: 52px; border-radius: 14px; border: 1px solid #C9CED6; background: #FFFFFF; padding: 0 14px 0 46px; font-size: 17px; font-family: Inter, sans-serif">
+    </div>
+  </header>
+
+  <main style="flex: 1; padding: 4px 16px 16px">
+    <section aria-label="Lista de clientes" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; overflow: hidden">
+      
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #EEF0F3">
+          <div style="width: 42px; height: 42px; flex-shrink: 0; border-radius: 21px; background: #12161C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px">Jd</div>
+          <div style="flex: 1; min-width: 0">
+            <div style="font-weight: 600; font-size: 15px">João da Silva</div>
+            <div style="font-size: 13px; color: #5B6472; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Onix 2019 · ABC1D23 · (85) 99999-1234</div>
+            <div style="font-size: 12px; font-weight: 600; color: #1F7A4D">Garantia até 27/10/2027</div>
+          </div>
+          <a href="10-clientes.html" aria-label="Chamar João da Silva no WhatsApp" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; border: 1px solid #E1E4E9; display: flex; align-items: center; justify-content: center; color: #1F7A4D">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+          </a>
+        </div>
+      
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #EEF0F3">
+          <div style="width: 42px; height: 42px; flex-shrink: 0; border-radius: 21px; background: #12161C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px">MS</div>
+          <div style="flex: 1; min-width: 0">
+            <div style="font-weight: 600; font-size: 15px">Maria Souza</div>
+            <div style="font-size: 13px; color: #5B6472; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">HB20 2020 · POX4G21 · (85) 98888-0000</div>
+            <div style="font-size: 12px; font-weight: 600; color: #1F7A4D">Garantia até 26/10/2027</div>
+          </div>
+          <a href="10-clientes.html" aria-label="Chamar Maria Souza no WhatsApp" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; border: 1px solid #E1E4E9; display: flex; align-items: center; justify-content: center; color: #1F7A4D">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+          </a>
+        </div>
+      
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #EEF0F3">
+          <div style="width: 42px; height: 42px; flex-shrink: 0; border-radius: 21px; background: #12161C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px">CL</div>
+          <div style="flex: 1; min-width: 0">
+            <div style="font-weight: 600; font-size: 15px">Carlos Lima</div>
+            <div style="font-size: 13px; color: #5B6472; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Compass · (85) 98765-4321</div>
+            <div style="font-size: 12px; font-weight: 600; color: #1F7A4D">Garantia até 26/10/2027</div>
+          </div>
+          <a href="10-clientes.html" aria-label="Chamar Carlos Lima no WhatsApp" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; border: 1px solid #E1E4E9; display: flex; align-items: center; justify-content: center; color: #1F7A4D">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+          </a>
+        </div>
+      
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #EEF0F3">
+          <div style="width: 42px; height: 42px; flex-shrink: 0; border-radius: 21px; background: #12161C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px">AR</div>
+          <div style="flex: 1; min-width: 0">
+            <div style="font-weight: 600; font-size: 15px">Ana Rocha</div>
+            <div style="font-size: 13px; color: #5B6472; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">T-Cross · (85) 99123-4567</div>
+            <div style="font-size: 12px; font-weight: 600; color: #1F7A4D">Garantia até 25/10/2027</div>
+          </div>
+          <a href="10-clientes.html" aria-label="Chamar Ana Rocha no WhatsApp" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; border: 1px solid #E1E4E9; display: flex; align-items: center; justify-content: center; color: #1F7A4D">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+          </a>
+        </div>
+      
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #EEF0F3">
+          <div style="width: 42px; height: 42px; flex-shrink: 0; border-radius: 21px; background: #12161C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px">PA</div>
+          <div style="flex: 1; min-width: 0">
+            <div style="font-weight: 600; font-size: 15px">Pedro Alves</div>
+            <div style="font-size: 13px; color: #5B6472; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Hilux Diesel · (85) 99654-3210</div>
+            <div style="font-size: 12px; font-weight: 600; color: #5B6472">Garantia vencida em 03/2026</div>
+          </div>
+          <a href="10-clientes.html" aria-label="Chamar Pedro Alves no WhatsApp" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; border: 1px solid #E1E4E9; display: flex; align-items: center; justify-content: center; color: #1F7A4D">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+          </a>
+        </div>
+      
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #EEF0F3">
+          <div style="width: 42px; height: 42px; flex-shrink: 0; border-radius: 21px; background: #12161C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px">TC</div>
+          <div style="flex: 1; min-width: 0">
+            <div style="font-weight: 600; font-size: 15px">Transportes Ceará</div>
+            <div style="font-size: 13px; color: #5B6472; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Scania R440 · (85) 3222-0000</div>
+            <div style="font-size: 12px; font-weight: 600; color: #1F7A4D">Garantia até 14/08/2027</div>
+          </div>
+          <a href="10-clientes.html" aria-label="Chamar Transportes Ceará no WhatsApp" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; border: 1px solid #E1E4E9; display: flex; align-items: center; justify-content: center; color: #1F7A4D">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+          </a>
+        </div>
+      
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #EEF0F3">
+          <div style="width: 42px; height: 42px; flex-shrink: 0; border-radius: 21px; background: #12161C; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px">LM</div>
+          <div style="flex: 1; min-width: 0">
+            <div style="font-weight: 600; font-size: 15px">Luana Martins</div>
+            <div style="font-size: 13px; color: #5B6472; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Honda Biz · (85) 99777-1122</div>
+            <div style="font-size: 12px; font-weight: 600; color: #5B6472">Garantia vencida em 01/2026</div>
+          </div>
+          <a href="10-clientes.html" aria-label="Chamar Luana Martins no WhatsApp" style="width: 44px; height: 44px; flex-shrink: 0; border-radius: 12px; border: 1px solid #E1E4E9; display: flex; align-items: center; justify-content: center; color: #1F7A4D">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.6-5.2A8.5 8.5 0 1 1 21 12z"></path></svg>
+          </a>
+        </div>
+      
+    </section>
+  </main>
+
+  <nav aria-label="Navegação principal" style="display: flex; background: #FFFFFF; border-top: 1px solid #E1E4E9; padding: 6px 4px 14px">
+    <a href="02-inicio.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></span>Início</a>
+    <a href="03-vender-itens.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.6a1 1 0 0 0 1-.8L21 7H6"></path></svg></span>Vender</a>
+    <a href="06-estoque.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg></span>Estoque</a>
+    <a href="07-entrada.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4"></path><path d="M4 16v4h16v-4"></path></svg></span>Entrada</a>
+    <a href="08-painel.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M5 20V11M11 20V5M17 20v-6M3 20h18"></path></svg></span>Painel</a>
+  </nav>
+
+  
+</div>
+</body>
+</html>

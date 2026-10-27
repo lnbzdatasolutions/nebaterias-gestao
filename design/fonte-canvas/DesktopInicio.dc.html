@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Início · notebook</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4ED8}a:hover{color:#1E40AF}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-wrap: wrap; align-items: stretch">
+
+  <aside style="flex: 1 1 232px; max-width: 100%; box-sizing: border-box; background: #12161C; color: #FFFFFF; padding: 20px 14px; display: flex; flex-direction: column; gap: 20px">
+    <div style="display: flex; align-items: center; gap: 10px; padding: 0 6px">
+      <div style="width: 38px; height: 38px; border-radius: 10px; background: #FFC21A; display: flex; align-items: center; justify-content: center">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#12161C" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><rect x="2" y="7" width="20" height="13" rx="2"></rect><path d="M6 7V4h3v3M15 7V4h3v3M6 13.5h4M14 13.5h4M16 11.5v4"></path></svg>
+      </div>
+      <span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">N E Baterias</span>
+    </div>
+    <nav aria-label="Menu" style="display: flex; flex-direction: column; gap: 4px">
+      <sc-for list="{{menu}}" as="m" hint-placeholder-count="9">
+        <a href="{{m.href}}" aria-current="{{m.atual}}" style="display: flex; align-items: center; min-height: 44px; padding: 0 12px; border-radius: 10px; text-decoration: none; color: {{m.cor}}; background: {{m.fundo}}; font-size: 15px; font-weight: {{m.peso}}">{{m.nome}}</a>
+      </sc-for>
+    </nav>
+    <div style="margin-top: auto; padding: 12px; border-radius: 12px; background: #1E242D; font-size: 13px; color: #C9CED6">Conectada como<br><strong style="color: #FFFFFF">esposa@nebaterias.com.br</strong></div>
+  </aside>
+
+  <main style="flex: 999 1 560px; min-width: 0; box-sizing: border-box; padding: 28px 32px 40px; display: flex; flex-direction: column; gap: 20px">
+
+    <header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+      <div>
+        <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 32px">Boa tarde</h1>
+        <div style="font-size: 14px; color: #5B6472">Terça, 27 de outubro de 2026</div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px">
+        <a href="DesktopEntrada.dc.html" style="display: flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 16px; border-radius: 12px; border: 1px solid #C9CED6; background: #FFFFFF; color: #12161C; text-decoration: none; font-weight: 600; font-size: 15px">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4"></path><path d="M4 16v4h16v-4"></path></svg>Nova entrada</a>
+        <a href="DesktopVender.dc.html" style="display: flex; align-items: center; gap: 8px; min-height: 46px; padding: 0 20px; border-radius: 12px; background: #FFC21A; color: #12161C; text-decoration: none; font-weight: 700; font-size: 16px">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2.4; stroke-linecap: round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Nova venda</a>
+      </div>
+    </header>
+
+    <section aria-label="Resumo" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px">
+      <div style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 14px; padding: 16px">
+        <div style="font-size: 13px; color: #5B6472">Vendas hoje</div>
+        <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 30px; margin-top: 4px">R$ 1.860,00</div>
+        <div style="font-size: 13px; color: #5B6472">2 vendas · 3 baterias</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 14px; padding: 16px">
+        <div style="font-size: 13px; color: #5B6472">Lucro hoje</div>
+        <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 30px; margin-top: 4px; color: #1F7A4D">R$ 703,71</div>
+        <div style="font-size: 13px; color: #5B6472">Margem 37,8%</div>
+      </div>
+      <div style="background: #12161C; color: #FFFFFF; border-radius: 14px; padding: 16px">
+        <div style="font-size: 13px; color: #C9CED6">Faturamento de outubro</div>
+        <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 30px; margin-top: 4px">R$ 18.420,00</div>
+        <div style="font-size: 13px; font-weight: 600; color: #7EE2A8">▲ 12% vs. setembro</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 14px; padding: 16px">
+        <div style="font-size: 13px; color: #5B6472">Valor em estoque</div>
+        <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 30px; margin-top: 4px">R$ 14.860</div>
+        <div style="font-size: 13px; color: #5B6472">41 baterias a preço de custo</div>
+      </div>
+    </section>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+      <section aria-label="Últimas vendas" style="flex: 2 1 520px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 16px 20px">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px">
+          <h2 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">Últimas vendas</h2>
+          <a href="DesktopVendas.dc.html" style="font-size: 14px; font-weight: 600">Ver todas</a>
+        </div>
+        <div style="overflow-x: auto">
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px; min-width: 520px">
+            <thead>
+              <tr style="text-align: left; color: #5B6472; font-size: 12px">
+                <th style="padding: 8px 6px; font-weight: 600">Nº</th>
+                <th style="padding: 8px 6px; font-weight: 600">Hora</th>
+                <th style="padding: 8px 6px; font-weight: 600">Baterias</th>
+                <th style="padding: 8px 6px; font-weight: 600">Pagamento · atendimento</th>
+                <th style="padding: 8px 6px; font-weight: 600; text-align: right">Total</th>
+                <th style="padding: 8px 6px; font-weight: 600; text-align: right">Situação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <sc-for list="{{vendas}}" as="v" hint-placeholder-count="5">
+                <tr style="border-top: 1px solid #EEF0F3">
+                  <td style="padding: 11px 6px; font-weight: 600">{{v.numero}}</td>
+                  <td style="padding: 11px 6px; color: #5B6472">{{v.hora}}</td>
+                  <td style="padding: 11px 6px">{{v.itens}}</td>
+                  <td style="padding: 11px 6px; color: #5B6472">{{v.detalhe}}</td>
+                  <td style="padding: 11px 6px; text-align: right; font-weight: 600; text-decoration: {{v.risco}}">{{v.total}}</td>
+                  <td style="padding: 11px 6px; text-align: right; font-size: 13px; font-weight: 600; color: {{v.cor}}">{{v.status}}</td>
+                </tr>
+              </sc-for>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <section aria-label="Consulta rápida" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 16px 20px">
+          <h2 style="margin: 0 0 10px; font-size: 15px; font-weight: 600">Consulta rápida de estoque</h2>
+          <div style="position: relative">
+            <label for="q" style="position: absolute; left: -9999px">Buscar bateria por modelo ou carro</label>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5B6472" style="position: absolute; left: 12px; top: 13px; stroke-width: 2; stroke-linecap: round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+            <input id="q" type="search" placeholder="Modelo ou carro (ex.: Hilux)" style="width: 100%; box-sizing: border-box; height: 46px; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px 0 40px; font-size: 15px; font-family: Inter, sans-serif">
+          </div>
+          <a href="DesktopEstoque.dc.html" style="display: inline-block; margin-top: 10px; font-size: 14px; font-weight: 600">Abrir estoque completo</a>
+        </section>
+        <section aria-label="Estoque baixo" style="background: #FFF4D6; border: 1px solid #F2D27A; border-radius: 16px; padding: 16px 20px">
+          <h2 style="margin: 0 0 6px; font-size: 15px; font-weight: 600">Repor estoque</h2>
+          <sc-for list="{{baixo}}" as="b" hint-placeholder-count="4">
+            <div style="display: flex; justify-content: space-between; padding: 9px 0; border-top: 1px solid #F2D27A; font-size: 14px">
+              <span><strong>{{b.modelo}}</strong> <span style="color: #5B6472">{{b.linha}}</span></span>
+              <span style="font-weight: 600; color: {{b.cor}}">{{b.saldo}}</span>
+            </div>
+          </sc-for>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const menuItens = [
+      ['Início', 'DesktopInicio.dc.html'], ['Vender', 'DesktopVender.dc.html'], ['Estoque', 'DesktopEstoque.dc.html'],
+      ['Entrada', 'DesktopEntrada.dc.html'], ['Painel', 'DesktopPainel.dc.html'], ['Vendas', 'DesktopVendas.dc.html'],
+      ['Clientes', 'DesktopClientes.dc.html'], ['Produtos', 'DesktopProdutos.dc.html'], ['Configurações', 'DesktopConfiguracoes.dc.html']
+    ];
+    return {
+      menu: menuItens.map(([nome, href]) => {
+        const on = nome === 'Início';
+        return { nome, href, atual: on ? 'page' : 'false', cor: on ? '#12161C' : '#C9CED6', fundo: on ? '#FFC21A' : 'transparent', peso: on ? 700 : 500 };
+      }),
+      vendas: [
+        { numero: '#129', hora: '14:32', itens: '1× M60GD', detalhe: 'Pix + Dinheiro · Entrega', total: 'R$ 405,00', status: 'Concluída', cor: '#1F7A4D', risco: 'none' },
+        { numero: '#128', hora: '11:10', itens: '1× M150BD', detalhe: 'Crédito 3x · Socorro', total: 'R$ 1.100,00', status: 'Concluída', cor: '#1F7A4D', risco: 'none' },
+        { numero: '#127', hora: '09:05', itens: '2× M40SD', detalhe: 'Pix · Balcão', total: 'R$ 760,00', status: 'Concluída', cor: '#1F7A4D', risco: 'none' },
+        { numero: '#126', hora: 'ontem', itens: '1× M60GD', detalhe: 'Débito · Balcão', total: 'R$ 450,00', status: 'Cancelada', cor: '#B42318', risco: 'line-through' },
+        { numero: '#125', hora: 'ontem', itens: '1× M70LD', detalhe: 'Crédito 2x · Entrega', total: 'R$ 600,00', status: 'Concluída', cor: '#1F7A4D', risco: 'none' }
+      ],
+      baixo: [
+        { modelo: 'M150BD', linha: 'Diesel', saldo: '−1', cor: '#B42318' },
+        { modelo: 'M60GE', linha: 'Automotiva', saldo: '0', cor: '#B42318' },
+        { modelo: 'M60AX', linha: 'EFB', saldo: '1', cor: '#7A4E00' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

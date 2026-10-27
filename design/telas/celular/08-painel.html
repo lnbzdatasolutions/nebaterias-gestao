@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel · celular</title>
+<!-- Referência visual estática gerada do protótipo. Dados são de exemplo. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4ED8}a:hover{color:#1E40AF}
+</style>
+</head>
+<body>
+<div style="width: 390px; height: 1300px; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-direction: column">
+
+  <header style="padding: 20px 16px 8px; display: flex; flex-direction: column; gap: 12px">
+    <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 26px">Painel</h1>
+    <div role="group" aria-label="Período" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; background: #E9EBEF; padding: 4px; border-radius: 12px">
+      
+        <button aria-pressed="false" style="height: 40px; border-radius: 9px; border: none; background: transparent; color: #12161C; font-size: 14px; font-weight: 500; font-family: Inter, sans-serif; cursor: pointer">Hoje</button>
+      
+        <button aria-pressed="false" style="height: 40px; border-radius: 9px; border: none; background: transparent; color: #12161C; font-size: 14px; font-weight: 500; font-family: Inter, sans-serif; cursor: pointer">7 dias</button>
+      
+        <button aria-pressed="true" style="height: 40px; border-radius: 9px; border: none; background: #FFFFFF; color: #12161C; font-size: 14px; font-weight: 700; font-family: Inter, sans-serif; cursor: pointer">Mês</button>
+      
+        <button aria-pressed="false" style="height: 40px; border-radius: 9px; border: none; background: transparent; color: #12161C; font-size: 14px; font-weight: 500; font-family: Inter, sans-serif; cursor: pointer">Ano</button>
+      
+    </div>
+  </header>
+
+  <main style="flex: 1; padding: 6px 16px 16px; display: flex; flex-direction: column; gap: 14px">
+
+    <section aria-label="Indicadores" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+      
+        <div style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 14px; padding: 12px 14px">
+          <div style="font-size: 13px; color: #5B6472">Faturamento</div>
+          <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 24px; margin-top: 2px">R$ 18.420</div>
+          <div style="font-size: 12px; font-weight: 600; color: #1F7A4D">▲ 12% vs. setembro</div>
+        </div>
+      
+        <div style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 14px; padding: 12px 14px">
+          <div style="font-size: 13px; color: #5B6472">Lucro bruto</div>
+          <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 24px; margin-top: 2px">R$ 6.190</div>
+          <div style="font-size: 12px; font-weight: 600; color: #1F7A4D">▲ 9%</div>
+        </div>
+      
+        <div style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 14px; padding: 12px 14px">
+          <div style="font-size: 13px; color: #5B6472">Margem</div>
+          <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 24px; margin-top: 2px">33,6%</div>
+          <div style="font-size: 12px; font-weight: 600; color: #5B6472">do preço vira lucro</div>
+        </div>
+      
+        <div style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 14px; padding: 12px 14px">
+          <div style="font-size: 13px; color: #5B6472">Markup</div>
+          <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 24px; margin-top: 2px">50,6%</div>
+          <div style="font-size: 12px; font-weight: 600; color: #5B6472">sobre o custo</div>
+        </div>
+      
+        <div style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 14px; padding: 12px 14px">
+          <div style="font-size: 13px; color: #5B6472">Vendas</div>
+          <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 24px; margin-top: 2px">42</div>
+          <div style="font-size: 12px; font-weight: 600; color: #5B6472">57 baterias</div>
+        </div>
+      
+        <div style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 14px; padding: 12px 14px">
+          <div style="font-size: 13px; color: #5B6472">Ticket médio</div>
+          <div style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 24px; margin-top: 2px">R$ 438</div>
+          <div style="font-size: 12px; font-weight: 600; color: #B42318">▼ 3%</div>
+        </div>
+      
+    </section>
+
+    <section aria-label="Faturamento por mês" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 14px">
+      <div style="display: flex; align-items: baseline; justify-content: space-between">
+        <h2 style="margin: 0; font-size: 15px; font-weight: 600">Faturamento por mês</h2>
+        <span style="font-size: 12px; color: #5B6472">últimos 6 meses</span>
+      </div>
+      <div style="margin-top: 6px; font-size: 13px; color: #7A4E00; font-weight: 600">Melhor mês: outubro · R$ 18.420</div>
+      <div style="display: flex; align-items: flex-end; gap: 10px; height: 150px; margin-top: 12px; border-bottom: 1px solid #C9CED6">
+        
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%">
+            <span style="font-size: 11px; color: #5B6472">12,3k</span>
+            <div style="width: 100%; height: 80px; border-radius: 6px 6px 0 0; background: #C9CED6"></div>
+          </div>
+        
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%">
+            <span style="font-size: 11px; color: #5B6472">14,1k</span>
+            <div style="width: 100%; height: 92px; border-radius: 6px 6px 0 0; background: #C9CED6"></div>
+          </div>
+        
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%">
+            <span style="font-size: 11px; color: #5B6472">15,8k</span>
+            <div style="width: 100%; height: 103px; border-radius: 6px 6px 0 0; background: #C9CED6"></div>
+          </div>
+        
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%">
+            <span style="font-size: 11px; color: #5B6472">13,9k</span>
+            <div style="width: 100%; height: 91px; border-radius: 6px 6px 0 0; background: #C9CED6"></div>
+          </div>
+        
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%">
+            <span style="font-size: 11px; color: #5B6472">16,4k</span>
+            <div style="width: 100%; height: 107px; border-radius: 6px 6px 0 0; background: #C9CED6"></div>
+          </div>
+        
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; height: 100%">
+            <span style="font-size: 11px; color: #5B6472">18,4k</span>
+            <div style="width: 100%; height: 120px; border-radius: 6px 6px 0 0; background: #FFC21A"></div>
+          </div>
+        
+      </div>
+      <div style="display: flex; gap: 10px; margin-top: 6px">
+        
+          <span style="flex: 1; text-align: center; font-size: 12px; color: #5B6472">mai</span>
+        
+          <span style="flex: 1; text-align: center; font-size: 12px; color: #5B6472">jun</span>
+        
+          <span style="flex: 1; text-align: center; font-size: 12px; color: #5B6472">jul</span>
+        
+          <span style="flex: 1; text-align: center; font-size: 12px; color: #5B6472">ago</span>
+        
+          <span style="flex: 1; text-align: center; font-size: 12px; color: #5B6472">set</span>
+        
+          <span style="flex: 1; text-align: center; font-size: 12px; color: #5B6472">out</span>
+        
+      </div>
+    </section>
+
+    <section aria-label="Baterias que mais venderam" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 14px">
+      <h2 style="margin: 0 0 6px; font-size: 15px; font-weight: 600">Mais vendidas no mês</h2>
+      
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #EEF0F3">
+          <span style="width: 22px; font-size: 13px; color: #5B6472">1</span>
+          <span style="flex: 1; font-weight: 600; font-size: 15px">M60GD</span>
+          <span style="width: 54px; text-align: right; font-size: 14px; color: #5B6472">14 un</span>
+          <span style="width: 88px; text-align: right; font-size: 14px; font-weight: 600; color: #1F7A4D">R$ 2.240</span>
+        </div>
+      
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #EEF0F3">
+          <span style="width: 22px; font-size: 13px; color: #5B6472">2</span>
+          <span style="flex: 1; font-weight: 600; font-size: 15px">M40SD</span>
+          <span style="width: 54px; text-align: right; font-size: 14px; color: #5B6472">9 un</span>
+          <span style="width: 88px; text-align: right; font-size: 14px; font-weight: 600; color: #1F7A4D">R$ 1.130</span>
+        </div>
+      
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #EEF0F3">
+          <span style="width: 22px; font-size: 13px; color: #5B6472">3</span>
+          <span style="flex: 1; font-weight: 600; font-size: 15px">MA5-D</span>
+          <span style="width: 54px; text-align: right; font-size: 14px; color: #5B6472">8 un</span>
+          <span style="width: 88px; text-align: right; font-size: 14px; font-weight: 600; color: #1F7A4D">R$ 520</span>
+        </div>
+      
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #EEF0F3">
+          <span style="width: 22px; font-size: 13px; color: #5B6472">4</span>
+          <span style="flex: 1; font-weight: 600; font-size: 15px">M60AX</span>
+          <span style="width: 54px; text-align: right; font-size: 14px; color: #5B6472">4 un</span>
+          <span style="width: 88px; text-align: right; font-size: 14px; font-weight: 600; color: #1F7A4D">R$ 760</span>
+        </div>
+      
+        <div style="display: flex; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #EEF0F3">
+          <span style="width: 22px; font-size: 13px; color: #5B6472">5</span>
+          <span style="flex: 1; font-weight: 600; font-size: 15px">M150BD</span>
+          <span style="width: 54px; text-align: right; font-size: 14px; color: #5B6472">2 un</span>
+          <span style="width: 88px; text-align: right; font-size: 14px; font-weight: 600; color: #1F7A4D">R$ 880</span>
+        </div>
+      
+    </section>
+
+    <section aria-label="Formas de pagamento e atendimento" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 14px">
+      <div>
+        <h2 style="margin: 0 0 8px; font-size: 15px; font-weight: 600">Como pagaram</h2>
+        
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px">
+            <span style="width: 70px; font-size: 14px">Pix</span>
+            <div style="flex: 1; height: 12px; border-radius: 6px; background: #EEF0F3; overflow: hidden"><div style="height: 100%; width: 46%; background: #12161C; border-radius: 6px"></div></div>
+            <span style="width: 40px; text-align: right; font-size: 14px; font-weight: 600">46%</span>
+          </div>
+        
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px">
+            <span style="width: 70px; font-size: 14px">Crédito</span>
+            <div style="flex: 1; height: 12px; border-radius: 6px; background: #EEF0F3; overflow: hidden"><div style="height: 100%; width: 28%; background: #12161C; border-radius: 6px"></div></div>
+            <span style="width: 40px; text-align: right; font-size: 14px; font-weight: 600">28%</span>
+          </div>
+        
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px">
+            <span style="width: 70px; font-size: 14px">Dinheiro</span>
+            <div style="flex: 1; height: 12px; border-radius: 6px; background: #EEF0F3; overflow: hidden"><div style="height: 100%; width: 16%; background: #12161C; border-radius: 6px"></div></div>
+            <span style="width: 40px; text-align: right; font-size: 14px; font-weight: 600">16%</span>
+          </div>
+        
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px">
+            <span style="width: 70px; font-size: 14px">Débito</span>
+            <div style="flex: 1; height: 12px; border-radius: 6px; background: #EEF0F3; overflow: hidden"><div style="height: 100%; width: 10%; background: #12161C; border-radius: 6px"></div></div>
+            <span style="width: 40px; text-align: right; font-size: 14px; font-weight: 600">10%</span>
+          </div>
+        
+      </div>
+      <div>
+        <h2 style="margin: 0 0 8px; font-size: 15px; font-weight: 600">Atendimento</h2>
+        
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px">
+            <span style="width: 70px; font-size: 14px">Balcão</span>
+            <div style="flex: 1; height: 12px; border-radius: 6px; background: #EEF0F3; overflow: hidden"><div style="height: 100%; width: 58%; background: #E0A500; border-radius: 6px"></div></div>
+            <span style="width: 40px; text-align: right; font-size: 14px; font-weight: 600">58%</span>
+          </div>
+        
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px">
+            <span style="width: 70px; font-size: 14px">Entrega</span>
+            <div style="flex: 1; height: 12px; border-radius: 6px; background: #EEF0F3; overflow: hidden"><div style="height: 100%; width: 30%; background: #E0A500; border-radius: 6px"></div></div>
+            <span style="width: 40px; text-align: right; font-size: 14px; font-weight: 600">30%</span>
+          </div>
+        
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 8px">
+            <span style="width: 70px; font-size: 14px">Socorro</span>
+            <div style="flex: 1; height: 12px; border-radius: 6px; background: #EEF0F3; overflow: hidden"><div style="height: 100%; width: 12%; background: #E0A500; border-radius: 6px"></div></div>
+            <span style="width: 40px; text-align: right; font-size: 14px; font-weight: 600">12%</span>
+          </div>
+        
+      </div>
+    </section>
+  </main>
+
+  <nav aria-label="Navegação principal" style="display: flex; background: #FFFFFF; border-top: 1px solid #E1E4E9; padding: 6px 4px 14px">
+    <a href="02-inicio.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></span>Início</a>
+    <a href="03-vender-itens.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.6a1 1 0 0 0 1-.8L21 7H6"></path></svg></span>Vender</a>
+    <a href="06-estoque.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg></span>Estoque</a>
+    <a href="07-entrada.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4"></path><path d="M4 16v4h16v-4"></path></svg></span>Entrada</a>
+    <a href="08-painel.html" aria-current="page" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #12161C; font-size: 12px; font-weight: 600">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px; border-radius: 15px; background: #FFE8A3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M5 20V11M11 20V5M17 20v-6M3 20h18"></path></svg></span>Painel</a>
+  </nav>
+</div>
+</body>
+</html>

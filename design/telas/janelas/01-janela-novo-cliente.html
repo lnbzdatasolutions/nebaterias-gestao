@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Novo cliente · janela rápida</title>
+<!-- Referência visual estática gerada do protótipo. Dados são de exemplo. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</head>
+<body>
+<div style="width: 100%; box-sizing: border-box; background: #FFFFFF; font-family: Inter, system-ui, sans-serif; color: #12161C; padding: 20px; border-radius: 20px; display: flex; flex-direction: column; gap: 14px">
+  <div style="display: flex; align-items: center; justify-content: space-between">
+    <div>
+      <h2 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 24px">Novo cliente</h2>
+      <div style="font-size: 13px; color: #5B6472">Só o nome é obrigatório</div>
+    </div>
+    <button aria-label="Fechar" style="width: 44px; height: 44px; border-radius: 12px; border: 1px solid #E1E4E9; background: #FFFFFF; display: flex; align-items: center; justify-content: center; cursor: pointer">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#12161C" style="stroke-width: 2.2; stroke-linecap: round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+    </button>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <label for="cr-nome" style="font-size: 14px; font-weight: 600">Nome *</label>
+    <input id="cr-nome" autocomplete="name" value="Maria Souza" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 2px solid #12161C; padding: 0 14px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C">
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <label for="cr-tel" style="font-size: 14px; font-weight: 600">Telefone / WhatsApp</label>
+    <input id="cr-tel" type="tel" inputmode="tel" value="(85) 98888-0000" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 14px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C">
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="cr-veic" style="font-size: 14px; font-weight: 600">Veículo</label>
+      <input id="cr-veic" value="HB20 2020" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; width: 100%">
+    </div>
+    <div style="display: flex; flex-direction: column; gap: 6px">
+      <label for="cr-placa" style="font-size: 14px; font-weight: 600">Placa</label>
+      <input id="cr-placa" value="POX-4G21" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 12px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C; width: 100%; text-transform: uppercase">
+    </div>
+  </div>
+  <div style="display: flex; flex-direction: column; gap: 6px">
+    <label for="cr-doc" style="font-size: 14px; font-weight: 600">CPF ou CNPJ <span style="font-weight: 400; color: #5B6472">(opcional)</span></label>
+    <input id="cr-doc" inputmode="numeric" placeholder="Só se o cliente pedir" style="height: 50px; box-sizing: border-box; border-radius: 12px; border: 1px solid #C9CED6; padding: 0 14px; font-size: 16px; font-family: Inter, sans-serif; color: #12161C">
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: #FFF4D6; font-size: 13px; color: #5C3D00">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; flex-shrink: 0" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16.5v.5"></path></svg>
+    Já existe cliente com este telefone? O sistema avisa antes de salvar.
+  </div>
+
+  <button style="min-height: 56px; border-radius: 14px; border: none; background: #FFC21A; color: #12161C; font-family: Inter, sans-serif; font-weight: 700; font-size: 17px; cursor: pointer">Salvar e usar nesta venda</button>
+</div>
+</body>
+</html>

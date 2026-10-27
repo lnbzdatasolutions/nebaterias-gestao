@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Estoque · consulta rápida</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D4ED8}a:hover{color:#1E40AF}
+</style>
+</helmet>
+<div style="width: 390px; height: 980px; box-sizing: border-box; background: #F5F6F8; font-family: Inter, system-ui, sans-serif; color: #12161C; display: flex; flex-direction: column">
+
+  <header style="padding: 20px 16px 8px; display: flex; flex-direction: column; gap: 12px">
+    <div style="display: flex; align-items: baseline; justify-content: space-between">
+      <h1 style="margin: 0; font-family: Barlow, sans-serif; font-weight: 700; font-size: 26px">Estoque</h1>
+      <span style="font-size: 13px; color: #5B6472">{{resumo}}</span>
+    </div>
+    <div style="position: relative">
+      <label for="busca-estoque" style="position: absolute; left: -9999px">Buscar por modelo ou carro</label>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5B6472" style="position: absolute; left: 14px; top: 15px; stroke-width: 2; stroke-linecap: round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+      <input id="busca-estoque" type="search" placeholder="Modelo ou carro (ex.: Hilux, M60)" style="width: 100%; box-sizing: border-box; height: 52px; border-radius: 14px; border: 1px solid #C9CED6; background: #FFFFFF; padding: 0 14px 0 46px; font-size: 17px; font-family: Inter, sans-serif; color: #12161C">
+    </div>
+    <div role="group" aria-label="Filtrar por linha" style="display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px">
+      <sc-for list="{{chips}}" as="c" hint-placeholder-count="6">
+        <button aria-pressed="{{c.ativo}}" onClick="{{c.pick}}" style="flex-shrink: 0; height: 40px; padding: 0 16px; border-radius: 999px; border: {{c.borda}}; background: {{c.fundo}}; color: {{c.cor}}; font-size: 14px; font-weight: 600; font-family: Inter, sans-serif; cursor: pointer">{{c.nome}}</button>
+      </sc-for>
+    </div>
+  </header>
+
+  <main style="flex: 1; padding: 4px 16px 16px; overflow: hidden">
+    <section aria-label="Baterias" style="background: #FFFFFF; border: 1px solid #E1E4E9; border-radius: 16px; overflow: hidden">
+      <sc-for list="{{itens}}" as="p" hint-placeholder-count="8">
+        <div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-bottom: 1px solid #EEF0F3; min-height: 64px; box-sizing: border-box">
+          <div style="flex: 1; min-width: 0">
+            <div style="display: flex; align-items: baseline; gap: 8px">
+              <span style="font-family: Barlow, sans-serif; font-weight: 700; font-size: 19px">{{p.modelo}}</span>
+              <span style="font-size: 12px; color: #5B6472">{{p.linha}}</span>
+            </div>
+            <div style="font-size: 13px; color: #5B6472; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{p.aplicacoes}}</div>
+          </div>
+          <div style="text-align: right; flex-shrink: 0">
+            <div style="display: inline-flex; align-items: center; justify-content: center; min-width: 44px; height: 32px; padding: 0 10px; box-sizing: border-box; border-radius: 10px; background: {{p.saldoFundo}}; color: {{p.saldoCor}}; font-family: Barlow, sans-serif; font-weight: 700; font-size: 20px">{{p.saldo}}</div>
+            <div style="font-size: 13px; color: #5B6472; margin-top: 2px">{{p.preco}}</div>
+          </div>
+        </div>
+      </sc-for>
+      <sc-if value="{{vazio}}" hint-placeholder-val="{{ false }}">
+        <div style="padding: 24px 16px; text-align: center; font-size: 15px; color: #5B6472">Nenhuma bateria nesta linha.</div>
+      </sc-if>
+    </section>
+  </main>
+
+  <nav aria-label="Navegação principal" style="display: flex; background: #FFFFFF; border-top: 1px solid #E1E4E9; padding: 6px 4px 14px">
+    <a href="Main.dc.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"></path></svg></span>Início</a>
+    <a href="Vender.dc.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.6a1 1 0 0 0 1-.8L21 7H6"></path></svg></span>Vender</a>
+    <a href="Estoque.dc.html" aria-current="page" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #12161C; font-size: 12px; font-weight: 600">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px; border-radius: 15px; background: #FFE8A3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M21 8 12 3 3 8v8l9 5 9-5z"></path><path d="m3 8 9 5 9-5M12 13v8"></path></svg></span>Estoque</a>
+    <a href="Entrada.dc.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4"></path><path d="M4 16v4h16v-4"></path></svg></span>Entrada</a>
+    <a href="Painel.dc.html" style="flex: 1; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-decoration: none; color: #5B6472; font-size: 12px; font-weight: 500">
+      <span style="display: flex; align-items: center; justify-content: center; width: 56px; height: 30px"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" style="stroke-width: 2; stroke-linecap: round; stroke-linejoin: round" aria-hidden="true"><path d="M5 20V11M11 20V5M17 20v-6M3 20h18"></path></svg></span>Painel</a>
+  </nav>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":980}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { linha: 'Todas' };
+  }
+  renderVals() {
+    const todos = [
+      { modelo: 'M60GD', linha: 'Automotiva', aplicacoes: 'Onix, HB20, Argo, Corolla, Civic', saldo: '4', preco: 'R$ 450,00', nivel: 'ok' },
+      { modelo: 'M60GE', linha: 'Automotiva', aplicacoes: 'Onix, HB20, Argo, Corolla, Civic', saldo: '0', preco: 'R$ 460,00', nivel: 'falta' },
+      { modelo: 'M40SD', linha: 'Automotiva', aplicacoes: 'Uno, Celta, Ka, Gol 1.0', saldo: '3', preco: 'R$ 380,00', nivel: 'ok' },
+      { modelo: 'M70LD', linha: 'Automotiva', aplicacoes: 'Compass, S10 Flex, Hilux Flex, Tucson', saldo: '2', preco: 'R$ 620,00', nivel: 'ok' },
+      { modelo: 'M60AX', linha: 'EFB', aplicacoes: 'Polo, Nivus, T-Cross TSI, Renegade', saldo: '1', preco: 'R$ 690,00', nivel: 'minimo' },
+      { modelo: 'M72TX', linha: 'EFB', aplicacoes: 'Polo, Nivus, T-Cross TSI, Renegade', saldo: '2', preco: 'R$ 780,00', nivel: 'ok' },
+      { modelo: 'M60AD', linha: 'AGM', aplicacoes: 'BMW, Mercedes, Audi, Volvo, Jetta', saldo: '1', preco: 'R$ 1.290,00', nivel: 'minimo' },
+      { modelo: 'MA5-D', linha: 'Moto', aplicacoes: 'Honda CG, Biz', saldo: '6', preco: 'R$ 190,00', nivel: 'ok' },
+      { modelo: 'M150BD', linha: 'Diesel', aplicacoes: 'VW Delivery, Cargo, Accelo', saldo: '−1', preco: 'R$ 1.100,00', nivel: 'falta' }
+    ];
+    const estilos = {
+      ok:     { saldoFundo: '#E3F4EA', saldoCor: '#1F7A4D' },
+      minimo: { saldoFundo: '#FFF4D6', saldoCor: '#7A4E00' },
+      falta:  { saldoFundo: '#FDE7E5', saldoCor: '#B42318' }
+    };
+    const linhas = ['Todas', 'Automotiva', 'EFB', 'AGM', 'Moto', 'Diesel'];
+    const atual = this.state.linha;
+    const itens = todos
+      .filter((p) => atual === 'Todas' || p.linha === atual)
+      .map((p) => ({ ...p, ...estilos[p.nivel] }));
+    return {
+      resumo: '19 modelos · 3 no mínimo',
+      itens,
+      vazio: itens.length === 0,
+      chips: linhas.map((nome) => {
+        const on = nome === atual;
+        return {
+          nome,
+          ativo: on ? 'true' : 'false',
+          borda: on ? '2px solid #12161C' : '1px solid #C9CED6',
+          fundo: on ? '#12161C' : '#FFFFFF',
+          cor: on ? '#FFFFFF' : '#12161C',
+          pick: () => this.setState({ linha: nome })
+        };
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>

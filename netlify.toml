@@ -1,0 +1,25 @@
+# Netlify: só a pasta dist/ é publicada (docs, design e supabase ficam fora do site).
+[build]
+  command = "node scripts/build.mjs --dist"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# O service worker precisa ser revalidado sempre, senão o app não atualiza.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/js/config.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
