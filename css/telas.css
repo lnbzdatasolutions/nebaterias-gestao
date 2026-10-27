@@ -398,3 +398,10 @@ body.com-janela { overflow: hidden; }
 .acoes-detalhe [data-cancelar] { grid-column: span 2; }
 .painel-detalhe .acoes-detalhe [data-cancelar] { grid-column: auto; }
 .painel-detalhe .acoes-detalhe .btn { min-height: 44px; font-size: 15px; padding: 0 10px; }
+
+/* Início no celular: aviso de nota e estoque baixo antes das últimas vendas */
+@media (max-width: 899.98px) {
+  .grade-inicio { display: flex; flex-direction: column; gap: 16px; }
+  .grade-inicio > .pilha { order: -1; }
+  .grade-inicio > .pilha:not(:has(.alerta:not([hidden]))) { display: none; }
+}
