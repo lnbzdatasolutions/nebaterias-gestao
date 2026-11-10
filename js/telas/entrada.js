@@ -49,7 +49,7 @@ function calcular(r) {
   return { linhas, base: centavos(base), custos, abat, unidades, total: centavos(base + custos - abat) };
 }
 
-export async function render(raiz, { irPara }) {
+export async function render(raiz, { irPara, params }) {
   const r = rascunho;
 
   raiz.innerHTML = `
@@ -179,13 +179,16 @@ export async function render(raiz, { irPara }) {
 
   async function adicionar() {
     const p = await escolherBateria();
-    if (!p) return;
+    if (p) adicionarProduto(p);
+  }
+
+  async function adicionarProduto(p, quantidade = 1) {
     const { data: ultima } = await supabase.from('vw_ultima_compra_produto')
       .select('preco_tabela, desconto_unitario, custo_unitario_final, data_compra, fornecedor_id')
       .eq('produto_id', p.id).maybeSingle();
     r.itens.push({
       produto: p,
-      quantidade: '1',
+      quantidade: String(quantidade),
       preco_tabela: ultima ? valorCampo(ultima.preco_tabela) : '',
       desconto_unitario: ultima && Number(ultima.desconto_unitario) ? valorCampo(ultima.desconto_unitario) : '',
       ultima,
@@ -319,6 +322,17 @@ export async function render(raiz, { irPara }) {
   });
 
   desenharItens();
+
+  // #entrada/<produto_id>/<quantidade>: vem do botão "Lançar como entrada" do Estoque
+  if (params?.[0]) {
+    history.replaceState(null, '', '#entrada');
+    const { data: p } = await supabase.from('vw_produtos_estoque').select('*').eq('id', params[0]).maybeSingle();
+    if (p && !r.itens.some((it) => it.produto.id === p.id)) {
+      await adicionarProduto(p, Math.max(parseInt(params[1], 10) || 1, 1));
+      aviso(`${p.modelo} adicionada. Informe o preço pago e registre a entrada.`, 'ok');
+    }
+  }
+
   try {
     await carregarFornecedores();
   } catch (e) {
