@@ -50,7 +50,9 @@ function totais(v = venda) {
   const somaPag = centavos(v.pagamentos.reduce((s, p) => s + numero(p.valor), 0));
   const fator = subtotal > 0 ? total / subtotal : 1;
   const abaixoCusto = v.itens.filter((it) => Number(it.produto.custo_medio) > 0 && numero(it.preco) * fator < Number(it.produto.custo_medio));
-  return { subtotal, desconto, total, unidades, lucro: centavos(total - cmv - taxas), cmv, somaPag, abaixoCusto };
+  // sem custo = nunca entrou pela Entrada: o lucro desta venda vai sair inflado
+  const semCusto = v.itens.filter((it) => !(Number(it.produto.custo_medio) > 0));
+  return { subtotal, desconto, total, unidades, lucro: centavos(total - cmv - taxas), cmv, somaPag, abaixoCusto, semCusto };
 }
 
 /** Valor automático: a única forma (ou a única não digitada à mão) recebe o que falta. */
@@ -245,7 +247,8 @@ export async function render(raiz, ctx) {
         <input inputmode="numeric" data-qtd="${i}" value="${q}" aria-label="Quantidade">
         <button type="button" data-mais="${i}" aria-label="Aumentar">${icone('mais', 20, 2.4)}</button>
       </div>`;
-    const estoqueItem = (p) => `<span class="${p.estoque_atual > 0 ? '' : 'vermelho'}">${saldo(p.estoque_atual)} em estoque</span>`;
+    const estoqueItem = (p) => `<span class="${p.estoque_atual > 0 ? '' : 'vermelho'}">${saldo(p.estoque_atual)} em estoque</span>`
+      + (Number(p.custo_medio) > 0 ? '' : ' · <span class="amarelo forte">sem custo</span>');
     el.innerHTML = `
       <h2 class="titulo-secao so-celular">Itens da venda</h2>
       <div class="so-celular pilha">
@@ -403,6 +406,10 @@ export async function render(raiz, ctx) {
     const alertas = $('#alertas', raiz);
     alertas.innerHTML = t.abaixoCusto.length ? `<p class="msg-erro">${icone('alerta', 18)} Abaixo do custo: ${t.abaixoCusto
       .map((it) => `${esc(it.produto.modelo)} (custo ${dinheiro(it.produto.custo_medio)})`).join(', ')}</p>` : '';
+    if (t.semCusto.length) {
+      alertas.innerHTML += `<p class="nota nota-alerta">${icone('alerta', 18)}<span><strong>Sem custo cadastrado:</strong> ${t.semCusto
+        .map((it) => esc(it.produto.modelo)).join(', ')}. O lucro desta venda vai sair errado. Se a bateria foi comprada, lance a Entrada antes de vender.</span></p>`;
+    }
     desenharExtras();
   }
 

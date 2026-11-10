@@ -512,3 +512,6 @@ body.com-janela { overflow: hidden; }
 .ajuste-sinal .seg { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; }
 .ajuste-sinal .seg[data-sinal="-1"][aria-pressed="true"] { background: var(--perigo); border-color: var(--perigo); color: #fff; }
 .ajuste-sinal .seg[data-sinal="1"][aria-pressed="true"] { background: var(--ok); border-color: var(--ok); color: #fff; }
+.selo-p { height: 22px; line-height: 22px; padding: 0 8px; font-size: 12px; }
+#alertas { display: flex; flex-direction: column; gap: 8px; }
+.aviso-acrescentar .link-btn { padding: 4px 0; min-height: 36px; display: inline; font-size: 14px; }

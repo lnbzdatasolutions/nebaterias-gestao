@@ -11,6 +11,9 @@ import {
 } from '../util.js';
 
 const MOTIVOS = ['Contagem', 'Garantia / troca', 'Avaria', 'Outro'];
+// Bateria com estoque e custo zero: entrou sem Entrada, o lucro das vendas sai errado.
+const semCusto = (p) => Number(p.estoque_atual) > 0 && !(Number(p.custo_medio) > 0);
+const seloSemCusto = (p) => (semCusto(p) ? '<span class="selo selo-alerta selo-p" title="Estoque sem custo: lance pela Entrada">sem custo</span>' : '');
 const diaMes = (d) => new Date(d).toLocaleDateString('pt-BR', { timeZone: FUSO, day: '2-digit', month: '2-digit' });
 
 export async function render(raiz, { params }) {
@@ -94,6 +97,7 @@ export async function render(raiz, { params }) {
               </span>
               <span class="direita">
                 <span class="selo-saldo ${corSaldo(p.estoque_atual, p.estoque_minimo)}">${saldo(p.estoque_atual)}</span>
+                ${seloSemCusto(p)}
                 <span class="d-bloco texto-medio">${p.preco_venda ? dinheiro(p.preco_venda) : 'sem preço'}</span>
               </span>
             </button>
@@ -108,7 +112,7 @@ export async function render(raiz, { params }) {
                 <td><span class="modelo-p">${esc(p.modelo)}</span><div class="texto-p texto-aux">${esc(p.linha)}</div></td>
                 <td class="texto-medio quebra">${esc(aplicacoesCurtas(p.aplicacoes))}</td>
                 <td class="centro"><span class="selo-saldo ${corSaldo(p.estoque_atual, p.estoque_minimo)}">${saldo(p.estoque_atual)}</span></td>
-                <td class="num">${Number(p.custo_medio) > 0 ? dinheiro(p.custo_medio) : '-'}</td>
+                <td class="num">${Number(p.custo_medio) > 0 ? dinheiro(p.custo_medio) : seloSemCusto(p) || '-'}</td>
                 <td class="num"><strong>${p.preco_venda ? dinheiro(p.preco_venda) : '-'}</strong></td>
                 <td class="num">${percentual(p.margem_pct)}</td>
                 <td class="num"><button type="button" class="btn btn-secundario btn-p">Detalhe</button></td>
@@ -145,6 +149,7 @@ export async function render(raiz, { params }) {
           <div class="mini"><span class="texto-aux">Preço · margem</span><strong>${p.preco_venda ? dinheiro(p.preco_venda) : '-'} · ${percentual(p.margem_pct)}</strong></div>
         </div>
         ${p.markup_pct !== null ? `<p class="texto-aux">Markup ${percentual(p.markup_pct)} (quanto se acrescenta sobre o custo). Margem: quanto do preço vira lucro.</p>` : ''}
+        ${semCusto(p) ? `<p class="nota nota-alerta">${icone('alerta', 18)}<span><strong>Estoque sem custo.</strong> Estas baterias entraram sem Entrada, então o lucro das vendas sai errado. Para regularizar: Retirar a quantidade aqui (motivo "Outro: regularizar custo") e lançar a mesma quantidade pela Entrada, com o preço pago.</span></p>` : ''}
         <h3 class="sub">Últimas movimentações</h3>
         ${movs.length ? `<ul class="lista-simples">
           ${movs.map((m) => `
@@ -156,6 +161,11 @@ export async function render(raiz, { params }) {
           <div class="segmentos segmentos-2 ajuste-sinal" role="radiogroup" aria-label="Tipo de ajuste">
             <button type="button" class="seg" data-sinal="-1" aria-pressed="false">${icone('menos', 18, 2.4)} Retirar</button>
             <button type="button" class="seg" data-sinal="1" aria-pressed="false">${icone('mais', 18, 2.4)} Acrescentar</button>
+          </div>
+          <div class="nota nota-alerta aviso-acrescentar" hidden>
+            ${icone('alerta', 18)}
+            <span><strong>Comprou do fornecedor?</strong> Use a Entrada: o ajuste não registra o custo e a margem fica errada. Acrescentar é só para contagem ou devolução.
+              <button type="button" class="link-btn link-forte" data-lancar-entrada>Lançar como entrada</button></span>
           </div>
           <div class="ajuste-campos">
             <input name="qtd" type="number" inputmode="numeric" min="1" step="1" value="1" aria-label="Quantidade" autocomplete="off">
@@ -178,7 +188,13 @@ export async function render(raiz, { params }) {
       sinal = Number(b.dataset.sinal);
       form.querySelectorAll('[data-sinal]').forEach((x) => x.setAttribute('aria-pressed', x === b));
       erro.hidden = true;
+      $('.aviso-acrescentar', form).hidden = sinal !== 1;
     }));
+    $('[data-lancar-entrada]', form).addEventListener('click', () => {
+      const n = Math.max(Math.abs(parseInt(form.qtd.value, 10) || 1), 1);
+      document.querySelector('dialog.janela[open]')?.close(); // no celular o detalhe é uma janela
+      location.hash = `entrada/${p.id}/${n}`;
+    });
     form.motivo.addEventListener('change', () => {
       form.outro.hidden = form.motivo.value !== 'Outro';
       if (!form.outro.hidden) form.outro.focus();
