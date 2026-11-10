@@ -164,7 +164,7 @@ export async function render(raiz, { params }) {
           </div>
           <div class="nota nota-alerta aviso-acrescentar" hidden>
             ${icone('alerta', 18)}
-            <span><strong>Comprou do fornecedor?</strong> Use a Entrada: o ajuste não registra o custo e a margem fica errada. Acrescentar é só para contagem ou devolução.
+            <span><strong>Comprou do fornecedor?</strong> Lance pela Entrada: o ajuste não registra quanto você pagou, e o custo e a margem ficam errados. Use Acrescentar só para corrigir a contagem ou para troca em garantia.
               <button type="button" class="link-btn link-forte" data-lancar-entrada>Lançar como entrada</button></span>
           </div>
           <div class="ajuste-campos">
