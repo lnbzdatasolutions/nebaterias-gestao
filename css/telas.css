@@ -503,3 +503,12 @@ body.com-janela { overflow: hidden; }
 .dica-top { margin: 6px 0 0; }
 @media (min-width: 900px) { .dica-top { display: none; } }
 .linha-venda-bateria { display: flex; justify-content: space-between; width: 100%; gap: 12px; color: var(--texto); text-decoration: none; }
+
+/* Estoque: filtro de linha secundário, abaixo do de marca */
+.chips-secundarios { align-items: center; margin-top: -4px; }
+.chips-secundarios .chip { min-height: 36px; padding: 0 14px; font-size: 14px; font-weight: 500; }
+.rotulo-chips { flex-shrink: 0; font-size: 13px; color: var(--texto-2); margin-right: 2px; }
+/* Ajuste de estoque: Retirar / Acrescentar no lugar do sinal digitado */
+.ajuste-sinal .seg { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; }
+.ajuste-sinal .seg[data-sinal="-1"][aria-pressed="true"] { background: var(--perigo); border-color: var(--perigo); color: #fff; }
+.ajuste-sinal .seg[data-sinal="1"][aria-pressed="true"] { background: var(--ok); border-color: var(--ok); color: #fff; }

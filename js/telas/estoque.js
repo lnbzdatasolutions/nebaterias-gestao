@@ -1,5 +1,5 @@
 // Estoque (#estoque ou #estoque/<busca>): consulta rápida por modelo ou carro,
-// filtros por linha, detalhe do produto, últimas movimentações e ajuste manual.
+// filtro por marca (principal) e por linha, detalhe do produto, movimentações e ajuste manual.
 import { supabase, ok, mensagemDeErro } from '../supabase.js';
 import { icone } from '../icones.js';
 import { abrirJanela } from '../componentes/janela.js';
@@ -16,6 +16,8 @@ const diaMes = (d) => new Date(d).toLocaleDateString('pt-BR', { timeZone: FUSO, 
 export async function render(raiz, { params }) {
   let produtos = [];
   let filtro = '';
+  let marca = '';
+  let marcas = [];
   let termo = params[0] ? decodeURIComponent(params[0]) : '';
   let selecionado = null;
 
@@ -35,9 +37,11 @@ export async function render(raiz, { params }) {
       <label class="busca busca-grande">${icone('busca', 22)}
         <input type="search" id="busca" placeholder="Modelo ou carro (ex.: Hilux, M60)" aria-label="Buscar bateria por modelo ou carro" autocomplete="off" value="${esc(termo)}">
       </label>
-      <div class="chips-filtro rolagem-x" id="filtros">
-        ${['', ...CATEGORIAS].map((c) => `<button type="button" class="chip" data-filtro="${c}" aria-pressed="${c === ''}">${c || 'Todas'}</button>`).join('')}
-      </div>
+      <div class="chips-filtro rolagem-x" id="marcas" role="group" aria-label="Marca"></div>
+    </div>
+    <div class="chips-filtro chips-secundarios rolagem-x" id="filtros" role="group" aria-label="Linha">
+      <span class="rotulo-chips">Linha</span>
+      ${['', ...CATEGORIAS].map((c) => `<button type="button" class="chip" data-filtro="${c}" aria-pressed="${c === ''}">${c || 'Todas'}</button>`).join('')}
     </div>
     <div class="grade-detalhe">
       <div id="lista" class="cartao lista-cartao"><p class="texto-aux pad">Carregando…</p></div>
@@ -48,12 +52,21 @@ export async function render(raiz, { params }) {
   const painel = $('#detalhe', raiz);
   const busca = $('#busca', raiz);
 
-  const visiveis = () => produtos.filter((p) => !filtro || categoria(p.linha) === filtro);
+  const visiveis = () => produtos.filter((p) => (!marca || p.marca === marca) && (!filtro || categoria(p.linha) === filtro));
+
+  function desenharMarcas() {
+    $('#marcas', raiz).innerHTML = ['', ...marcas].map((m) =>
+      `<button type="button" class="chip" data-marca="${esc(m)}" aria-pressed="${m === marca}">${m ? esc(m) : 'Todas as marcas'}</button>`).join('');
+  }
 
   function desenharResumo() {
     // o resumo considera o catálogo inteiro, não a busca
     supabase.rpc('buscar_produtos', { p_limite: 1000 }).then(({ data: todos }) => {
       if (!todos) return;
+      // marcas do catálogo, Moura primeiro
+      marcas = [...new Set(todos.map((p) => p.marca))]
+        .sort((a, b) => (a === 'Moura' ? -1 : b === 'Moura' ? 1 : a.localeCompare(b)));
+      desenharMarcas();
       const unidades = todos.reduce((s, p) => s + Math.max(p.estoque_atual, 0), 0);
       const valor = todos.reduce((s, p) => s + Number(p.valor_estoque_custo || 0), 0);
       const minimo = todos.filter((p) => p.abaixo_minimo).length;
@@ -66,7 +79,8 @@ export async function render(raiz, { params }) {
   function desenhar() {
     const itens = visiveis();
     if (!itens.length) {
-      lista.innerHTML = `<p class="texto-aux pad">Nenhuma bateria encontrada${termo ? ` para "${esc(termo)}"` : ''}.</p>`;
+      const filtros = [marca, filtro].filter(Boolean).join(' · ');
+      lista.innerHTML = `<p class="texto-aux pad">Nenhuma bateria encontrada${termo ? ` para "${esc(termo)}"` : ''}${filtros ? ` em ${esc(filtros)}` : ''}.</p>`;
       return;
     }
     lista.innerHTML = `
@@ -75,7 +89,7 @@ export async function render(raiz, { params }) {
           <li>
             <button type="button" class="linha-botao" data-ver="${p.id}">
               <span class="min0">
-                <span class="d-bloco"><span class="modelo">${esc(p.modelo)}</span> <span class="texto-aux">${esc(linhaCurta(p.linha))}</span></span>
+                <span class="d-bloco"><span class="modelo">${esc(p.modelo)}</span> <span class="texto-aux">${marca ? '' : `${esc(p.marca)} · `}${esc(linhaCurta(p.linha))}</span></span>
                 <span class="texto-medio d-bloco">${esc(aplicacoesCurtas(p.aplicacoes))}</span>
               </span>
               <span class="direita">
@@ -139,8 +153,12 @@ export async function render(raiz, { params }) {
         </ul>` : '<p class="texto-aux">Nenhuma movimentação ainda. O estoque entra pela tela Entrada.</p>'}
         <form class="ajuste" novalidate>
           <strong>Ajustar estoque</strong>
+          <div class="segmentos segmentos-2 ajuste-sinal" role="radiogroup" aria-label="Tipo de ajuste">
+            <button type="button" class="seg" data-sinal="-1" aria-pressed="false">${icone('menos', 18, 2.4)} Retirar</button>
+            <button type="button" class="seg" data-sinal="1" aria-pressed="false">${icone('mais', 18, 2.4)} Acrescentar</button>
+          </div>
           <div class="ajuste-campos">
-            <input name="qtd" inputmode="numeric" placeholder="+1 ou -1" aria-label="Quantidade do ajuste (+ ou -)" autocomplete="off">
+            <input name="qtd" type="number" inputmode="numeric" min="1" step="1" value="1" aria-label="Quantidade" autocomplete="off">
             <select name="motivo" aria-label="Motivo">${MOTIVOS.map((m) => `<option>${m}</option>`).join('')}</select>
           </div>
           <input name="outro" placeholder="Descreva o motivo" aria-label="Motivo do ajuste" autocomplete="off" hidden>
@@ -155,15 +173,22 @@ export async function render(raiz, { params }) {
   function montarDetalhe(el, p, aoMudar) {
     const form = $('form.ajuste', el);
     const erro = $('.msg-erro', form);
+    let sinal = 0; // a pessoa escolhe Retirar ou Acrescentar: nada vem marcado
+    form.querySelectorAll('[data-sinal]').forEach((b) => b.addEventListener('click', () => {
+      sinal = Number(b.dataset.sinal);
+      form.querySelectorAll('[data-sinal]').forEach((x) => x.setAttribute('aria-pressed', x === b));
+      erro.hidden = true;
+    }));
     form.motivo.addEventListener('change', () => {
       form.outro.hidden = form.motivo.value !== 'Outro';
       if (!form.outro.hidden) form.outro.focus();
     });
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const qtd = parseInt(form.qtd.value.replace(/[^\d-]/g, ''), 10);
+      const n = Math.abs(parseInt(form.qtd.value.replace(/\D/g, ''), 10) || 0);
+      const qtd = sinal * n;
       const motivo = form.motivo.value === 'Outro' ? form.outro.value.trim() : form.motivo.value;
-      const falha = !qtd ? 'Informe a quantidade, ex.: +1 ou -1.' : motivo.length < 3 ? 'Descreva o motivo.' : '';
+      const falha = !sinal ? 'Escolha Retirar ou Acrescentar.' : !n ? 'Informe a quantidade.' : motivo.length < 3 ? 'Descreva o motivo.' : '';
       erro.textContent = falha;
       erro.hidden = !falha;
       if (falha) return;
@@ -217,7 +242,7 @@ export async function render(raiz, { params }) {
   }
 
   raiz.addEventListener('click', async (e) => {
-    const alvo = e.target.closest('[data-ver], [data-filtro], [data-editar], #nova, #exportar');
+    const alvo = e.target.closest('[data-ver], [data-filtro], [data-marca], [data-editar], #nova, #exportar');
     if (!alvo) return;
     try {
       if (alvo.id === 'nova') {
@@ -225,6 +250,10 @@ export async function render(raiz, { params }) {
         if (nova) { aviso(`${nova.modelo} cadastrada.`, 'ok'); await carregar(); desenharResumo(); }
       } else if (alvo.id === 'exportar') {
         await exportarEstoque();
+      } else if (alvo.dataset.marca !== undefined) {
+        marca = alvo.dataset.marca;
+        desenharMarcas();
+        desenhar();
       } else if (alvo.dataset.filtro !== undefined) {
         filtro = alvo.dataset.filtro;
         raiz.querySelectorAll('[data-filtro]').forEach((b) => b.setAttribute('aria-pressed', b === alvo));
